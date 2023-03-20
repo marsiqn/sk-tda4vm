@@ -1,0 +1,15 @@
+[
+	{
+		"main_isolation_hostid": "TISCI_HOST_ID_MCU_0_R5_1",
+		"mcusdkDeviceFolder": "j721e",
+		"mcusdkUsage": false,
+		"pdkUsage": true,
+		"sRAMSize": 8,
+		"sRamGranularity": 1,
+		"sciClientPrefixReplacement": "TISCI_",
+		"sciClientSocVersion": "V1",
+		"shortName": "j721e",
+		"soc": "J721E_DRA829_TDA4VM_AM752x",
+		"wildCardPrivId": 195
+	}
+]
