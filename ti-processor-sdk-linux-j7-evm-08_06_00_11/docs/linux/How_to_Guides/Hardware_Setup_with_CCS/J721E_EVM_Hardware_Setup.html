@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4.2.1. J721E EVM Hardware Setup &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../../../index.html"/>
+        <link rel="up" title="4.2. Hardware EVM Setup" href="../../How_to_Guides_Hardware_Setup_with_CCS.html"/>
+        <link rel="next" title="5. Documentation Tarball" href="../../Documentation_Tarball.html"/>
+        <link rel="prev" title="4.2. Hardware EVM Setup" href="../../How_to_Guides_Hardware_Setup_with_CCS.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../../../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Foundational_Components.html">3. Foundational Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../How_to_Guides.html">4. How to Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../How_to_Guides_Developer_Notes.html">4.1. Developer Notes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../How_to_Guides_Hardware_Setup_with_CCS.html">4.2. Hardware EVM Setup</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.1. J721E EVM Hardware Setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../How_to_Guides.html">4. How to Guides</a> &raquo;</li>
+      
+          <li><a href="../../How_to_Guides_Hardware_Setup_with_CCS.html">4.2. Hardware EVM Setup</a> &raquo;</li>
+      
+    <li>4.2.1. J721E EVM Hardware Setup</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="j721e-evm-hardware-setup">
+<h1>4.2.1. J721E EVM Hardware Setup<a class="headerlink" href="#j721e-evm-hardware-setup" title="Permalink to this headline">¶</a></h1>
+<p class="rubric" id="description">Description</p>
+<p>The J721E Evaluation Module provides an affordable platform to quickly
+start evaluation of Jacinto™ DRA8xx Processors and accelerate development
+for Infotainment, ADAS, Gateway and many other automotive
+applications.</p>
+<p>The J721E Evaluation Module consists of a SoM(System on Module) and a
+common processor board.</p>
+<p class="rubric" id="j7es-som">J7ES SOM</p>
+<p>System on Module is a small board which has the SoC specific socket and
+other important platform specific hardware like PMIC, DDR memory, etc</p>
+<p>There are 2 variants. Following are the images of EVMs with different versions
+of SoM:</p>
+<ol class="arabic simple">
+<li>Alpha board</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Alpha EVMs have “Interim PMIC” sticker on the SoM board.</p>
+</div>
+<img alt="../../../_images/J721E_Alpha_Board_1.jpg" src="../../../_images/J721E_Alpha_Board_1.jpg" />
+<img alt="../../../_images/J721E_Alpha_Board_2.jpg" src="../../../_images/J721E_Alpha_Board_2.jpg" />
+<ol class="arabic simple" start="2">
+<li>Beta board</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Beta EVMs don’t have a “Interim PMIC” sticker on the SoM board.</p>
+</div>
+<img alt="../../../_images/J721E_Beta_Board.jpg" src="../../../_images/J721E_Beta_Board.jpg" />
+<p>Contents of the board</p>
+<ul class="simple">
+<li>J721e SoC</li>
+<li>Power controller</li>
+<li>4 GiB DDR RAM</li>
+<li>OSPI NOR flash</li>
+<li>Hyperflash</li>
+</ul>
+<p class="rubric" id="common-proc-board">Common Processor Board</p>
+<p>Common Processor Board is the main board which has peripherals to provide
+most common functionality. It allows to connect to different adapter cards.</p>
+<p>Common Processor Board with ALPHA-SOM</p>
+<img alt="../../../_images/K3-Common-Proc-Board-with-Alpha-som.png" src="../../../_images/K3-Common-Proc-Board-with-Alpha-som.png" />
+<p>Common Processor Board with BETA-SOM</p>
+<img alt="../../../_images/K3-Common-Proc-Board-with-Beta-som.png" src="../../../_images/K3-Common-Proc-Board-with-Beta-som.png" />
+<p>Contents of the board</p>
+<p>Refer to <a class="reference external" href="J721E_EVM_Hardware_Setup.html#evm-connections">EVM connections</a>
+for detail information regarding connecting peripherals to Common Processor Board</p>
+<ul class="simple">
+<li>12V Power input</li>
+<li>4xUART to USB port for Main uarts</li>
+<li>2xUART to USB port MCU domain uarts</li>
+<li>5x Ethernet ports</li>
+<li>2x Display ports</li>
+<li>2x FPDlink display connectors</li>
+<li>7x 3.5mm audio jacks</li>
+<li>2x PCIe connectors</li>
+<li>SD card slot</li>
+<li>8GiB eMMC</li>
+</ul>
+<p class="rubric" id="ivi-daughter-card">Infotainment daughter card</p>
+<p>Infotainment daughter card is adapter board which has additional peripherals for
+infotainment use cases. This has support for HDMI display, FPDlink display
+extra audio channels, CSI camera, etc</p>
+<img alt="../../../_images/K3-Infotainment-card.png" src="../../../_images/K3-Infotainment-card.png" />
+<p>Contents of the board</p>
+<ul class="simple">
+<li>14x 3.5mm audio jacks</li>
+<li>2x FPDlink display connectors</li>
+<li>Parallel port Omnivision camera connector</li>
+<li>CSI camera connector</li>
+<li>HDMI display connector</li>
+</ul>
+<p class="rubric" id="gesi-daughter-card">GESI daughter card</p>
+<p>GESI(Gateway/Ethernet Switch/ Industrial) daughter card is adapter board which
+has additional peripherals for gateway and industrial use cases.
+This has support for extra ethernet ports and CAN ports, etc</p>
+<img alt="../../../_images/K3-GESI-card.png" src="../../../_images/K3-GESI-card.png" />
+<p>Contents of the board</p>
+<ul class="simple">
+<li>5x ethernet ports</li>
+<li>Profinet connector</li>
+<li>Motor control headers</li>
+<li>Additional CAN headers</li>
+</ul>
+<p class="rubric" id="switch-settings">Switch settings</p>
+<p>Most common boot method is to use SD card. Following are the switch settings to
+set the boot mode to SD for common processor board.</p>
+<img alt="../../../_images/K3-J721E-EVM-Switch-SD-boot.png" src="../../../_images/K3-J721E-EVM-Switch-SD-boot.png" />
+<p>When you want the binaries to be loaded from a debugger like CCS, the common
+processor boards has to be set in the NO boot mode.  Following are the switch settings
+to do the same.</p>
+<img alt="../../../_images/K3-J721E-EVM-Switch-NO-boot.png" src="../../../_images/K3-J721E-EVM-Switch-NO-boot.png" />
+<p class="rubric" id="evm-connections">EVM connections</p>
+<p>Connect Following peripherals for working with processor SDK Linux</p>
+<ol class="arabic simple">
+<li>MAIN_UART is a USB connector to connect 4x main UART devices,
+this will register /dev/ttyUSB[0-3] in your Linux machine.</li>
+<li>MCU_UART is a USB connector to connect 2x mcu UART devices.
+this will register /dev/ttyUSB[4-5] in your Linux machine.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Connect the MAIN_UART and MCU_UART in order so that the device numbers
+are assigned correctly.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li>Connect a Display Port 1080p monitor to the Display0 port of the
+commonProcBoard.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only the monitor with preferred resolution as 1080p shall
+be used, any other resolution is not supported.</p>
+</div>
+<ol class="arabic simple" start="4">
+<li>Connect ethernet at the RJ45 connector[4] in the commonProcBoard as shown.</li>
+<li>Insert micro SD card at the slot shown in ][5]</li>
+<li>Connect the XDS110 connector[6] if you want to run RTOS demos or use CCS.</li>
+<li>Connect a 1080p HDMI monitor to the HDMI port[7] port on the Infotainment
+daughter card.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For Linux demos, keep the bootswitch settings in SD mode
+For Gateway demos, keep the bootswitch settings in noboot mode</p>
+</div>
+<ol class="arabic simple" start="8">
+<li>Connect a 12V power supply</li>
+<li>Power on the board</li>
+</ol>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Documentation_Tarball.html" class="btn btn-neutral float-right" title="5. Documentation Tarball" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../How_to_Guides_Hardware_Setup_with_CCS.html" class="btn btn-neutral" title="4.2. Hardware EVM Setup" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

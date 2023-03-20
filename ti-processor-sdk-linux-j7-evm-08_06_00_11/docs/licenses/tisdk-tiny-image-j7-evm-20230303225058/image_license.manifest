@@ -1,0 +1,30 @@
+RECIPE NAME: linux-ti-staging
+VERSION: 5.10.162+gitAUTOINC+76b3e88d56
+LICENSE: GPLv2
+FILES: k3-j721e-fpdlink-imx390-rcm-1-3--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-cpb-csi2-ov5640--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-rcm-0-0--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-sk--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtb k3-j721e-fpdlink-imx390-rcm-0-1--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo fitImage--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.bin k3-j721e-fpdlink-imx390-cm-1-3--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-common-proc-board-infotainment--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-sk-csi2-ov5640--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-cm-0-3--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-sk-rpi-cam-imx219--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-cpb-fusion--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-cm-0-0--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-cm-1-1--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-rcm-0-2--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-cm-1-0--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-rcm-0-3--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-edgeai-apps--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo fitImage-its--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.its k3-j721e-common-proc-board--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtb k3-j721e-proc-board-tps65917--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtb k3-j721e-fpdlink-imx390-cm-1-2--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo Image--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.bin k3-j721e-fpdlink-imx390-cm-0-2--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-vision-apps--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-rcm-1-2--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-sk-fusion--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-rcm-1-1--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo fitImage-linux.bin--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.itb k3-j721e-fpdlink-imx390-cm-0-1--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-sk-rpi-hdr-ehrpwm--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo k3-j721e-fpdlink-imx390-rcm-1-0--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.dtbo modules--5.10.162+gitAUTOINC+76b3e88d56-r0b.arago5_psdkla_97.4.0-j7-evm-20230303225058.tgz
+
+RECIPE NAME: optee-os
+VERSION: 3.20.0+gitAUTOINC+8e74d47616
+LICENSE: BSD
+FILES: tee-pager_v2.bin bl32.bin tee-pageable_v2.bin tee.bin bl32.elf tee-header_v2.bin bl32.bin.unsigned
+
+RECIPE NAME: ti-rtos-firmware
+VERSION: 08.02.00.04
+LICENSE: TI-TFL
+FILES: 
+
+RECIPE NAME: tisdk-uenv
+VERSION: 1.0
+LICENSE: MIT
+FILES: uEnv.txt
+
+RECIPE NAME: trusted-firmware-a
+VERSION: 2.8+gitAUTOINC+2fcd408bb3
+LICENSE: BSD & Apache-2.0
+FILES: bl31-k3.elf bl31-k3.bin bl31.bin.unsigned
+
+RECIPE NAME: u-boot-ti-staging
+VERSION: 2021.01+gitAUTOINC+62a9e51344
+LICENSE: GPLv2+
+FILES: tispl.bin-j7-evm-2021.01+gitAUTOINC+62a9e51344-r33_psdkla_17 u-boot-j7-evm-2021.01+gitAUTOINC+62a9e51344-r33_psdkla_17.img u-boot-spl.bin-j7-evm-2021.01+gitAUTOINC+62a9e51344-r33_psdkla_17
+

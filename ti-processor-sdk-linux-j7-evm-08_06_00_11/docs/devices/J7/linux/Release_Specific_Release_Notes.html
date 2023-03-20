@@ -1,0 +1,1666 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.1. Release Notes &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../../../index.html"/>
+        <link rel="up" title="2. Release Specific" href="Release_Specific.html"/>
+        <link rel="next" title="2.2. Performance Guide" href="Release_Specific_Performance_Guide.html"/>
+        <link rel="prev" title="2. Release Specific" href="Release_Specific.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../../../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../linux/Overview.html">1. Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Release_Specific.html">2. Release Specific</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. Release Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">2.1.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#licensing">2.1.2. Licensing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation">2.1.3. Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-platforms">2.1.4. Supported Platforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#release-08-06-00">2.1.5. Release 08.06.00</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-information">2.1.6. Build Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#u-boot">2.1.6.1. U-Boot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel">2.1.6.2. Kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yocto">2.1.6.3. Yocto</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#issues-tracker">2.1.7. Issues Tracker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#issues-opened-in-previous-releases-that-were-closed-on-this-release">2.1.7.1. Issues opened in previous releases that were closed on this release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#issues-found-and-closed-on-this-release-that-may-be-applicable-to-prior-releases">2.1.7.2. Issues found and closed on this release that may be applicable to prior releases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#errata-workarounds-available-in-this-release">2.1.7.3. Errata Workarounds Available in this Release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#u-boot-known-issues">2.1.7.4. U-Boot Known Issues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux-known-issues">2.1.7.5. Linux Known Issues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux-rt-kernel-known-issues">2.1.7.6. Linux RT Kernel Known Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#change-requests">2.1.8. Change Requests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sdk-features-scope-change-for-8-5-release">2.1.8.1. SDK features scope change for 8.5 release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sdk-features-descoped-from-8-4-release">2.1.8.2. SDK features descoped from 8.4 release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sdk-features-descoped-from-8-0-release">2.1.8.3. SDK features descoped from 8.0 release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sdk-features-present-in-7-0-that-were-descoped-in-7-1">2.1.8.4. SDK features present in 7.0 that were descoped in 7.1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-and-usage">2.1.9. Installation and Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#host-support">2.1.10. Host Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Release_Specific_Performance_Guide.html">2.2. Performance Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Release_Specific_Yocto_layer_Configuration.html">2.3. Yocto Layer Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Release_Specific_Supported_Platforms_and_Versions.html">2.4. Supported Platforms and Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Release_Specific_Migration_Guide.html">2.5. Processor SDK Linux Migration Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linux/Foundational_Components.html">3. Foundational Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linux/How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linux/Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="Release_Specific.html">2. Release Specific</a> &raquo;</li>
+      
+    <li>2.1. Release Notes</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="release-notes">
+<span id="release-specific-release-notes"></span><h1>2.1. Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>2.1.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Processor Software Development Kit (Processor-SDK) for Linux</strong>
+provides a fundamental software platform for development, deployment and
+execution of Linux based applications and includes the following:</p>
+<ul class="simple">
+<li>Bootloaders, Linux Kernel &amp; Filesystem</li>
+<li>SDK installer &amp; Prebuilt Binaries</li>
+<li>Setup scripts</li>
+<li>Demo applications</li>
+<li>Documentation</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For building some of the RTOS-based demonstrations, you should also download
+Processor SDK RTOS installer. For more information,
+refer to &lt;PSDKRA install path&gt;/index.html.</p>
+</div>
+</div>
+<div class="section" id="licensing">
+<h2>2.1.2. Licensing<a class="headerlink" href="#licensing" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to the software manifest, which outlines the licensing
+status for all packages included in this release. The manifest can be found on the SDK
+download page or in the installed directory as indicated below. In
+addition, see <a class="reference internal" href="../../../linux/Overview_GPLv3_Disclaimer.html#overview-gplv3-disclaimer"><span class="std std-ref">Processor SDK Linux GPLv3 Disclaimer</span></a>.</p>
+</div>
+<div class="section" id="documentation">
+<h2>2.1.3. Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="index.html#linux-index"><span class="std std-ref">Processor SDK Linux Software Developer’s Guide</span></a>: Provides information on features, functions, delivery package and,
+compile tools for the Processor SDK Linux release. This also provides
+detailed information regarding software elements and software
+infrastructure to allow developers to start creating applications.</li>
+<li><a class="reference internal" href="../../../linux/Overview_Getting_Started_Guide.html#overview-getting-started"><span class="std std-ref">Processor SDK Linux Getting Started Guide</span></a>: Provides information on getting the software and running
+examples/demonstrations bundled in the SDK.</li>
+<li><strong>Software Manifest</strong>: Provides license information on software
+included in the SDK release. This document is in the release at
+<code class="docutils literal"><span class="pre">[INSTALL-DIR]/docs</span></code>.</li>
+<li><strong>EVM Quick Start Guide</strong>: Provides information on hardware setup and
+running the demonstration application that is loaded on flash. This
+document is provided as part of the EVM kit.</li>
+</ul>
+</div>
+<div class="section" id="supported-platforms">
+<h2>2.1.4. Supported Platforms<a class="headerlink" href="#supported-platforms" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="Release_Specific_Supported_Platforms_and_Versions.html#release-specific-supported-platforms-and-versions"><span class="std std-ref">here</span></a> for a list of supported platforms and links to more information.</p>
+</div>
+<div class="section" id="release-08-06-00">
+<h2>2.1.5. Release 08.06.00<a class="headerlink" href="#release-08-06-00" title="Permalink to this headline">¶</a></h2>
+<p>Released February 2023</p>
+<p class="rubric" id="whats-new">What’s New</p>
+<p>Processor SDK 8.6 Release supports the following platforms:</p>
+<blockquote>
+<div><ul class="simple">
+<li>J721E</li>
+<li>J7200</li>
+<li>J721S2</li>
+<li>J784S4</li>
+<li>AM68A</li>
+<li>AM69A</li>
+</ul>
+</div></blockquote>
+<p>Processor SDK 8.6 Release has following new features:</p>
+<blockquote>
+<div><ul class="simple">
+<li>AM68A-sk and AM69A-sk HS-FS support</li>
+<li>Fusion 1 board for supporting multi-camera capture for Edge AI applications</li>
+<li>Replay Protected Memory Block (RPMB) access in OP-TEE userspace through eMMC RPMB</li>
+<li>SPI Master/Slave</li>
+<li>J7200 stability improvements</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="build-information">
+<h2>2.1.6. Build Information<a class="headerlink" href="#build-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="u-boot">
+<h3>2.1.6.1. U-Boot<a class="headerlink" href="#u-boot" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">Head Commit: 62a9e513448d700cbc3d775f497f94ba63851c8e include: configs: Update env for selecting right dtb file</div>
+<div class="line">Date: Fri Feb 16 16:37:18 CST 2023</div>
+<div class="line">uBoot Version: 2021.01</div>
+<div class="line">uBoot Description: 08.06.00.006</div>
+<div class="line">Clone: git://git.ti.com/ti-u-boot/ti-u-boot.git</div>
+<div class="line">Branch: ti-u-boot-2021.01</div>
+<div class="line">uBoot Tag: 08.06.00.006</div>
+</div>
+<div class="line-block">
+<div class="line">Compiler Information:  aarch64-none-linux-gnu-gcc (GNU Toolchain for the A-profile Architecture 9.2-2019.12 (arm-9.10))</div>
+<div class="line"><br /></div>
+</div>
+<p class="rubric">Note:</p>
+<div class="line-block">
+<div class="line">meta-psdkla Yocto layer contains additional patches for U-Boot <a class="reference external" href="https://git.ti.com/cgit/jacinto-linux/meta-psdkla/tree/recipes-bsp/u-boot/u-boot-ti-staging?h=REL.PSDK.JACINTO.08.06.00.11">here</a>.</div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="kernel">
+<h3>2.1.6.2. Kernel<a class="headerlink" href="#kernel" title="Permalink to this headline">¶</a></h3>
+<p class="rubric" id="linux-kernel">Linux Kernel</p>
+<div class="line-block">
+<div class="line">Head Commit: 76b3e88d569210a51399e8d8c8babd995af29d11 Merged TI feature platform_base into ti-linux-5.10.y-cicd</div>
+<div class="line">Date: Fri Feb 16 14:32:58 CST 2023</div>
+<div class="line">Kernel Version: 5.10.162</div>
+<div class="line">Kernel Description: 08.06.00.006</div>
+</div>
+<div class="line-block">
+<div class="line">Repo: git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git</div>
+<div class="line">Branch: ti-linux-5.10.y</div>
+<div class="line">Tag: 08.06.00.006</div>
+<div class="line">Kernel defconfig: ti_sdk_arm64_release_defconfig</div>
+</div>
+<div class="line-block">
+<div class="line">Compiler Information:  arm-none-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 9.2-2019.12 (arm-9.10)) 9.2.1 20191025</div>
+<div class="line"><br /></div>
+</div>
+<p class="rubric" id="real-time-rt-linux-kernel">Real Time (RT) Linux Kernel</p>
+<div class="line-block">
+<div class="line">Head Commit: 02a1d48fd7af03f93bdf4ca06415618caa11bec2 Merge branch ‘ti-rt-linux-5.10.y-cicd’ into ti-rt-linux-5.10.y</div>
+<div class="line">Date: Fri Feb 16 16:11:49 CST 2023</div>
+<div class="line">Kernel Version: 5.10.162</div>
+<div class="line">Kernel Description: 08.06.00.006-rt</div>
+</div>
+<div class="line-block">
+<div class="line">Repo: git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git</div>
+<div class="line">Branch: ti-rt-linux-5.10.y</div>
+<div class="line">Tag: 08.06.00.006-rt</div>
+<div class="line">Kernel defconfig: ti_sdk_arm64_rt_release_defconfig</div>
+</div>
+<div class="line-block">
+<div class="line">Compiler Information:  arm-none-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 9.2-2019.12 (arm-9.10)) 9.2.1 20191025</div>
+</div>
+<p class="rubric">Note:</p>
+<div class="line-block">
+<div class="line">meta-psdkla Yocto layer contains additional patches for Linux Kernel <a class="reference external" href="https://git.ti.com/cgit/jacinto-linux/meta-psdkla/tree/recipes-kernel/linux/linux-ti-staging?h=REL.PSDK.JACINTO.08.06.00.11">here</a>.</div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="yocto">
+<h3>2.1.6.3. Yocto<a class="headerlink" href="#yocto" title="Permalink to this headline">¶</a></h3>
+<p class="rubric" id="meta-ti">meta-ti</p>
+<div class="line-block">
+<div class="line">Head Commit: 6aade6d4b54c0da2fc6887b0d4f8192d58180656 linux-ti-staging-rt: RC Auto-Merger: 08.06.00.005</div>
+<div class="line">Date: 2023-02-09</div>
+</div>
+<div class="line-block">
+<div class="line">Clone: git://git.yoctoproject.org/meta-ti</div>
+<div class="line">Branch: dunfell</div>
+<div class="line">Release Tag: 08.06.00.006</div>
+<div class="line"><br /></div>
+</div>
+<p class="rubric" id="meta-arago">meta-arago</p>
+<div class="line-block">
+<div class="line">Head Commit:  97ebd081c7df3d7cfe1331cbcbc29c8db2400f80 ltp-ddt: RC Auto-Merger: 08.06.00.006</div>
+<div class="line">Date: 2023-02-09</div>
+</div>
+<div class="line-block">
+<div class="line">Clone: git://git.yoctoproject.org/meta-arago</div>
+<div class="line">Branch: dunfell</div>
+<div class="line">Release Tag: 08.06.00.006</div>
+<div class="line"><br /></div>
+</div>
+<p class="rubric">meta-psdkla</p>
+<div class="line-block">
+<div class="line">Head Commit: 0ea1910d30d612eb4bdf7beff71950828fd9ac5c edgeai-gui-app: Updating to latest masster</div>
+<div class="line">Date: 2023-03-03</div>
+</div>
+<div class="line-block">
+<div class="line">Clone: git://git.ti.com/jacinto-linux/meta-psdkla.git</div>
+<div class="line">Branch: master</div>
+<div class="line">Release Tag: REL.PSDK.JACINTO.08.06.00.11</div>
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="issues-tracker">
+<h2>2.1.7. Issues Tracker<a class="headerlink" href="#issues-tracker" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="issues-opened-in-previous-releases-that-were-closed-on-this-release">
+<h3>2.1.7.1. Issues opened in previous releases that were closed on this release<a class="headerlink" href="#issues-opened-in-previous-releases-that-were-closed-on-this-release" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="14%" />
+<col width="67%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Record ID</th>
+<th class="head">Title</th>
+<th class="head">Platform</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LCPD-29636</td>
+<td>TDA4VH: multi thread mutex usage causes kernel crash</td>
+<td>j784s4-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-28317</td>
+<td>GStreamer pipeline with decoder and fakesink causes kernel crash</td>
+<td>j721e-evm,j721e-hsevm</td>
+</tr>
+<tr class="row-even"><td>LCPD-28256</td>
+<td>Wave5: H264/265 Encoded file produces extra green garbage data on width</td>
+<td>j721s2-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-28255</td>
+<td>Wave5: Decode fails for Dynamic resolution change in input stream</td>
+<td>j721s2-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-25598</td>
+<td>Wave5: Dynamic SRAM configuration in upstream driver</td>
+<td>j721s2-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-25332</td>
+<td>J721e Failing Video test</td>
+<td>j721e-idk-gw</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-10986">LCPD-28432</a></td>
+<td>DRA821: PCIe: Segmentation fault</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29714</td>
+<td>iperf hangs during crypto performance testing</td>
+<td>j721e-idk-gw</td>
+</tr>
+<tr class="row-even"><td>LCPD-29696</td>
+<td>SERDES driver not being probed in U-Boot</td>
+<td>j721e-evm,j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29554</td>
+<td>EEPROM Header Unidentified Board</td>
+<td>j721e-idk-gw,j7200-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-29402</td>
+<td>tftp download in U-Boot fails on <a class="reference external" href="mailto:am64xx-evm1&#37;&#52;&#48;eptf124">am64xx-evm1<span>&#64;</span>eptf124</a></td>
+<td>am64xx-evm,j721e-idk-gw,j7200-evm</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11000">LCPD-28889</a></td>
+<td>j721s2: GPIO Interrupts are broken</td>
+<td>j721s2-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-26728</td>
+<td>J721e: Watchdog reset fails on newer SoMs</td>
+<td>j721e-idk-gw,j721e-sk</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29599</td>
+<td>Stream_1 benchmark executable missing</td>
+<td>j721e-idk-gw,j721s2-evm,j7200-evm,j784s4-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-28259</td>
+<td>Wave5: V4l2 driver Multi stream support</td>
+<td>j721s2-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-28257</td>
+<td>Wave5: Video looping does not work with H264/265 Decoder</td>
+<td>j721s2-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-22972</td>
+<td>j721e-idk-gw GLBenchmark GLB25_EgyptTestStandardOffscreen_inherited test</td>
+<td>j721e-idk-gw</td>
+</tr>
+<tr class="row-odd"><td>LCPD-28756</td>
+<td>J7AHP - Enable ultra high speed mode for SDIO/MMC</td>
+<td>j784s4-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-28485</td>
+<td>j7200: Segmentation fault during reload PCIe driver.</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-28433</td>
+<td>PCIe EP: DMA test fail</td>
+<td>j721s2-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-25263</td>
+<td>j721s2-evm: U-Boot USBHOST: Superspeed test is failing</td>
+<td>j721s2-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-25112</td>
+<td>Ethernet driver not gating its clock when interface is down</td>
+<td>am64xx-evm,j721e-idk-gw</td>
+</tr>
+<tr class="row-even"><td>LCPD-22413</td>
+<td>Hyperflash tests fail ~50% of the time on j7200</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-17113</td>
+<td>[Cpsw9g][VirtualDriver][VirtualMAC] rpmsg_kdrv_switch is not autoloaded</td>
+<td>j721e-idk-gw</td>
+</tr>
+<tr class="row-even"><td>LCPD-29694</td>
+<td>gpio-line-names is limited to 100. it should be ti,ngpios</td>
+<td>am62axx_sk-fs,am62xx-sk,am64xx-sk,am654x-idk,dra71x-evm,dra7xx-evm,j784s4-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29646</td>
+<td>Failure logs during boot:  Failed to get MSI domain</td>
+<td>am62xx-sk,j721e-idk-gw</td>
+</tr>
+<tr class="row-even"><td>LCPD-29645</td>
+<td>MMC: SD Card doesn’t go into SDR104 mode</td>
+<td>j784s4-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29528</td>
+<td>k3: integration: sdk: missing tag info for optee and atf projects</td>
+<td>am62xx-sk,am64xx-evm,am64xx-hsevm,am64xx-sk,am64xx-hssk,j721e-idk-gw,j721s2-evm,j721s2-hsevm,j7200-evm,j7200-hsevm,j784s4-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-29524</td>
+<td>j721: sdhci0: Capabilities offered in U-Boot Vs Kernel dts are different</td>
+<td>j721e-idk-gw</td>
+</tr>
+<tr class="row-odd"><td>LCPD-27886</td>
+<td>USART: Erroneous clear/trigger of timeout interrupt</td>
+<td>am62axx_sk-fs,am62xx-sk,am64xx-evm,j721e-idk-gw,j7200-evm,j784s4-evm,j784s4-hsevm</td>
+</tr>
+<tr class="row-even"><td>LCPD-18860</td>
+<td>isolcpus in the command line is not honored</td>
+<td>am654x-evm,am654x-idk,j721e-idk-gw,j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-22954</td>
+<td>DRM Stress Test fails</td>
+<td>am62xx-lp-sk,am62xx_lp_sk-fs,am62xx-sk,am654x-evm,j721e-idk-gw,j721s2-evm,j721s2-hsevm,j784s4-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-25663</td>
+<td>Remove old IMG demo binaries</td>
+<td>am62xx-sk,j721e-evm,j721s2-evm,j784s4-evm</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="issues-found-and-closed-on-this-release-that-may-be-applicable-to-prior-releases">
+<h3>2.1.7.2. Issues found and closed on this release that may be applicable to prior releases<a class="headerlink" href="#issues-found-and-closed-on-this-release-that-may-be-applicable-to-prior-releases" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="14%" />
+<col width="67%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Record ID</th>
+<th class="head">Title</th>
+<th class="head">Platform</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LCPD-32462</td>
+<td>Documentation: List of supported Ubuntu versions link is broken</td>
+<td>j721e-evm-ivi,j721e-idk-gw,j721s2-evm,j7200-evm,j784s4-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32335</td>
+<td>SDK: J784S4: Kernel crashes when am65_cpts_disable() is invoked for MAIN CPSW CPTS</td>
+<td>j784s4-evm,j784s4-hsevm</td>
+</tr>
+<tr class="row-even"><td>LCPD-29931</td>
+<td>Missing CPSWnG Native Driver Section in User Guide</td>
+<td>j721e-evm-ivi,j721e-idk-gw,j721e-sk,j7200-evm</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11068">LCPD-32460</a></td>
+<td>J7200/J7VCL: Linux crash when we cat pinctrl debugfs node</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11063">LCPD-32292</a></td>
+<td>Docs: J784S4: No information on Linux boot flow</td>
+<td>j784s4-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29894</td>
+<td>Interrupt Values for adc are incorrect in dts</td>
+<td>j721s2-evm,j784s4-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-29737</td>
+<td>J7200: Watchdog reset test fails</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32515</td>
+<td>OV5640: LI OV5640 module fails to probe</td>
+<td>am68_sk-fs,am69_sk-fs,j721e-sk,j721s2-evm,j784s4-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-32703</td>
+<td>Fusion, CSI Camera overlays missing in rootfs for J7200, J721E, J721S2</td>
+<td>j721e-idk-gw,j721s2-evm,j7200-evm,j784s4-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32692</td>
+<td>J7200: am65xx: CPSW Checksum Offload Support: Test skipped</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-32493</td>
+<td>J7200: USB CDC ECM class device fails</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32472</td>
+<td>J7200: CPSW5G Virtual Eth PING Tests fail</td>
+<td>j7200-evm,j7200-hsevm</td>
+</tr>
+<tr class="row-even"><td>LCPD-29885</td>
+<td>Fix DTC Warnings: J784S4 USXGMII Overlays</td>
+<td>j784s4-evm,j784s4-hsevm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29732</td>
+<td>SDK: MDIO: DaVinci driver probe incorrectly deferred</td>
+<td>j784s4-evm,j784s4-hsevm</td>
+</tr>
+<tr class="row-even"><td>LCPD-32654</td>
+<td>uboot watchdog, ESM, PMIC test tracing RC4</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32557</td>
+<td>MCSPI Test failing due to missing configs</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-32494</td>
+<td>J7200: U-boot shows multiple ti_sci message not acknowledged warnings</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29900</td>
+<td>k3: allmod config fails to build due to ti sci kconfig</td>
+<td>am62xx-sk,am64xx-evm,am64xx-sk,j721e-idk-gw</td>
+</tr>
+<tr class="row-even"><td>LCPD-29740</td>
+<td>j721e-idk-gw:  EMMC_DD_RW_500M test fail</td>
+<td>j721e-idk-gw,j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29729</td>
+<td>j721e-idk-gw, j7200-evm  MMC_M_MODULAR_SDHC_MULTI tests fail</td>
+<td>j721e-idk-gw,j7200-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-32467</td>
+<td>tidss: Incorrect pixel format definitions</td>
+<td>am62xx-lp-sk,am62xx_lp_sk-fs,am62xx-sk,j721e-idk-gw,j721s2-evm,j721s2-hsevm,j784s4-evm,j784s4-hsevm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29883</td>
+<td>Test to update bootloader in mmc using dfu failing</td>
+<td>j721s2-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-29866</td>
+<td>j721e-idk-gw:  MMC_M_FUNC_SDHC_EXT2_DD_RW_1G Failing</td>
+<td>j721e-idk-gw</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="errata-workarounds-available-in-this-release">
+<h3>2.1.7.3. Errata Workarounds Available in this Release<a class="headerlink" href="#errata-workarounds-available-in-this-release" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Record ID</th>
+<th class="head">Title</th>
+<th class="head">Platform</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LCPD-19965</td>
+<td>OSPI PHY Controller Bug Affecting Read Transactions</td>
+<td>am64xx-evm,am654x-idk,j721e-idk-gw,j7200-evm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-19047</td>
+<td>USB: Race condition while reading TRB from system memory in device mode</td>
+<td>j721e-evm,j721e-hsevm,j721e-evm-ivi,j721e-idk-gw</td>
+</tr>
+<tr class="row-even"><td>LCPD-17220</td>
+<td>U-Boot Hyperbus: Hyperflash reads limited to 125MHz max. frequency</td>
+<td>j721e-idk-gw</td>
+</tr>
+<tr class="row-odd"><td>LCPD-16605</td>
+<td>MMC: MMC1/2 Speed Issue</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+</tr>
+<tr class="row-even"><td>LCPD-27886</td>
+<td>USART: Erroneous clear/trigger of timeout interrupt</td>
+<td>am62axx_sk-fs,am62xx-sk,am64xx-evm,j721e-idk-gw,j7200-evm,j784s4-evm,j784s4-hsevm</td>
+</tr>
+<tr class="row-odd"><td>LCPD-22544</td>
+<td>DDR: LPDDR4 should be configured to 2666 MT/S</td>
+<td>j7200-evm</td>
+</tr>
+<tr class="row-even"><td>LCPD-19068</td>
+<td>DSS: Disabling a layer connected to Overlay may result in synclost during the next frame</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="u-boot-known-issues">
+<h3>2.1.7.4. U-Boot Known Issues<a class="headerlink" href="#u-boot-known-issues" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="10%" />
+<col width="21%" />
+<col width="48%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Record ID</th>
+<th class="head">Title</th>
+<th class="head">Platform</th>
+<th class="head">Workaround</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LCPD-32697</td>
+<td>Failed to get DHCP address in U-Boot</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11056">LCPD-29852</a></td>
+<td>j784s4-evm: SD card not recognized in U-Boot when booting over UART</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11058">LCPD-29891</a></td>
+<td>u-boot: USB storage device detection failed on j7200</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-22512</td>
+<td>Update dfu_alt_info_ospi to include flashing of PHY tuning data</td>
+<td>j721e-evm,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-17789</td>
+<td>UBOOT J7:  Could not see UFS device by scsi scan</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-24824</td>
+<td>J7200/VCL: u-boot SPL code configuring the SOC DDR PLL (PLL12) incorrectly. Desired boot frequency is 27.5 MHz</td>
+<td>j7200-evm</td>
+<td>Hardcode  desired DDR freq in function k3_ddrss_init_freq of u-boot</td>
+</tr>
+<tr class="row-even"><td>LCPD-22904</td>
+<td>U-boot: Update EMIFtool for i2244:DDR: Valid stop value must be defined for write DQ VREF training</td>
+<td>j721e-idk-gw,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-17523</td>
+<td>A72-SPL - Support to dump EEPROM to shared memory</td>
+<td>j721e-evm,j721e-idk-gw,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32695</td>
+<td>J784S4 : U-boot : Mass storage tests failure</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32726</td>
+<td>Test: U-Boot: Support Octal SPI(OSPI) flash devices  (AHP) RC 6 SDK 8.6</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-24108</td>
+<td>U-Boot: TISCI config ring fail traces seen in OSPI boot mode on J721E</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32721</td>
+<td>U-boot DFU mode is not functional</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32660</td>
+<td>J721S2: U-boot shows a ti_sci message not acknowledged warning.</td>
+<td>j721s2-evm,j721s2-hsevm</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="linux-known-issues">
+<h3>2.1.7.5. Linux Known Issues<a class="headerlink" href="#linux-known-issues" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="4%" />
+<col width="8%" />
+<col width="58%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Record ID</th>
+<th class="head">Title</th>
+<th class="head">Platform</th>
+<th class="head">Workaround</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LCPD-32580</td>
+<td>J7200: System benchmarking tests are failing</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-27522</td>
+<td>Multi Stream decode fails</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-29521</td>
+<td>R5 remote proc load does’nt guarentee CPU0 vs CPU1 sequencing</td>
+<td>j721e-evm,j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-28791</td>
+<td>AHP GFX performance regression compaired to AEP</td>
+<td>j784s4-evm,j784s4-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11062">LCPD-28511</a></td>
+<td>GPU cache coherency issues</td>
+<td>j721e-evm,j721e-hsevm,j721s2-evm,j721s2-hsevm,j784s4-evm,j784s4-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32430</td>
+<td>OpenSSL Crypto Perf Intermittent Failure</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-19497</td>
+<td>J7200: CPSW2g: interface goes up and down sporadically</td>
+<td>j7200-evm</td>
+<td>Seen only on very few EVMs. No workaround.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-10994">LCPD-17814</a></td>
+<td>Kingston 16G card could not boot to uboot prompt</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32794</td>
+<td>j7200: wkup_pmx: Offsets of the pinctrl nodes under the wkup_pmx2 are wrong</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11055">LCPD-32365</a></td>
+<td>J7200: Audit pinmux node for correct sizes</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32363</td>
+<td>ATF: Address ARM Errata 854172</td>
+<td>j721e-hsevm,j721e-evm-ivi,j721e-idk-gw,j721e-sk,j721s2-evm,j721s2-hsevm,j7200-evm,j7200-hsevm,j784s4-evm,j784s4-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29949</td>
+<td>[PROD STOP]I2c operations at 100KHz is broken</td>
+<td>am62xx-sk,am62xx_sk-fs,am62xx_sk-se,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-10984">LCPD-29705</a></td>
+<td>J7200: DT compile time warnings</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32609</td>
+<td>J784S4: Sync flip test fails for resolution&gt;2k</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11067">LCPD-32448</a></td>
+<td>j721s2: display: eDP mode fails colorbar test</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11061">LCPD-29525</a></td>
+<td>Documentation for MCAN missing in the SDK</td>
+<td>j7200-evm,j7200-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11064">LCPD-28645</a></td>
+<td>K3conf wrong frequencies</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29721</td>
+<td>SDK: Linux: Kernel crashes with Intel PCIe WiFi Card</td>
+<td>j721e-evm,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32468</td>
+<td>CMA allocation in higher memory (32bit+) fails</td>
+<td>j721e-idk-gw,j721s2-evm,j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29680</td>
+<td>vxe_enc_probe warning observed while booting with debug options enabled</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-29634</td>
+<td>Need to include codec maximum capabilities in SDK documentation</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29620</td>
+<td>IMG Decoder not passing ITU-T Streams</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11054">LCPD-29320</a></td>
+<td>The H.264 profile in the IMG video encoder driver is hardcoded to Base profile.</td>
+<td>j721e-idk-gw</td>
+<td><p class="first">The following 2 patches enables the user to provide user defined profile for the video encoding using Gstreamer.</p>
+<p>Board: J721e (TDA4VM)</p>
+<p>SDK Version: 8.4</p>
+<p><strong>Patch-1:</strong> To be applied to Gstreamer plugin.</p>
+<p>Patch file Name:  0001-Added-H264-profiles-support-to-Gstreamer-Plugin-for-.patch</p>
+<p>In order to apply the patch, the user needs to have a Yocto setup and for setting up Yocto, please refer to SDK Documentation. Once the Yocto build is ready, the Gstreamer plugin is found at the location:</p>
+<p><em>&lt;path-to-J721e-8.4-sdk&gt;/yocto-build/build/arago-tmp-external-arm-glibc/work/j7_evm-linux/gstreamer1.0-plugins-good/1.16.3-r0.0.arago3_psdkla_0/gst-plugins-good-1.16.3</em></p>
+<p>The patch can be applied from this folder and changes are made to the files:</p>
+<p><em>./sys/v4l2/gstv4l2h264enc.c and ./sys/v4l2/gstv4l2h264enc.h</em></p>
+<p><strong>Patch-2:</strong> To be applied to Linux Kernel</p>
+<p>Patch file name:</p>
+<p><em>0001-Added-H264-Profiles-Support-to-IMG-Video-encode-driv.patch</em></p>
+<p>Location of Linux Kernel:</p>
+<p><em>./ti-processor-sdk-linux-j7-evm-08_04_00_11/board-support/linux-5.10+gitAUTOINC+95b90aa828-g95b90aa828</em></p>
+<p>Apply the patch from this folder and changes are made to the file:</p>
+<p><em>./drivers/media/platform/vxe-vxd/encoder/vxe_v4l2.c</em></p>
+<p><em>./drivers/media/platform/vxe-vxd/encoder/vxe_enc.c</em></p>
+<p>Once both the patches are applied, the driver can be verified by the below command. Use profile=0 for Base, profile=2 for Main, profile=4 for High. For any other value, default Base profile is set.</p>
+<p><em>$ gst-launch-1.0 videotestsrc pattern=ball do-timestamp=true num-buffers=100 &nbsp;! video/x-raw, format=NV12, width=852, height=480, framerate=30/1 ! v4l2h264enc profile=2 ! h264parse ! mp4mux ! filesink location=demo_main.mp4</em></p>
+<p class="last">Profile of the file can be verified using ffmpeg</p>
+</td>
+</tr>
+<tr class="row-odd"><td>LCPD-25619</td>
+<td>Wave5: Encoded output, mplayer warnings</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-17138</td>
+<td>Kernel warning reported during h264 video encode operations</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-25322</td>
+<td>Docs: J7200: Improve the IPC chapter for ti-rpmsg-char</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-25321</td>
+<td>Docs: J721E: Improve the IPC chapter for ti-rpmsg-char</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-24456</td>
+<td>Move IPC validation source from github to git.ti.com</td>
+<td>am335x-evm,am335x-hsevm,am335x-ice,am335x-sk,am43xx-epos,am43xx-gpevm,am43xx-hsevm,am437x-idk,am437x-sk,am571x-idk,am572x-idk,am574x-idk,am574x-hsidk,am57xx-evm,am57xx-beagle-x15,am57xx-hsevm,am62axx_sk-fs,am62xx-sk,am62xx_sk-fs,am62xx_sk-se,am62xx-vlab,am62xx-zebu,am64xx-evm,am64xx-hsevm,am64xx-sk,am654x-evm,am654x-idk,am654x-hsevm,beaglebone,bbai,beaglebone-black,dra71x-evm,dra71x-hsevm,dra72x-evm,dra72x-hsevm,dra76x-evm,dra76x-hsevm,dra7xx-evm,dra7xx-hsevm,j7ae-evm,j7ae-zebu,j7aep-zebu,j7am-evm,j7am-vlab,j7am-zebu,j7amp-vlab,j7amp-zebu,j721e-evm,j721e-hsevm,j721e-evm-ivi,j721e-idk-gw,j721e-sk,j721e-vlab,j721s2-evm,j721s2-hsevm,j7200-evm,j7200-hsevm,j7amp-evm,k2e-evm,k2e-hsevm,k2g-evm,k2g-hsevm,k2g-ice,k2hk-evm,k2hk-hsevm,k2l-evm,k2l-hsevm,omapl138-lcdk</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-17284</td>
+<td>remoteproc/k3-r5: Cores are started out-of-order when core 0 file size &gt;&gt; core 1 file size</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-16545</td>
+<td>remoteproc/k3-r5f: PDK IPC echo_test image fails to boot up in remoteproc mode on second run</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-16535</td>
+<td>remoteproc/k3-dsp: PDK IPC echo test binaries fails to do IPC in remoteproc mode on second run</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-25662</td>
+<td>Remove SGX PVR tools from KS3 devices</td>
+<td>am62xx-sk,am62xx_sk-fs,am62xx_sk-se,j721e-evm,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-25221</td>
+<td><blockquote class="first last">
+<div>j721e-idk-gw failing Glmark2-DRM Test (Impact 1)</div></blockquote>
+</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-22921</td>
+<td>j721e PVR profiling with PVRPerfServer test is failing</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-19894</td>
+<td>UYVY texture test fails due to internal data stream error</td>
+<td>j721e-idk-gw,j721s2-evm,j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-26692</td>
+<td>Hardware + Software IPSec Performance Test Failures</td>
+<td>am335x-evm,am43xx-gpevm,am57xx-evm,am64xx-evm,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-24127</td>
+<td>AM654x IPSEC Software Crypto tests fail (Impact 4)</td>
+<td>am654x-evm,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32784</td>
+<td>Automated Test: J784S4: CPSW Ping fails</td>
+<td>j784s4-evm,j784s4-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32725</td>
+<td>[Cpsw9g][VirtualDriver][VirtualMAC]Netdev driver should support operate as a virtual driver that interacts with switch firmware via IPC  (AHP) RC 6 SDK 8.6</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32702</td>
+<td>J784S4 : USB Client : CDC ECM test failures</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32701</td>
+<td>J7200 : USB Client : Mass storage performance tests failure</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32700</td>
+<td>Test: MCSPI loopback tests failing for all J7 Platforms</td>
+<td>j721e-idk-gw,j721s2-evm,j7200-evm,j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32699</td>
+<td>Test: CPSW Virtual Net driver: Ping test fails since interface is not up</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32565</td>
+<td>Serror while pcie bus scan</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32564</td>
+<td>Failed to set irq type to MSI</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32563</td>
+<td>PCIe write test failed</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32542</td>
+<td>Failed to set irq type to MSI-X</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32471</td>
+<td>J7200: CPSW5G Virtual Eth Driver Performance Measurement</td>
+<td>j7200-evm,j7200-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11066">LCPD-32334</a></td>
+<td>V4L2 driver compliance test is failing</td>
+<td>j721e-idk-gw,j721e-sk,j721s2-evm,j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-28087</td>
+<td>emmc: using RPMB panicks the TA on High speed mode</td>
+<td>j721e-evm,j721e-hsevm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-25304</td>
+<td>J7AEP: USB: USB 3.0 devices not getting enumerated in high speed</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-24725</td>
+<td>PCIE RC Link fails when linux prints are made quiet</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-24690</td>
+<td>Kernel: SDK: Set HIGH_SPEED_EN for MMC1 instance</td>
+<td>am62xx-sk,am62xx_sk-fs,am62xx_sk-se,am64xx-evm,am64xx-sk,j721s2-evm,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-24491</td>
+<td>Docs: MMC/SD supported modes not documented properly for J721E/J7200</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-22905</td>
+<td>UDMA: TR15 hangs if ICNT0 is less than 64 bytes</td>
+<td>am654x-evm,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-20240</td>
+<td>MMC Modular testcase regression</td>
+<td>j721e-idk-gw,j721e-sk</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-19659</td>
+<td>Doc: PCIe: Update documentation to indicate how to move to compliance mode</td>
+<td>j721e-evm,j721e-hsevm,j721e-evm-ivi,j721e-idk-gw,j7200-evm,j7200-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-19499</td>
+<td>Kernel: OSPI write throughput is less than 1MB/s</td>
+<td>j7200-evm,j7200-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-19084</td>
+<td>Few SD cards not enumerating in Kernel with Alpha EVM</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-17421</td>
+<td>CPSW9G: Can’t bring up interface over NFS</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-17172</td>
+<td>Uboot USBhost: Sandisk Extreme USB 3.0 msc stick could not be detected at second time</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-17171</td>
+<td>Uboot dhcp occasionally failed</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-16640</td>
+<td>PCIe RC: GIC ITS misbehaves when more than 4 devices use it simultaneously</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-16396</td>
+<td>J721E: RC: Unsupported request in configuration completion packets results in an abort</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>Workaround for Multifunction: Configure all the physical functions supported by the endpoint. For configuring all the 6 functions of PCIe  controller instance ‘1’ in J721E, the following can be used. mount -t configfs none /sys/kernel/config; cd /sys/kernel/config/pci_ep/; mkdir functions/pci_epf_test/func1; echo 0x104c &gt; functions/pci_epf_test/func1/vendorid; echo 0xb00d &gt; functions/pci_epf_test/func1/deviceid; echo 1 &gt; functions/pci_epf_test/func1/msi_interrupts; echo 16 &gt; functions/pci_epf_test/func1/msix_interrupts; ln -s functions/pci_epf_test/func1 controllers/d800000.pcie-ep/; mkdir functions/pci_epf_test/func2; echo 0x104c &gt; functions/pci_epf_test/func2/vendorid; echo 0xb00d &gt; functions/pci_epf_test/func2/deviceid; echo 1 &gt; functions/pci_epf_test/func2/msi_interrupts; echo 16 &gt; functions/pci_epf_test/func2/msix_interrupts; ln -s functions/pci_epf_test/func2 controllers/d800000.pcie-ep/; mkdir functions/pci_epf_test/func3; echo 0x104c &gt; functions/pci_epf_test/func3/vendorid; echo 0xb00d &gt; functions/pci_epf_test/func3/deviceid; echo 1 &gt; functions/pci_epf_test/func3/msi_interrupts; echo 16 &gt; functions/pci_epf_test/func3/msix_interrupts; ln -s functions/pci_epf_test/func3 controllers/d800000.pcie-ep/; mkdir functions/pci_epf_test/func4; echo 0x104c &gt; functions/pci_epf_test/func4/vendorid; echo 0xb00d &gt; functions/pci_epf_test/func4/deviceid; echo 1 &gt; functions/pci_epf_test/func4/msi_interrupts; echo 16 &gt; functions/pci_epf_test/func4/msix_interrupts; ln -s functions/pci_epf_test/func4 controllers/d800000.pcie-ep/; mkdir functions/pci_epf_test/func5; echo 0x104c &gt; functions/pci_epf_test/func5/vendorid; echo 0xb00d &gt; functions/pci_epf_test/func5/deviceid; echo 1 &gt; functions/pci_epf_test/func5/msi_interrupts; echo 16 &gt; functions/pci_epf_test/func5/msix_interrupts; ln -s functions/pci_epf_test/func5 controllers/d800000.pcie-ep/; mkdir functions/pci_epf_test/func6; echo 0x104c &gt; functions/pci_epf_test/func6/vendorid; echo 0xb00d &gt; functions/pci_epf_test/func6/deviceid; echo 1 &gt; functions/pci_epf_test/func6/msi_interrupts; echo 16 &gt; functions/pci_epf_test/func6/msix_interrupts; ln -s functions/pci_epf_test/func6 controllers/d800000.pcie-ep/; echo 1 &gt; controllers/d800000.pcie-ep/start; echo 1 &gt; /sys/bus/pci/devices/0000:00:00.0/remove; echo 1 &gt; /sys/bus/pci/rescan; Workaround for switch card: No workarounds available.</td>
+</tr>
+<tr class="row-even"><td>LCPD-16031</td>
+<td>J721e: PCIe: Legacy interrupts do not work</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32656</td>
+<td>AM69-SK: PCIe0 enumeration fails</td>
+<td>am69_sk-fs,j784s4-evm,j784s4-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32655</td>
+<td>J784S4: CTRL MMR IO PADCONFIG size is incorrect for wakeup domain</td>
+<td>am69_sk-fs,j784s4-evm,j784s4-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32581</td>
+<td>J721E HS: Boot is delayed because of a kernel warning for mmc recovery mode</td>
+<td>j721e-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32560</td>
+<td>j7200-evm: FSCK&lt;NNNN&gt;.REC files are sporadically created on the EMMC partition</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32539</td>
+<td>J7AEP: Linux crash when we cat pinctrl debugfs node</td>
+<td>j721s2-evm,j721s2-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32538</td>
+<td>J7AHP: Linux crash when we cat pinctrl debugfs node</td>
+<td>j784s4-evm,j784s4-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32487</td>
+<td>J721S2: CTRL MMR IO PADCONFIG size is incorrect for wakeup domain</td>
+<td>am68_sk-fs,j721s2-evm,j721s2-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32474</td>
+<td>k3conf: Unknown silicon for J784S4</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32279</td>
+<td>k3conf reports J7ES silicon rev version incorrectly</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11057">LCPD-29648</a></td>
+<td>Failure logs during boot: Failed unmounting /var/lib &amp; /var/volatile</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11060">LCPD-29647</a></td>
+<td>Non-fatal failure logs seen during system boot up</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-29644</td>
+<td>MMC: SD Card doesn’t go into DDR50 mode</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://sir.ext.ti.com/jira/browse/EXT_EP-11059">LCPD-28861</a></td>
+<td>J721e/j7200: MCU/WKUP UART as console. The output gets garbled after sysfw/dm load</td>
+<td>j721e-evm,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-28250</td>
+<td>J7AEP: QSPI Write corrupted when the first operation after powerup is erase</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-25692</td>
+<td>linux needs to identify J7ES PG1.1 correctly</td>
+<td>j721s2-evm,j721s2-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-25686</td>
+<td>k3conf needs to identify J7ES PG1.1 correctly</td>
+<td>j721s2-evm,j721s2-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-25262</td>
+<td>j721s2-evm : cpuhotplug06 fails</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-25195</td>
+<td>j721s2-evm: audio device is not found</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-23010</td>
+<td>j721e-idk-gw stress boot test files</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-22715</td>
+<td>i2232: DDR: Controller postpones more than allowed refreshes after frequency change</td>
+<td>am62xx-sk,am62xx_sk-fs,am62xx_sk-se,j721e-idk-gw,j721s2-evm,j7200-evm</td>
+<td><p class="first">Workaround 1:
+Disable dynamic frequency change by programing DFS_ENABLE = 0:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>DFS_ENABLE = 0
+</pre></div>
+</div>
+<p>Workaround 2:
+If switching frequency, program the register field values as follows:</p>
+<div class="last highlight-text"><div class="highlight"><pre><span></span>if (old_freq/new_freq &gt;= 7) {
+    if (PBR_EN==1) {  // Per-bank refresh is enabled
+          AREF_HIGH_THRESHOLD = 19
+          AREF_NORM_THRESHOLD = 18
+          AREF_PBR_CONT_EN_THRESHOLD = 1
+          AREF_CMD_MAX_PER_TREF = 8
+    }
+    else {  // Per-bank refresh is disabled
+          AREF_HIGH_THRESHOLD = 18
+          AREF_NORM_THRESHOLD = 17
+          AREF_CMD_MAX_PER_TREF = 8
+    }
+} else {
+    AREF_HIGH_THRESHOLD = 21
+    AREF_CMD_MAX_PER_TREF = 8
+}
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>LCPD-22319</td>
+<td>OpenSSL performance test data out of bounds</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-20653</td>
+<td>ltp: kernel syscall tests fail</td>
+<td>am335x-evm,am43xx-gpevm,am654x-idk,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-19792</td>
+<td>j721e boot fails sometimes due to EL1 exception</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-18258</td>
+<td>IPSEC perfomance failures</td>
+<td>am654x-evm,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-17543</td>
+<td>Some cpuhotplug tests failed</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32556</td>
+<td>j721s2: kmstest fails when eDP is used</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-24502</td>
+<td>j721e-evm-ivi Universal Planes fails (Impact 1)</td>
+<td>j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-19068</td>
+<td>DSS: Disabling a layer connected to Overlay may result in synclost during the next frame</td>
+<td>j721e-evm,j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-17017</td>
+<td>J7: DSS underflows seen on various use cases</td>
+<td>j721e-evm-ivi,j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-25583</td>
+<td>H264 Encode followed by decode not working for all resolutions in Gstreamer</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-16531</td>
+<td>video decode: vxd_dec warnings displayed at end of gstreamer hevc playback to kmssink for certain video</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-22513</td>
+<td>Update SDK doc to include OSPI flashing instruction using dfu-util</td>
+<td>j721e-evm,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-18790</td>
+<td>eMMC tests failed on J7 rev E2 EVM</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32709</td>
+<td>Test: QSPI tests are failing on J721E</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29880</td>
+<td>CAN_S_FUNC_MODULAR test fail</td>
+<td>am64xx-evm,j7200-evm,j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-29865</td>
+<td>j721e-idk-gw:  MMC_M_MODULAR_NEG_MOD_RW_SDHC Fails</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29755</td>
+<td>j721e-idk-gw : Can Transmission and Reception Tests Fail</td>
+<td>j721e-idk-gw</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-19743</td>
+<td>Packages.gz is missing</td>
+<td>j7200-evm,j7200-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-19739</td>
+<td>AM65 shutdown error</td>
+<td>am654x-idk,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32762</td>
+<td>Delayed detection of HP SD Card on J721s2</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32722</td>
+<td>Linux SDK  VENC: Performance - 1x 1080p60 [Failing on AHP]</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32767</td>
+<td>CI/CD failure</td>
+<td>j721s2-hsevm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32724</td>
+<td>remote proc booting of C7x in non-SMP mode  (AHP) RC 6 SDK 8.6</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32723</td>
+<td>remote proc booting of C7x in non-SMP mode (AHP) RC 6 SDK 8.6</td>
+<td>am69_sk-fs,j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32469</td>
+<td>PVR profiling with PVRPerfServer arm8 64bits failure</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-22339</td>
+<td>PCI-E USBCARD, ETHCARD don’t indicate 2-lane support with lspci</td>
+<td>j721e-idk-gw,j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32771</td>
+<td>j721e: doc: Uboot: SD/eMMC build instructions is wrong</td>
+<td>j721e-idk-gw,j721e-sk</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32718</td>
+<td>GPIO_S_FUNC_EDGE_ALL_BANK and GPIO_S_FUNC_DIR_IN_ALL_BANK Test failing in SDK 8.6</td>
+<td>j784s4-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-32708</td>
+<td>J721s2: OSPI: Flash write error during stress test on 8.5 SDK</td>
+<td>j721s2-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>LCPD-32544</td>
+<td>J7200: OSPI Phy calibration fails intermittently</td>
+<td>j7200-evm</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>LCPD-29699</td>
+<td>J721E tidss fails to keep in sync with displays requesting resolutions &gt; 2k</td>
+<td>j721e-evm,j721e-hsevm,j721e-evm-ivi,j721e-idk-gw,j721e-sk</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="linux-rt-kernel-known-issues">
+<h3>2.1.7.6. Linux RT Kernel Known Issues<a class="headerlink" href="#linux-rt-kernel-known-issues" title="Permalink to this headline">¶</a></h3>
+<p>There are no known issues in this release in the Linux RT Kernel.</p>
+</div>
+</div>
+<div class="section" id="change-requests">
+<h2>2.1.8. Change Requests<a class="headerlink" href="#change-requests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sdk-features-scope-change-for-8-5-release">
+<h3>2.1.8.1. SDK features scope change for 8.5 release<a class="headerlink" href="#sdk-features-scope-change-for-8-5-release" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">ID</th>
+<th class="head">Head Line</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>JACINTOREQ-4994</td>
+<td>Video Codec Memory Optimization Scope Change</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sdk-features-descoped-from-8-4-release">
+<h3>2.1.8.2. SDK features descoped from 8.4 release<a class="headerlink" href="#sdk-features-descoped-from-8-4-release" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="13%" />
+<col width="60%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">ID</th>
+<th class="head">Head Line</th>
+<th class="head">Original Fix Version</th>
+<th class="head">New Fix Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>JACINTOREQ-4930</td>
+<td>k3conf Doc and Test Modify</td>
+<td>08.04.00</td>
+<td>08.05.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sdk-features-descoped-from-8-0-release">
+<h3>2.1.8.3. SDK features descoped from 8.0 release<a class="headerlink" href="#sdk-features-descoped-from-8-0-release" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="13%" />
+<col width="60%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">ID</th>
+<th class="head">Head Line</th>
+<th class="head">Original Fix Version</th>
+<th class="head">New Fix Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>JACINTOREQ-1559</td>
+<td>Linux H264 decoder support</td>
+<td>08.00.00</td>
+<td>08.01.00</td>
+</tr>
+<tr class="row-odd"><td>JACINTOREQ-1485</td>
+<td>Linux writeback pipeline support</td>
+<td>08.00.00</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td>JACINTOREQ-1444</td>
+<td>Vision apps inclusion in yocto build</td>
+<td>08.00.00</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sdk-features-present-in-7-0-that-were-descoped-in-7-1">
+<h3>2.1.8.4. SDK features present in 7.0 that were descoped in 7.1<a class="headerlink" href="#sdk-features-present-in-7-0-that-were-descoped-in-7-1" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Feature</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>HS support</td>
+<td>Restored in 7.3</td>
+</tr>
+<tr class="row-odd"><td>SPL/Uboot boot modes restricted to SD card boot mode</td>
+<td>Restored in 7.3</td>
+</tr>
+<tr class="row-even"><td>1s Linux boot</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Descope for support of native H264 encode/decode</td>
+<td>Use R5F based driver with OpenVX as interface.  H.264 decoder support restored in 7.3</td>
+</tr>
+<tr class="row-even"><td>GPU compression</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>SA2UL driver optimization</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Display Sharing</td>
+<td>Display sharing demo available in SDK v6.1</td>
+</tr>
+<tr class="row-odd"><td>Virtualization (Jailhouse hypervisor/IPC virtualization/CPSW9G virtualization)</td>
+<td>Does not affect 3P virtualization solutions. Basic Jailhouse demo can be seen in SDK 7.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="installation-and-usage">
+<h2>2.1.9. Installation and Usage<a class="headerlink" href="#installation-and-usage" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="index.html#linux-index"><span class="std std-ref">Software Developer’s Guide</span></a> provides instructions on how to setup your Linux development environment, install the SDK and start your development. It also includes User’s Guides for various Example Applications.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="host-support">
+<h2>2.1.10. Host Support<a class="headerlink" href="#host-support" title="Permalink to this headline">¶</a></h2>
+<p>For the specific supported hosts for current SDK, see <a class="reference internal" href="../../../linux/How_to_Guides/Host/How_to_Build_a_Ubuntu_Linux_host_under_VMware.html#how-to-build-a-ubuntu-linux-host-under-vmware"><span class="std std-ref">this page</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Processor SDK Installer is 64-bit, and installs only on 64-bit host machine.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Release_Specific_Performance_Guide.html" class="btn btn-neutral float-right" title="2.2. Performance Guide" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Release_Specific.html" class="btn btn-neutral" title="2. Release Specific" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4.1.8. How to flash eMMC device &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../../../index.html"/>
+        <link rel="up" title="4.1. Developer Notes" href="../../How_to_Guides_Developer_Notes.html"/>
+        <link rel="next" title="4.1.9. How to visualize statistics data" href="How_to_visualize_statistics_data.html"/>
+        <link rel="prev" title="4.1.7. How to change dtb files" href="How_to_Change_dtb_File.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../../../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Foundational_Components.html">3. Foundational Components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../How_to_Guides.html">4. How to Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../How_to_Guides_Developer_Notes.html">4.1. Developer Notes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Host/Connect_to_an_EVM_via_Telnet.html">4.1.1. Connect to an EVM via Telnet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Host/How_to_Setup_a_Samba_Server.html">4.1.2. How to Setup a Samba Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Host/Boot_Sequence.html">4.1.3. Boot Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Host/Moving_Files_to_the_Target_System.html">4.1.4. Moving Files to the Target System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Host/How_to_Flash_Linux_System_from_U-boot.html">4.1.5. How to Flash Linux System from U-boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Processor_SDK_Linux_File_System_Optimization_Customization.html">4.1.6. SDK File System Optimization/Customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="How_to_Change_dtb_File.html">4.1.7. How to change dtb files</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.1.8. How to flash eMMC device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="How_to_visualize_statistics_data.html">4.1.9. How to visualize statistics data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FAQ/How_to_Verify_Ipc_Linux_R5.html">4.1.10. How to verify IPC between Linux and MCU R5 in Keystone devices?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FAQ/How_to_Configure_MSMC_memory.html">4.1.11. How to configure K3 MSMC memory for use as SRAM or L3 cache?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FAQ/How_to_Check_Device_Tree_Info.html">4.1.12. How to check some device tree information from user-space of Linux?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FAQ/How_to_Integrate_Open_Source_Software.html">4.1.13. How do I integrate a different version of open source software than what is packaged in Processor SDK Linux J721e?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Host/How_to_Build_a_Ubuntu_Linux_host_under_VMware.html">4.1.14. How to Build a Ubuntu Linux host under VMware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Host/K3_Resource_Partitioning_Tool.html">4.1.15. K3 Resource Partitioning Tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FAQ/Tda4_Latest_FAQs.html">4.1.16. Latest FAQs on TDA4</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../How_to_Guides_Hardware_Setup_with_CCS.html">4.2. Hardware EVM Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../How_to_Guides.html">4. How to Guides</a> &raquo;</li>
+      
+          <li><a href="../../How_to_Guides_Developer_Notes.html">4.1. Developer Notes</a> &raquo;</li>
+      
+    <li>4.1.8. How to flash eMMC device</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-flash-emmc-device">
+<h1>4.1.8. How to flash eMMC device<a class="headerlink" href="#how-to-flash-emmc-device" title="Permalink to this headline">¶</a></h1>
+<p>Following steps will partition, format and populate the eMMC device with
+a copy of the SD card rootfs filesystem.</p>
+<ul class="simple">
+<li>Copy the mksdboot.sh from host machine &lt;PATH_TO_INSTALLER&gt;/bin/mksdboot.sh
+into the target filesystem.</li>
+<li>Make sure the script has execute permissions.</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>chmod +x mksdboot.sh
+</pre></div>
+</div>
+<ul class="simple">
+<li>Make sure the board boots with uenv.txt.base so that both SD and eMMC devices
+are available to kernel.</li>
+<li>example output when both SD(mmcblk1) and eMMC(mmcblk0) are available</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>root@j7-evm:~# ls -l /dev/mmcblk*
+brw-rw----    <span class="m">1</span> root     disk      <span class="m">179</span>,   <span class="m">0</span> Jul <span class="m">18</span> <span class="m">22</span>:49 /dev/mmcblk0
+brw-rw----    <span class="m">1</span> root     disk      <span class="m">179</span>,  <span class="m">32</span> Jul <span class="m">17</span> <span class="m">22</span>:37 /dev/mmcblk0boot0
+brw-rw----    <span class="m">1</span> root     disk      <span class="m">179</span>,  <span class="m">64</span> Jul <span class="m">17</span> <span class="m">22</span>:37 /dev/mmcblk0boot1
+crw-------    <span class="m">1</span> root     root      <span class="m">242</span>,   <span class="m">0</span> Jul <span class="m">17</span> <span class="m">22</span>:37 /dev/mmcblk0rpmb
+brw-rw----    <span class="m">1</span> root     disk      <span class="m">179</span>,  <span class="m">96</span> Jul <span class="m">17</span> <span class="m">22</span>:37 /dev/mmcblk1
+brw-rw----    <span class="m">1</span> root     disk      <span class="m">179</span>,  <span class="m">97</span> Jul <span class="m">17</span> <span class="m">22</span>:37 /dev/mmcblk1p1
+brw-rw----    <span class="m">1</span> root     disk      <span class="m">179</span>,  <span class="m">98</span> Jul <span class="m">17</span> <span class="m">22</span>:37 /dev/mmcblk1p2
+</pre></div>
+</div>
+<ul class="simple">
+<li>Unmount the eMMC partitions from root kernel</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>umount /dev/mmcblk0*
+</pre></div>
+</div>
+<ul class="simple">
+<li>Stop the udev daemon to avoid auto mounting the partitions while we are
+formatting the eMMC</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>udevadm control -s
+</pre></div>
+</div>
+<ul class="simple">
+<li>Partition the eMMC device using mksdboot.sh script as follows:</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>root@j7-evm:~# ./mksdboot.sh --device /dev/mmcblk0
+./mksdboot.sh: line <span class="m">83</span>: <span class="o">[</span>: too many arguments
+-- Main device is: /dev/mmcblk1p2
+************************************************************
+*         THIS WILL DELETE ALL THE DATA ON /dev/mmcblk0        *
+*                                                          *
+*         WARNING! Make sure your computer does not go     *
+*                  in to idle mode <span class="k">while</span> this script is    *
+*                  running. The script will complete,      *
+*                  but your SD card may be corrupted.      *
+*                                                          *
+*         Press &lt;ENTER&gt; to confirm....                     *
+************************************************************
+
+ls: /dev/mmcblk0?: No such file or directory
+<span class="m">1024</span>+0 records in
+<span class="m">1024</span>+0 records out
+
+Welcome to fdisk <span class="o">(</span>util-linux <span class="m">2</span>.32.1<span class="o">)</span>.
+Changes will remain in memory only, <span class="k">until</span> you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table.
+Created a new DOS disklabel with disk identifier 0x02f86286.
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: Partition <span class="nb">type</span>
+   p   primary <span class="o">(</span><span class="m">0</span> primary, <span class="m">0</span> extended, <span class="m">4</span> free<span class="o">)</span>
+   e   extended <span class="o">(</span>container <span class="k">for</span> logical partitions<span class="o">)</span>
+Select <span class="o">(</span>default p<span class="o">)</span>: Partition number <span class="o">(</span><span class="m">1</span>-4, default <span class="m">1</span><span class="o">)</span>: First sector <span class="o">(</span><span class="m">2048</span>-31080447, default <span class="m">2048</span><span class="o">)</span>: Last sector, +secto<span class="o">[</span><span class="m">87597</span>.744275<span class="o">]</span>  mmcblk0: p1 p2
+rs or +size<span class="o">{</span>K,M,G,T,P<span class="o">}</span> <span class="o">(</span><span class="m">2048</span>-31080447, default <span class="m">31080447</span><span class="o">)</span>:
+Crea<span class="o">[</span><span class="m">87597</span>.750177<span class="o">]</span>  mmcblk0: p1 p2
+ted a new partition <span class="m">1</span> of <span class="nb">type</span> <span class="s1">&#39;Linux&#39;</span> and of size <span class="m">62</span> MiB.
+Partition <span class="c1">#1 contains a vfat signature.</span>
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: Partition <span class="nb">type</span>
+   p   primary <span class="o">(</span><span class="m">1</span> primary, <span class="m">0</span> extended, <span class="m">3</span> free<span class="o">)</span>
+   e   extended <span class="o">(</span>container <span class="k">for</span> logical partitions<span class="o">)</span>
+Select <span class="o">(</span>default p<span class="o">)</span>: Partition number <span class="o">(</span><span class="m">2</span>-4, default <span class="m">2</span><span class="o">)</span>: First sector <span class="o">(</span><span class="m">129024</span>-31080447, default <span class="m">129024</span><span class="o">)</span>: Last sector, +sectors or +size<span class="o">{</span>K,M,G,T,P<span class="o">}</span> <span class="o">(</span><span class="m">129024</span>-31080447, default <span class="m">31080447</span><span class="o">)</span>:
+Created a new partition <span class="m">2</span> of <span class="nb">type</span> <span class="s1">&#39;Linux&#39;</span> and of size <span class="m">14</span>.8 GiB.
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: Partition number <span class="o">(</span><span class="m">1</span>,2, default <span class="m">2</span><span class="o">)</span>: Hex code <span class="o">(</span><span class="nb">type</span> L to list all codes<span class="o">)</span>:
+Changed <span class="nb">type</span> of partition <span class="s1">&#39;Linux&#39;</span> to <span class="s1">&#39;W95 FAT32 (LBA)&#39;</span>.
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: Partition number <span class="o">(</span><span class="m">1</span>,2, default <span class="m">2</span><span class="o">)</span>:
+The bootable flag on partition <span class="m">1</span> is enabled now.
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: The partition table has been altered.
+Calling ioctl<span class="o">()</span> to re-read partition table.
+Syncing disks.
+
+Formating /dev/mmcblk01 ...
+mkfs.fat <span class="m">4</span>.1 <span class="o">(</span><span class="m">2017</span>-01-24<span class="o">)</span>
+mkfs.fat: warning - lowercase labels might not work properly with DOS or Windows
+mke2fs <span class="m">1</span>.44.3 <span class="o">(</span><span class="m">10</span>-July-2018<span class="o">)</span>
+<span class="m">64</span>-bit filesystem support is not enabled.  The larger fields afforded by this feature <span class="nb">enable</span> full-strength checksumming.  Pass -O 64bit to rectify.
+Discarding device blocks: <span class="k">done</span>
+Creating filesystem with <span class="m">3868928</span> 4k blocks and <span class="m">967232</span> inodes
+Filesystem UUID: a5586362-272d-4fb2-a0cc-56458dfc4b64
+Superblock backups stored on blocks:
+        <span class="m">32768</span>, <span class="m">98304</span>, <span class="m">163840</span>, <span class="m">229376</span>, <span class="m">294912</span>, <span class="m">819200</span>, <span class="m">884736</span>, <span class="m">1605632</span>, <span class="m">2654208</span>
+
+Allocating group tables: <span class="k">done</span>
+Writing inode tables: <span class="k">done</span>
+Creating journal <span class="o">(</span><span class="m">16384</span> blocks<span class="o">)</span>: <span class="k">done</span>
+Writing superblocks and filesystem accounting information: <span class="k">done</span>
+
+Partitioning and formatting completed!
+root@j7-evm:~# <span class="o">[</span><span class="m">87602</span>.674595<span class="o">]</span> EXT4-fs <span class="o">(</span>mmcblk0p2<span class="o">)</span>: mounted filesystem with ordered data mode. Opts: <span class="o">(</span>null<span class="o">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Now copy the contents of SD card rootfs partition into eMMC device rootfs partition.
+Run the Following commands on the target, one by one.</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>umount /run/media/*
+mkdir /mnt/sd-rootfs
+mount /dev/mmcblk1p2 /mnt/sd-rootfs
+mkdir /mnt/emmc-rootfs
+mount /dev/mmcblk0p2 /mnt/emmc-rootfs
+cp -r /mnt/sd-rootfs/* /mnt/emmc-rootfs
+sync
+umount /mnt/*
+</pre></div>
+</div>
+<ul class="simple">
+<li>After rebooting the board, The Infotainment Virtual machine can use the rootfs from eMMC</li>
+</ul>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="How_to_visualize_statistics_data.html" class="btn btn-neutral float-right" title="4.1.9. How to visualize statistics data" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="How_to_Change_dtb_File.html" class="btn btn-neutral" title="4.1.7. How to change dtb files" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

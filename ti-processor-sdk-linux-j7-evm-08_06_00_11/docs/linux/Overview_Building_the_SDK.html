@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.2. Building the SDK with Yocto &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../index.html"/>
+        <link rel="up" title="1. Overview" href="Overview.html"/>
+        <link rel="next" title="1.3. Simplified SDK Build using Top-Level Makefile" href="Overview_Top_Level_Makefile.html"/>
+        <link rel="prev" title="1.1.4. GCC ToolChain" href="Overview/GCC_ToolChain.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="Overview.html">1. Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Overview_Getting_Started_Guide.html">1.1. Getting Started Guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.2. Building the SDK with Yocto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">1.2.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start">1.2.2. Quick Start</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites-one-time-setup">1.2.2.1. Prerequisites (One-time setup)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-steps">1.2.2.2. Build Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#processor-sdk-build-reference">1.2.3. Processor SDK Build Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#layer-configuration">1.2.3.1. Layer Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-options">1.2.3.2. Build Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recipes">1.2.3.3. Recipes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#common-variations">1.2.4. Common Variations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#see-also">1.2.5. See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_Top_Level_Makefile.html">1.3. Simplified SDK Build using Top-Level Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_Directory_Structure_Overview.html">1.4. Directory Structure Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_PSDKLA_PSDKRA_Summary.html">1.5. Processor SDK RTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_EdgeAI_Stack.html">1.6. Edge AI Stack and OOB Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_Technical_Support.html">1.7. Processor SDK Technical Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_GPLv3_Disclaimer.html">1.8. GPLv3 Disclaimer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Foundational_Components.html">3. Foundational Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="Overview.html">1. Overview</a> &raquo;</li>
+      
+    <li>1.2. Building the SDK with Yocto</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="overview-building-the-sdk"></span><div class="section" id="building-the-sdk-with-yocto">
+<h1>1.2. Building the SDK with Yocto<a class="headerlink" href="#building-the-sdk-with-yocto" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>1.2.1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This page provides the steps to build the Processor SDK and individual
+components from source. The Processor SDK build is based on the <a class="reference external" href="https://git.yoctoproject.org/meta-arago">Arago
+Project</a> which
+provides a set of layers for <a class="reference external" href="http://openembedded.org/">OpenEmbedded</a>
+and the <a class="reference external" href="http://yoctoproject.org/">Yocto Project</a> targeting TI
+platforms.</p>
+<p>This page will provide the basic steps required to recreate the Processor
+SDK along with a reference of Processor SDK specific configurations,
+build targets, and target devices. Also, tips and suggestions are
+provided along with links for more in-depth information.</p>
+</div>
+<div class="section" id="quick-start">
+<h2>1.2.2. Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisites-one-time-setup">
+<h3>1.2.2.1. Prerequisites (One-time setup)<a class="headerlink" href="#prerequisites-one-time-setup" title="Permalink to this headline">¶</a></h3>
+<p class="rubric" id="host-setup-ubuntu-recommended">Host Setup - Ubuntu (Recommended)</p>
+<p>The recommended Linux distribution is Ubuntu 18.04.</p>
+<p>The following build host packages are required for Ubuntu. The following
+command will install the required tools on the Ubuntu Linux
+distribution.</p>
+<p>For Ubuntu 18.04, please run the following:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ sudo apt-get install build-essential autoconf \
+      automake bison \
+      flex libssl-dev bc u-boot-tools \
+      python diffstat \
+      texinfo gawk chrpath dos2unix \
+      wget unzip socat doxygen libc6:i386 \
+      libncurses5:i386 libstdc++6:i386 \
+      libz1:i386 g++-multilib \
+      git python3-distutils python3-apt
+</pre></div>
+</div>
+<p>By default Ubuntu uses “dash” as the default shell for /bin/sh. You must
+reconfigure to use bash by running the following command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>sudo dpkg-reconfigure dash
+</pre></div>
+</div>
+<p>Be sure to select “No” when you are asked to use dash as the default
+system shell.</p>
+<p class="rubric">Large Swap File</p>
+<p>Building large packages, especially several at a time, requires a lot of
+working memory for a computer. For computers with 32 GB or RAM or more, this
+should not be a problem. For computers with less RAM, a swap file of ~16GB may
+be needed to build large packages. Creating a large swap file, or resizing a
+small swap file to be larger will help avoid build errors for large packages.</p>
+<p class="rubric" id="proxy-setup">Proxy Setup</p>
+<p>If working behind a proxy, please see <a class="reference external" href="https://wiki.yoctoproject.org/wiki/Working_Behind_a_Network_Proxy">Working Behind a Network
+Proxy</a>.</p>
+<p class="rubric" id="cross-compile-toolchain">Cross-Compile Toolchain</p>
+<p>Run the following commands to install the ARM Toolchains. Note that the &lt;PATH_TO_TOOLCHAIN&gt; used here needs to be provided to the
+TOOLCHAIN_BASE variable when running the bitbake command, as shown in the ‘Build Steps’ section below.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>cd &lt;PATH_TO_TOOLCHAIN&gt;
+wget https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz
+tar -Jxvf gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz
+wget https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu.tar.xz
+tar -Jxvf gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu.tar.xz
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For building all SDK components, you need two compilers.
+ARMv8 for software running on A72
+ARMv7 for software running on R5F
+Make sure to download both of these toolchains before starting yocto build.</p>
+</div>
+</div>
+<div class="section" id="build-steps">
+<h3>1.2.2.2. Build Steps<a class="headerlink" href="#build-steps" title="Permalink to this headline">¶</a></h3>
+<p>Please refer to <a class="reference internal" href="../devices/J7/linux/Release_Specific_Yocto_layer_Configuration.html#yocto-layer-configuration"><span class="std std-ref">here</span></a> for the
+layer configuration for a particular release of Processor SDK Linux.
+See <a class="reference internal" href="#build-options">Build Options</a> for a list of additional targets.  The MACHINE can be set to
+j7-evm, for example.</p>
+<p>Processor SDK Linux J721e uses the ‘oe-layersetup’ tool to configure the meta layers. If you do not have the Linux SDK package installed:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>git clone https://git.ti.com/git/arago-project/oe-layersetup.git yocto-build
+cd yocto-build
+</pre></div>
+</div>
+<p>The Linux SDK package also has the above tool cloned at the top level. If you have it installed:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>cd &lt;SDK INSTALL DIR&gt;/yocto-build
+</pre></div>
+</div>
+<p>Then run following commands to setup a yocto build for a specific release version and build the ‘tisdk-default-image’ target.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>./oe-layertool-setup.sh -f configs/processor-sdk-linux/processor-sdk-linux-&lt;version&gt;.txt
+cd build
+echo &quot;ARAGO_BRAND  = \&quot;psdkla\&quot;&quot; &gt;&gt; conf/local.conf
+echo &quot;DISTRO_FEATURES_append = \&quot; virtualization\&quot;&quot; &gt;&gt; conf/local.conf
+. conf/setenv
+TOOLCHAIN_BASE=&lt;PATH_TO_TOOLCHAIN&gt; MACHINE=&lt;machine&gt; bitbake -k tisdk-default-image
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The build will ~250GB of hard disk space for building the tisdk-default-image.</p>
+</div>
+<p class="rubric">Building for a HS platform</p>
+<p>To build for an HS platform, bitbake needs to know the location of the secdev utilities.
+Obtain it with the following:</p>
+<blockquote>
+<div><div class="highlight-text"><div class="highlight"><pre><span></span>$ git clone https://git.ti.com/git/security-development-tools/core-secdev-k3.git -b master
+$ export TI_SECURE_DEV_PKG=`pwd`/core-secdev-k3
+</pre></div>
+</div>
+</div></blockquote>
+<p>Then let bitbake know the location by adding TI_SECURE_DEV_PKG_K3=$TI_SECURE_DEV_PKG to the
+list of environment variables before the bitbake command.</p>
+</div>
+</div>
+<div class="section" id="processor-sdk-build-reference">
+<h2>1.2.3. Processor SDK Build Reference<a class="headerlink" href="#processor-sdk-build-reference" title="Permalink to this headline">¶</a></h2>
+<p>The following sections provide information for configuration, build
+options, and supported platforms of the Processor SDK.</p>
+<div class="section" id="layer-configuration">
+<h3>1.2.3.1. Layer Configuration<a class="headerlink" href="#layer-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Please refer to <a class="reference internal" href="../devices/J7/linux/Release_Specific_Yocto_layer_Configuration.html#yocto-layer-configuration"><span class="std std-ref">here</span></a> for the layer configuration for a particular release of Processor SDK Linux.</p>
+</div>
+<div class="section" id="build-options">
+<h3>1.2.3.2. Build Options<a class="headerlink" href="#build-options" title="Permalink to this headline">¶</a></h3>
+<p class="rubric" id="images">Images</p>
+<p>In addition to individual components packages, the following table
+provides a list of build targets supported. These are the &lt;target&gt; used
+in the command:</p>
+<p><code class="docutils literal"><span class="pre">MACHINE=&lt;machine&gt;</span> <span class="pre">bitbake</span> <span class="pre">&lt;target&gt;</span></code></p>
+<p>The “Build Output” is given relative to the
+<strong>arago-tmp-[toolchain]/deploy</strong> directory.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="52%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Target</th>
+<th class="head">Build Output</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>arago-core-psdkla-bundle</td>
+<td>images/&lt;machine&gt;/arago-core-psdkla-bundle-&lt;machine&gt;.tar.xz</td>
+<td>Full SDK</td>
+</tr>
+<tr class="row-odd"><td>tisdk-edgeai-image</td>
+<td>images/&lt;machine&gt;/tisdk-edgeai-image-&lt;machine&gt;.tar.xz</td>
+<td>Target Edge AI Filesystem</td>
+</tr>
+<tr class="row-even"><td>tisdk-default-image</td>
+<td>images/&lt;machine&gt;/tisdk-default-image-&lt;machine&gt;.tar.xz</td>
+<td>Target Filesystem</td>
+</tr>
+<tr class="row-odd"><td>tisdk-base-image</td>
+<td>images/&lt;machine&gt;/tisdk-base-image-&lt;machine&gt;.tar.xz</td>
+<td>Minimal Target Filesystem</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p class="rubric" id="platforms">Platforms</p>
+<p>Please refer to <a class="reference internal" href="../devices/J7/linux/Release_Specific_Yocto_layer_Configuration.html#yocto-layer-configuration"><span class="std std-ref">here</span></a> for the yocto build platforms supported in Processor SDK Linux J721e.
+These are the &lt;machine&gt; used in the command:</p>
+<p><code class="docutils literal"><span class="pre">MACHINE=&lt;machine&gt;</span> <span class="pre">bitbake</span> <span class="pre">&lt;target&gt;</span></code></p>
+<p class="rubric" id="rt-support">RT Support</p>
+<p>Processor SDK Linux J721e also supports RT Linux Kernel with the yocto build. Run the commands below, before the bitbake build command, to setup RT builds:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>echo &quot;ARAGO_RT_ENABLE = \&quot;1\&quot;&quot; &gt;&gt; conf/local.conf
+echo &quot;ARAGO_RT_ENABLE_linux-rt = \&quot;1\&quot;&quot; &gt;&gt; conf/local.conf
+</pre></div>
+</div>
+</div>
+<div class="section" id="recipes">
+<span id="building-the-sdk-recipes"></span><h3>1.2.3.3. Recipes<a class="headerlink" href="#recipes" title="Permalink to this headline">¶</a></h3>
+<p class="rubric" id="recipe-basics">Recipe Basics</p>
+<p>One or more recipes can be specified for the &lt;target&gt; for greater
+granularity of recipe development and debug. Specifying a recipe name,
+minus the version (if the version is appended to the name), will build
+the recipe and all its dependencies.</p>
+<p>For example, the command below builds only the jailhouse recipe and all the
+dependencies it defines.</p>
+<p><code class="docutils literal"><span class="pre">MACHINE=&lt;machine&gt;</span> <span class="pre">bitbake</span> <span class="pre">jailhouse</span></code></p>
+<p>After the bitbake command above is successfully done,
+<strong>arago-tmp-[toolchain]/work/&lt;machine&gt;-linux/jailhouse</strong> directory
+will be available including the original source code under the git
+folder, independent shared objects (.so files) under packages-split
+folder, and IPKs under deploy-ipks folder.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please note that the output of a recipe can be in another folder under “arago-tmp-[toolchain]/work” directory, depending on the defines of the recipe.</p>
+</div>
+<p class="rubric" id="forced-re-compilation">Forced Re-compilation</p>
+<p>When needed, source code under the work directory (e.g.,
+<strong>arago-tmp-[toolchain]/work/&lt;machine&gt;-linux/jailhouse</strong>/git) can
+be modified. After the modification is done, run the following commands
+to force recompilation with the new code and rebuilding of the recipe,
+e.g.,</p>
+<p><code class="docutils literal"><span class="pre">MACHINE=&lt;machine&gt;</span> <span class="pre">bitbake</span> <span class="pre">jailhouse</span> <span class="pre">--force</span> <span class="pre">-c</span> <span class="pre">compile</span></code></p>
+<p><code class="docutils literal"><span class="pre">MACHINE=&lt;machine&gt;</span> <span class="pre">bitbake</span> <span class="pre">jailhouse</span></code></p>
+<p class="rubric" id="installing-package">Installing Package</p>
+<p>To install a modified and rebuilt package, copy the new IPKs from the
+deploy-ipks folder (e.g.,
+<strong>arago-tmp-[toolchain]/work/&lt;machine&gt;-linux/jailhouse/[version]/deploy-ipks</strong>)
+to the target system and then run the following command to install the
+IPKs:</p>
+<p><code class="docutils literal"><span class="pre">opkg</span> <span class="pre">install</span> <span class="pre">[package_ipk].ipk</span></code></p>
+<p class="rubric" id="cleaning-a-built-recipe">Cleaning a Built Recipe</p>
+<p>A built recipe can be cleaned using:</p>
+<p><code class="docutils literal"><span class="pre">MACHINE=&lt;machine&gt;</span> <span class="pre">bitbake</span> <span class="pre">&lt;target&gt;</span> <span class="pre">-c</span> <span class="pre">cleansstate</span></code></p>
+<p>The cleansstate task will clean recipe’s work directory and remove the
+recipe’s output from the dependency tree used by other recipe’s during
+compilation.</p>
+</div>
+</div>
+<div class="section" id="common-variations">
+<h2>1.2.4. Common Variations<a class="headerlink" href="#common-variations" title="Permalink to this headline">¶</a></h2>
+<p>N/A</p>
+</div>
+<div class="section" id="see-also">
+<h2>1.2.5. See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>General information on Yocto, OpenEmbedded and Arago projects can be found at:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://yoctoproject.org/">Yocto Project</a></li>
+<li><a class="reference external" href="http://openembedded.org/">OpenEmbedded</a></li>
+<li><a class="reference external" href="https://git.yoctoproject.org/meta-arago">Arago Project</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Overview_Top_Level_Makefile.html" class="btn btn-neutral float-right" title="1.3. Simplified SDK Build using Top-Level Makefile" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Overview/GCC_ToolChain.html" class="btn btn-neutral" title="1.1.4. GCC ToolChain" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

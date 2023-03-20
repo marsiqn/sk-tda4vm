@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.1.1.14. RemoteProc &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../../../index.html"/>
+        <link rel="up" title="3.1.1. User’s Guide" href="Users-Guide.html"/>
+        <link rel="next" title="3.1.2. Troubleshooting" href="Applications.html"/>
+        <link rel="prev" title="3.1.1.13. HyperBus and HyperFlash" href="UG-HyperBus.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../../../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../Foundational_Components.html">3. Foundational Components</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Foundational_Components_U-Boot.html">3.1. U-Boot</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="Users-Guide.html">3.1.1. User’s Guide</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="UG-General-Info.html">3.1.1.1. General Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-DFU.html">3.1.1.2. USB Device Firmware Upgrade (DFU)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-Network.html">3.1.1.3. Network (Wired or USB Client)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-NAND.html">3.1.1.4. NAND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-Memory.html">3.1.1.5. SD, eMMC and USB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-SPI.html">3.1.1.6. SPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-QSPI.html">3.1.1.7. OSPI/QSPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-NOR.html">3.1.1.8. NOR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-UART.html">3.1.1.9. UART</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-SATA.html">3.1.1.10. SATA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-UFS.html">3.1.1.11. UFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-DDR3.html">3.1.1.12. DDR3 ECC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="UG-HyperBus.html">3.1.1.13. HyperBus and HyperFlash</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">3.1.1.14. RemoteProc</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Applications.html">3.1.2. Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Kernel.html">3.2. Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Filesystem.html">3.3. Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Tools.html">3.4. Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_IPCLLD.html">3.5. IPC Low Level Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Graphics.html">3.6. Graphics and Display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Multimedia_D5520_VXE384.html">3.7. Multimedia Video Codec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Virtualization.html">3.8. Virtualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_ATF.html">3.9. ARM Trusted Firmware-A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_OPTEE.html">3.10. OP-TEE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../Foundational_Components.html">3. Foundational Components</a> &raquo;</li>
+      
+          <li><a href="../../Foundational_Components_U-Boot.html">3.1. U-Boot</a> &raquo;</li>
+      
+          <li><a href="Users-Guide.html">3.1.1. User’s Guide</a> &raquo;</li>
+      
+    <li>3.1.1.14. RemoteProc</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="remoteproc">
+<h1>3.1.1.14. RemoteProc<a class="headerlink" href="#remoteproc" title="Permalink to this headline">¶</a></h1>
+<p>This section documents how to initialize, load, start and stop remote cores from U-Boot prompt.
+Following remotecores support is available in U-boot:</p>
+<ul class="simple">
+<li>Cortex-R5F in Lockstep more</li>
+<li>Cortex-R5F in split mode</li>
+<li>C66x DSP</li>
+<li>C71x DSP</li>
+</ul>
+<div class="section" id="initialization">
+<h2>3.1.1.14.1. Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>U-Boot supports for initializing all the available remotecores in one go or
+initialize individual core based on the DT alias id.</p>
+<p>The below command will initialize all the available remote cores:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>=&gt; rproc init
+</pre></div>
+</div>
+<p>The below command will initialize just the given remote core</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>=&gt; rproc init &lt;id&gt;
+</pre></div>
+</div>
+<p>The below command lists all the available/initialized remotecores in the system.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>=&gt; rproc list
+0 - Name:&#39;r5f@41000000&#39; type:&#39;internal memory mapped&#39; supports: load start stop reset
+1 - Name:&#39;r5f@41400000&#39; type:&#39;internal memory mapped&#39; supports: load start stop reset
+2 - Name:&#39;r5f@5c00000&#39; type:&#39;internal memory mapped&#39; supports: load start stop reset
+3 - Name:&#39;r5f@5d00000&#39; type:&#39;internal memory mapped&#39; supports: load start stop reset
+4 - Name:&#39;r5f@5e00000&#39; type:&#39;internal memory mapped&#39; supports: load start stop reset
+5 - Name:&#39;r5f@5f00000&#39; type:&#39;internal memory mapped&#39; supports: load start stop reset
+6 - Name:&#39;dsp@4d80800000&#39; type:&#39;internal memory mapped&#39; supports: load start stop reset
+7 - Name:&#39;dsp@4d81800000&#39; type:&#39;internal memory mapped&#39; supports: load start stop reset
+8 - Name:&#39;dsp@64800000&#39; type:&#39;internal memory mapped&#39; supports: load start stop reset
+</pre></div>
+</div>
+</div>
+<div class="section" id="loading">
+<h2>3.1.1.14.2. Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
+<p>Once Initialized, remotecores can be loaded with a relevant image. Make sure
+image is loaded only after initializing the core.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>=&gt; load mmc 1:2 0x90000000 /lib/firmware/j7-main-r5f0_0-fw
+2536540 bytes read in 112 ms (21.6 MiB/s)
+=&gt; rproc load 2 0x90000000 0x${filesize}
+Load Remote Processor 2 with data@addr=0x90000000 2536540 bytes: Success!
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting">
+<h2>3.1.1.14.3. Starting<a class="headerlink" href="#starting" title="Permalink to this headline">¶</a></h2>
+<p>Successfully loaded remotecore can be started using the following command.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>=&gt; rproc start 2
+</pre></div>
+</div>
+</div>
+<div class="section" id="stop">
+<h2>3.1.1.14.4. Stop<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h2>
+<p>A running remotecore can be stopped using the following command.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>=&gt; rproc stop 2
+</pre></div>
+</div>
+<p>Make sure all the commands are run in the above given sequence. Currently IPC
+is not supported in U-boot.</p>
+</div>
+<div class="section" id="hs-devices">
+<h2>3.1.1.14.5. HS Devices<a class="headerlink" href="#hs-devices" title="Permalink to this headline">¶</a></h2>
+<p>HS Devices by default use the secure firmware images present in the filesystem
+for booting the remoteproc cores. Symlinks to these secure firmware images have
+a suffix of <cite>-sec</cite> on them.</p>
+<p>All the firmware images are authenticated while loading from U-boot.</p>
+<p>Steps for signing and updating firmware images in filesystem.</p>
+<p class="rubric">Getting Security Dev Tool</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ git clone https://git.ti.com/git/security-development-tools/core-secdev-k3.git -b master
+$ export TI_SECURE_DEV_PKG=`pwd`/core-secdev-k3
+</pre></div>
+</div>
+<p class="rubric">Signing the firmware</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh $FIRMWARE $FIRMWARE.signed
+</pre></div>
+</div>
+<p class="rubric">Updating firmware image</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ ln -vfs $FIRMWARE.signed /lib/firmware/j7-main-r5f0_0-fw-sec
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Applications.html" class="btn btn-neutral float-right" title="3.1.2. Troubleshooting" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="UG-HyperBus.html" class="btn btn-neutral" title="3.1.1.13. HyperBus and HyperFlash" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

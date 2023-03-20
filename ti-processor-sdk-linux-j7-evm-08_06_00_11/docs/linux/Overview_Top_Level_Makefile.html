@@ -1,0 +1,545 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.3. Simplified SDK Build using Top-Level Makefile &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../index.html"/>
+        <link rel="up" title="1. Overview" href="Overview.html"/>
+        <link rel="next" title="1.4. Directory Structure Overview" href="Overview_Directory_Structure_Overview.html"/>
+        <link rel="prev" title="1.2. Building the SDK with Yocto" href="Overview_Building_the_SDK.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="Overview.html">1. Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Overview_Getting_Started_Guide.html">1.1. Getting Started Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_Building_the_SDK.html">1.2. Building the SDK with Yocto</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.3. Simplified SDK Build using Top-Level Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_Directory_Structure_Overview.html">1.4. Directory Structure Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_PSDKLA_PSDKRA_Summary.html">1.5. Processor SDK RTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_EdgeAI_Stack.html">1.6. Edge AI Stack and OOB Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_Technical_Support.html">1.7. Processor SDK Technical Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview_GPLv3_Disclaimer.html">1.8. GPLv3 Disclaimer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Foundational_Components.html">3. Foundational Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="Overview.html">1. Overview</a> &raquo;</li>
+      
+    <li>1.3. Simplified SDK Build using Top-Level Makefile</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="overview-top-level-makefile"></span><div class="section" id="simplified-sdk-build-using-top-level-makefile">
+<span id="top-level-makefile"></span><h1>1.3. Simplified SDK Build using Top-Level Makefile<a class="headerlink" href="#simplified-sdk-build-using-top-level-makefile" title="Permalink to this headline">¶</a></h1>
+<p class="rubric" id="top-level-makefile-overview">Overview</p>
+<p>Inside of the Processor SDK Linux J721e package, there is a top-level Makefile that can
+be used to build some of the sub-components found within the SDK. This
+Makefile uses the Rules.make file and gives an example of how the
+various components can be built and the parameters to use.</p>
+<p><strong>NOTE:</strong> You should not call this makefile with the
+<a class="reference external" href="GCC_ToolChain.html#environment-setup-script">environment-setup
+script</a>
+sourced. The sub-component Makefiles will handle sourcing this script
+where appropriate, but some make targets such as the Linux kernel make
+target do not work properly when this script is already sourced.</p>
+<p class="rubric" id="rules-make">Rules.make</p>
+<p>The following sections cover the Rules.make file found in the top-level
+of the Processor SDK Linux J721e package.</p>
+<p class="rubric" id="top-level-makefile-purpose">Purpose</p>
+<p>The <strong>Rules.make</strong> file in the top-level of the Processor SDK Linux J721e package is
+used not only by the top-level Makefile, but also by many of the
+sub-component Makefiles to gain access to common shared variables and
+settings. The next section covers the main variables defined in the
+Rules.make file.</p>
+<p class="rubric" id="variables-defined">Variables Defined</p>
+<ul class="simple">
+<li><strong>PLATFORM</strong> - This represents the machine name of the device
+supported by the SDK. This machine name has a direct correlation to
+the machine definition in the <a class="reference external" href="https://git.yoctoproject.org/meta-arago">Arago
+project</a> build system. The PLATFORM
+variable can be used by component Makefiles to make decisions on a
+per-machine basis.</li>
+<li><strong>SOC</strong>  - This describes the base SOC name of the device
+supported by the SDK.</li>
+<li><strong>SOC_TYPE</strong> - This describes the HS configuration to build for. It
+can be set to ‘gp’ (default), ‘hs’, and ‘hs-fs’. It is used when building
+u-boot and linux to use unsigned or signed images as required.</li>
+<li><strong>ARCH</strong> - This represents the architecture family of the machine.
+This can be used by component Makefiles to change settings such as
+mtune values in CFLAGS based on the architecture of the PLATFORM.</li>
+<li><strong>UBOOT_MACHINE</strong> - This us used when building u-boot to configure
+the u-boot sources for the correct device.</li>
+<li><strong>TI_SDK_PATH</strong> - This points to the top-level of the SDK. This is
+the same directory where the Rules.make file itself is located.</li>
+<li><strong>DESTDIR</strong> - This points to the base installation directory that
+applications/drivers should be installed to. This is usually the root
+of a target file system but can be changed to point anywhere.</li>
+<li><strong>LINUX_DEVKIT_PATH</strong> - This points to the linux-devkit directory.
+This directory is the base directory containing the cross-compiler
+and cross-libraries as well as the
+<a class="reference external" href="GCC_ToolChain.html#environment-setup-script">environment-setup</a>
+script used by many component Makefiles to source additional variable
+settings.</li>
+<li><strong>CROSS_COMPILE</strong> - This setting represents the CROSS_COMPILE
+prefix to be used when invoking the cross-compiler. Many components
+such as the Linux kernel use the variable CROSS_COMPILE to prepend
+the proper prefix to commands such as <em>gcc</em> to invoke the ARM
+cross-compiler.</li>
+<li><strong>ENV_SETUP</strong> - This points to the
+<a class="reference external" href="GCC_ToolChain.html#environment-setup-script">environment-setup</a>
+script in the linux-devkit directory used by many components to
+configure for a cross-compilation build.</li>
+<li><strong>LINUXKERNEL_INSTALL_DIR</strong> - This points to the location of the
+Linux kernel sources, which is used by components such as out-of-tree
+kernel drivers to find the Linux kernel Makefiles and headers.</li>
+</ul>
+<p class="rubric" id="makefile">Makefile</p>
+<p>The following sections cover the Makefile found in the top-level of the
+Processor SDK Linux J721e package.</p>
+<p class="rubric" id="makefile-required-packages">Required Host Packages</p>
+<p>Please run the following command to install all packages required to by the
+makefile targets.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# sudo apt-get install build-essential autoconf automake bison flex libssl-dev bc u-boot-tools
+</pre></div>
+</div>
+<p class="rubric" id="compiler-toolchain">Compiler toolchain</p>
+<p>On the download page, you will find links to the recommended compiler toolchains.
+Download and extract them into your home directory. Note that you have to download
+both the toolchains for ARMv8 and ARMv7. Make sure to update your PATH to
+include the path to toolchain.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>GCC92PATH=$HOME/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/bin:$HOME/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin
+export PATH=$GCC92PATH:$PATH
+</pre></div>
+</div>
+<p class="rubric" id="target-types">Target Types</p>
+<p>For each of the targets discussed below the following target type are
+defined</p>
+<ul class="simple">
+<li><strong>&lt;target&gt;</strong> - This is the build target which will compile the
+release version of the component.</li>
+<li><strong>&lt;target&gt;_install</strong> - This target will install the component to the
+location pointed to by DESTDIR.</li>
+<li><strong>&lt;target&gt;_clean</strong> - This target will clean the component.</li>
+</ul>
+<p class="rubric" id="top-level-targets">Top-Level Targets</p>
+<p>The Processor SDK Linux J721e package provides the following targets by default, which
+will invoke the corresponding component targets:</p>
+<ul class="simple">
+<li><strong>all</strong> - This will call the build target for each component defined
+in the Makefile.</li>
+<li><strong>install</strong> - This will call the install target for each component
+defined in the Makefile.</li>
+<li><strong>clean</strong> - This will call the clean target for each component
+defined in the Makefile.</li>
+</ul>
+<p class="rubric" id="common-targets">Common Targets</p>
+<p>The following targets are common to all platforms in Processor SDK Linux J721e
+package:</p>
+<ul class="simple">
+<li><strong>linux</strong> - Compiles the Linux kernel using the default
+tisdk_&lt;PLATFORM&gt;_defconfig configuration.</li>
+<li><strong>linux-dtbs</strong> - Compiles and creates the device tree blobs.</li>
+<li><strong>am-benchmarks</strong> - Builds the ARM Benchmarks for the ARCH defined in
+Rules.make.</li>
+<li><strong>am-sysinfo</strong> - Build the helper applications used by the system
+settings demos in Matrix.</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p class="rubric" id="additional-targets">Additional Targets</p>
+<p>Depending on the capabilities and software available for a given device
+additional targets may also be defined. You can find the list of all the
+targets by looking at the <strong>all</strong> target as described in the
+<a class="reference external" href="#top-level-targets">**Top-Level Targets**</a> section above.</p>
+<p>Following are some of the additionaly targets supported:</p>
+<ul class="simple">
+<li><strong>u-boot</strong> - This target will build the u-boot binaries tiboot3.bin,
+tispl.bin &amp; u-boot.img. It also triggers a build for the sysfw-image
+target.</li>
+</ul>
+<ul class="simple">
+<li><strong>sysfw-image</strong> - Builds the system firmware itb file, which is a single
+binary for the system firmware release along with the different board
+configs.</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Along with these targets, there might be additional targets for different
+external kernel modules. This list is different for each platform.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p class="rubric" id="usage-examples">Usage Examples</p>
+<p>The following examples demonstrate how to use the top-level Makefile for
+some common tasks. All of the examples below assume that you are calling
+the Makefile from the top-level of the SDK.</p>
+<ul class="simple">
+<li>Build Everything</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make
+</pre></div>
+</div>
+<ul class="simple">
+<li>Clean Everything</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make clean
+</pre></div>
+</div>
+<ul class="simple">
+<li>Install Everything</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make install
+</pre></div>
+</div>
+<ul class="simple">
+<li>Build the Linux kernel</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make linux
+</pre></div>
+</div>
+<ul class="simple">
+<li>Install the Linux kernel modules</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make linux_install
+</pre></div>
+</div>
+<ul class="simple">
+<li>Build the ARM Benchmarks</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make am-benchmarks
+</pre></div>
+</div>
+<ul class="simple">
+<li>Clean the ARM Benchmarks</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make am-benchmarks_clean
+</pre></div>
+</div>
+<ul class="simple">
+<li>Install the ARM Benchmarks</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make am-benchmarks_install
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Build the sysfw</p>
+<p>By default, when building for HS device, sysfw is built for J721E PG1.1 which will not
+work on a PG2.0 HS EVM. To build sysfw for different version, pass an additional argument
+to the make command as ‘SYSFW_SOC=j721e_sr2’ for PG2.0 and ‘SYSFW_SOC=j721e’ for PG1.0</p>
+</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make sysfw-image
+</pre></div>
+</div>
+<ul class="simple">
+<li>Clean the sysfw</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make sysfw-image_clean
+</pre></div>
+</div>
+<ul class="simple">
+<li>Install the sysfw</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make sysfw-image_install
+</pre></div>
+</div>
+<ul class="simple">
+<li>Build u-boot</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make u-boot
+</pre></div>
+</div>
+<ul class="simple">
+<li>Clean u-boot</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make u-boot_clean
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Install u-boot to SD card</p>
+<p>Set the BOOTFS variable in Rules.make to the location of the BOOT partition
+of the SD card. Then run the following</p>
+</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# make u-boot_install
+</pre></div>
+</div>
+<p class="rubric" id="installing-to-sd-card">Installing to SD card</p>
+<p>All the install targets copy the files in the rootfs pointed by the DESTDIR variable
+and the boot files into the location pointed by the BOOTFS variable.
+By default, Rules.make points the DESTDIR to the NFS path for filesystem.
+If you want to install the files to the SD card, you should be able to specify
+different path to DESTDIR &amp; BOOTFS on commandline. e.g. run following for installing
+everything in the SD card.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# sudo -E BOOTFS=/media/$USER/boot DESTDIR=/media/$USER/rootfs make install
+#Replace the path to SD card partitions as appropriate
+</pre></div>
+</div>
+<p class="rubric" id="a-note-about-out-of-tree-kernel-modules">A Note about Out-of-tree Kernel Modules</p>
+<p>Some drivers like the GPU drivers are delivered as modules outside of
+the kernel tree. If you rebuild the kernel and install it using the
+“make linux_install” target you will also need to rebuild the out of
+tree modules and install them as well. The modules_install command used
+by the linux_install target will remove any existing drivers before
+installing the new ones. This means those drivers are no longer
+available until they have been rebuilt against the kernel and
+re-installed.</p>
+<p class="rubric" id="a-note-about-the-linux-kernel-version">A Note about the Linux Kernel Version</p>
+<p>To simplify and accelerate rebuilding and installing the linux kernel,
+the file <em>.scmversion</em> is included in the kernel source tree to pin down
+the version of the kernel provided in the SDK. If upgrading the kernel
+sources or adding new commits, this file should be removed so that the
+appropriate version is built into the kernel image.</p>
+<p class="rubric" id="top-level-makefile-hs-devices">A Note about building for HS devices</p>
+<p>The PSDK Linux Images can be built for HS devices using the SOC_TYPE variable
+and prebuilt binaries provided for system firmware, etc. However keep in mind
+that the SOC_TYPE flag should be used with both build and install targets.
+For example,</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>make linux                 # Builds Linux Kernel Image, DTBs, Modules
+make linux_install         # Installs all of the above
+SOC_TYPE=&lt;hs/hs-fs&gt; make linux            # Same as above but also signs the Image and dtbs and produces the fitImage
+SOC_TYPE=&lt;hs/hs-fs&gt; make linux_install    # Installs the fitImage and modules
+make u-boot                # Builds GP u-boot binaries using unsigned images and GP system firmware binaries
+make u-boot_install        # Installs GP u-boot binaries, if built previously
+SOC_TYPE=hs make u-boot           # Builds HS u-boot binaries using signed images and HS-SE system firmware binaries
+SOC_TYPE=hs-fs make u-boot        # Builds HS u-boot binaries using signed images and HS-FS system firmware binaries
+SOC_TYPE=&lt;hs/hs-fs&gt; make u-boot_install   # Installs HS u-boot binaries, if built previously
+</pre></div>
+</div>
+<p>To rebuild any of the prebuilt binaries for an HS device, please refer to the respective section under Foundational Components.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Overview_Directory_Structure_Overview.html" class="btn btn-neutral float-right" title="1.4. Directory Structure Overview" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Overview_Building_the_SDK.html" class="btn btn-neutral" title="1.2. Building the SDK with Yocto" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

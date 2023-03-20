@@ -1,0 +1,412 @@
+.. include:: /replacevars.rst.inc
+
+GCC ToolChain
+======================================
+
+.. http://processors.wiki.ti.com/index.php/Processor_Linux_SDK_GCC_Toolchain
+.. rubric:: Overview
+   :name: gcc-overview
+
+The |__SDK_FULL_NAME__| package contains an ARM-based toolchain for Cortex
+A devices. The ARM toolchain also enables hardware floating point
+(hardfp) support. Older toolchains including arm-arago-linux-gnueabi-
+uses software floating point (softfp). This results in software built
+using a hardfp toolchain being incompatible with software built with a
+softfp toolchain.
+
+.. rubric:: ARM Toolchain
+   :name: arm-toolchain
+
+The |__SDK_FULL_NAME__| package uses an ARM-based tool chain. Other than
+using a newer version of GCC, the ARM tool chain also supports hard
+floating point, also known as Hard-FP. Hard-FP uses the FPU on the ARM
+instead of simulating it. Older tool chains including the Arago tool
+chain uses soft floating point (Soft-FP). Binaries built using a soft-fp
+tool chain are not compatible with binaries built using a hard-fp.
+Therefore, you must rebuild all binaries to use either hard-fp and
+soft-fp since you can't mix and match. By default, all binaries included
+in the |__SDK_FULL_NAME__| package will be built for hard-fp.
+
+.. ifconfig:: CONFIG_sdk not in ('PSDKL')
+
+  The name of the toolchain binaries have also been updated from older
+  versions of the SDK. Previous versions may have used a prefix of
+  "**arm-arago-linux-gnueabi-**". Current SDK ARMv7 toolchains use a prefix of
+  "**arm-linux-gnueabihf-**" For example, the new toolchain's gcc compiler
+  is named **arm-linux-gnueabihf-gcc**.
+
+.. ifconfig:: CONFIG_sdk in ('PSDKL')
+
+  The name of the toolchain binaries have also been updated from older
+  versions of the SDK. Current SDK ARMv8 toolchains use a prefix of
+  "**aarch64-linux-gnu-**" For example, the new toolchain's gcc compiler
+  is named **aarch64-linux-gnu-gcc**.
+
+  GCC tools are used to compile and link code on ARM A72/A53.
+
+  +----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+  | CGT                              | Download link                                                                                                                           |
+  +==================================+=========================================================================================================================================+
+  | ARM64 CGT for A72/A53 Linux      | https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu.tar.xz     |
+  +----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+  | ARM32 CGT for R5F U Boot         | https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz   |
+  +----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+
+.. rubric:: Linux-Devkit Structure
+   :name: linux-devkit-structure
+
+Here is the structure of the Linux-devkit directory within the SDK.
+
++-------------------------------------------------+-------------------------------------------------------------------------------------+
+| Element                                         | Location                                                                            |
++-------------------------------------------------+-------------------------------------------------------------------------------------+
+| Toolchain Location                              | linux-devkit/sysroots/x86\_64-arago-linux/usr/bin                                   |
++-------------------------------------------------+-------------------------------------------------------------------------------------+
+| Cross Compile Libraries Location                | linux-devkit/sysroots/<device specific string>-vfp-neon-linux-gnueabi/usr/lib       |
++-------------------------------------------------+-------------------------------------------------------------------------------------+
+| Headers for Cross Compiled Libraries Location   | linux-devkit/sysroots/<device specific string>-vfp-neon-linux-gnueabi/usr/include   |
++-------------------------------------------------+-------------------------------------------------------------------------------------+
+
+.. rubric:: Location in SDK
+   :name: location-in-sdk
+
+The toolchain is located in the Linux SDK in the **<SDK INSTALL
+DIR>/linux-devkit** directory. The following sections will cover the key
+components of the toolchain.
+
+.. rubric:: Cross-Compilers/Tools
+   :name: cross-compilerstools
+
+The cross-compilers and tools such as qmake2 can be found the the
+**<SDK INSTALL DIR>/linux-devkit/sysroots/x86\_64-arago-linux/usr/bin** directory. Adding this
+directory to your PATH will allow using these tools. For example:
+
+::
+
+ host# export PATH="<SDK INSTALL DIR>/linux-devkit/sysroots/x86\_64-arago-linux/usr/bin:$PATH"
+
+Additional tools are also located here such as the **qmake2, rcc, uic** tools
+used by Qt. In addition there is a qt.conf file that can be used by tools such
+as Qt creator to use the pre-built libraries found in the Linux SDK.
+
+.. rubric:: Toolchain Prefix
+   :name: toolchain-prefix
+
+
+.. ifconfig:: CONFIG_sdk not in ('PSDKL')
+
+  The cross-compile tools are prefixed with a unique target triplet which
+  indicates the architecture and OS of the output executable code. For example,
+  the prefix **arm-linux-gnueabihf-** indicates the ARMv7 achitecture running the
+  Linux OS, and thus the corresponding GCC cross compiler is called
+  **arm-linux-gnueabihf-gcc**.
+
+.. ifconfig:: CONFIG_sdk not in ('PSDKL')
+
+  The cross-compile tools are prefixed with a unique target triplet which
+  indicates the architecture and OS of the output executable code. For example,
+  the prefix **aarch64-linux-gnu-** indicates the ARMv7 achitecture running the
+  Linux OS, and thus the corresponding GCC cross compiler is called
+  **aarch64-linux-gnu-gcc**.
+
+Reference the table below for all toolchain prefixes and their corresponding
+architectures found in Processor SDK.
+
+.. ifconfig:: CONFIG_sdk in ('PLSDK')
+
+    +-----------------------+--------------+-------------------------------------------------------------------------+
+    | Toolchain Prefix      | Architecture | Processor SDK Device                                                    |
+    +-----------------------+--------------+-------------------------------------------------------------------------+
+    | arm-oe-linux-gnueabi- | ARMv5        | omapl138-lcdk                                                           |
+    +-----------------------+--------------+-------------------------------------------------------------------------+
+    | arm-linux-gnueabihf-  | ARMv7        | am335x-evm, am437x-evm, am57xx-evm, k2e-evm, k2g-evm, k2hk-evm, k2l-evm |
+    +-----------------------+--------------+-------------------------------------------------------------------------+
+    | aarch64-linux-gnu-    | ARMv8        | am65xx-evm                                                              |
+    +-----------------------+--------------+-------------------------------------------------------------------------+
+
+.. ifconfig:: CONFIG_sdk in ('PSDKL')
+
+    +-----------------------+--------------+-------------------------------------------------------------------------+
+    | Toolchain Prefix      | Architecture | Processor SDK Device                                                    |
+    +-----------------------+--------------+-------------------------------------------------------------------------+
+    | aarch64-linux-gnu-    | ARMv8        | j7-evm j7200-evm am65xx-evm                                             |
+    +-----------------------+--------------+-------------------------------------------------------------------------+
+
+In an effort to be succient, the specific toolchain prefix will be replaced with
+${TOOLCHAIN_PREFIX} in the examples below. In fact, the
+`environment-setup script <#environment-setup-script>`__, described below, will
+set this variable in your environment.
+
+.. rubric:: Cross-Compiled Libraries
+   :name: cross-compiled-libraries
+
+The toolchain within the Linux SDK contains more than just the
+cross-compiler, it also contains pre-built libraries that can be used
+in your applications without requiring you to cross-compile them
+yourself. These libraries include packages from alsa to zlib. The
+libraries are located in the **<SDK INSTALL
+DIR>/linux-devkit/sysroots/<device specific
+string>-vfp-neon-linux-gnueabi/** directory. For a list of the
+libraries you can refer to the software manifest found in the **<SDK
+INSTALL DIR>/docs** directory or look at the list of libraries
+available in the **<SDK INSTALL DIR>/linux-devkit/sysroots/<device
+specific string>-vfp-neon-linux-gnueabi/usr/lib** directory. You will
+also find the header files corresponding to these libraries in the
+**<SDK INSTALL DIR>/linux-devkit/sysroots/<device specific
+string>-vfp-neon-linux-gnueabi/usr/include** directory. Usage of these
+libraries will be covered in more detail in the next sections, but as
+an example if your application wants access to the alsa asound library
+then you can now do the following command (assuming you have added the
+cross compiler to your PATH):
+
+:: 
+
+  host# ${TOOLCHAIN_PREFIX}gcc -lasound app.c -o app.out
+
+.. rubric:: environment-setup script
+   :name: environment-setup-script
+
+When cross-compiling packages that use configuration tools and autotools
+there are many settings that are required to make sure that the proper
+cross-compile libraries are used. The **environment-setup** script
+located in the **<SDK INSTALL DIR>/linux-devkit** directory handles this
+for you. This script exports variables to perform actions such as:
+
+-  Adding the toolchain to the PATH
+-  Setting up CPATH
+-  Setting up PKG\_CONFIG\_\* paths
+-  Setting standard variable such as CC, CPP, AR to the cross-compile
+   values
+
+To **use** the environment-setup script you only need to source it. This
+is as simple as:
+
+::
+
+  host# source linux-devkit/environment-setup
+
+To know if the environment setup script has been sourced in your current
+shell the shell prompt will be changed to contain the
+**[linux-devkit]:** prefix in the command prompt.
+
+The `Usage <#usage>`__ section below will cover some cases where
+using the environment-setup script is useful.
+
+.. rubric:: When Compiling the Linux Kernel
+   :name: when-compiling-the-linux-kernel
+
+Because environment-setup changes standard variables such as CC you
+should not use this script when compiler projects that build host-side
+as well as target-side tools. A prime example of this is the Linux
+kernel, which builds some host side tools to help during the kernel
+build. If the environment-setup script has been sourced then the CC
+value will specify the cross-compiler for the host-side tool build. This
+means that the tools compiled and used during the kernel build will be
+compiled for the ARM platform while the kernel build tries to run these
+tools on an Intel platform. This will cause the tools to fail to run and
+the kernel to fail to compile.
+
+.. rubric:: Usage
+
+.. ifconfig:: CONFIG_sdk in ('PSDKL')
+
+    The following sections give some examples of how to use the included
+    toolchain to compile a simple *HelloWorld* application.
+
+.. ifconfig:: CONFIG_sdk not in ('PSDKL')
+
+    The following sections give some examples of how to use the included
+    toolchain to compile simple applications such as *HelloWorld* to more
+    complex examples such as configuring and compiler GStreamer plugins.
+
+.. rubric:: Simple Cross-Compile
+   :name: simple-cross-compile
+
+In the simplest case the cross-compiler can be used to compile simple
+applications that just need access to standard libraries. The two
+examples below cover an application that uses only the standard libgcc
+libraries and another example that uses the pthreads threading library.
+
+.. rubric:: HelloWorld
+   :name: helloworld
+
+Simple applications like **HelloWorld** can be compiled using just a
+call to the cross-compiler since the cross-compiler can find the
+libraries it was built with without any issues. The following steps will
+show how to make a simple helloworld application and cross-compile that
+application.
+
+Create a **helloworld.c** file
+
+.. code-block:: c
+
+    #include <stdio.h>
+     
+     int main() {
+         printf ("Hello World from TI!!!\n");
+         return 0;
+     }
+
+Cross-compile the **helloworld.c** file using the cross-compile
+toolchain. In this example we will invoke the toolchain without it
+having been added to our PATH.
+
+| 
+
+::
+
+  host# <SDK INSTALL DIR>/linux-devkit/sysroots/x86_64-arago-linux/usr/bin/${TOOLCHAIN_PREFIX}gcc helloworld.c -o helloworld
+
+| 
+
+After the above steps are run you should now have a **helloworld**
+executable in your directory that has been compiled for the ARM. A
+simple way to check this is to run the following command:
+
+| 
+
+::
+
+  host# file helloworld
+
+This should yield output like:
+
+::
+
+  helloworld: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 3.2.0, with debug_info, not stripped
+
+.. ifconfig:: CONFIG_sdk not in ('PSDKL')
+
+    .. rubric:: Using PThreads
+       :name: using-pthreads
+
+    In many cases your simple application probably wants to use additional
+    libraries than the standard libgcc and glibc libraries. In this case
+    you will need to include the header files for those libraries as well
+    as add the library to the compile line. In this example we will look
+    at how to build a simple threading application and use the pthread
+    library. This example was derived from the example code at
+    `**http://www.amparo.net/ce155/thread-ex.html** <http://www.amparo.net/ce155/thread-ex.html>`__
+
+    Create a file **thread-ex.c** with the following contents
+
+    | 
+
+    .. code:: c
+
+        #include <unistd.h>;
+        #include <sys/types.h>;
+        #include <errno.h>;
+        #include <stdio.h>;
+        #include <stdlib.h>;
+        #include <pthread.h>;
+        #include <string.h>;
+         
+        int print_message_function(void *ptr);
+         
+        /* struct to hold data to be passed to a thread
+        this shows how multiple data items can be passed to a thread */
+        typedef struct str_thdata
+        {
+            int thread_no;
+            char message[100];
+        } thdata;
+         
+        int main(int argc, void **argv)
+        {
+            pthread_t thread1, thread2;
+            thdata data1, data2;
+         
+            data1.thread_no = 1;
+            strcpy(data1.message, "Hello!");
+         
+            data2.thread_no = 2;
+            strcpy(data2.message, "Hi!");
+         
+            pthread_create (&thread1, NULL, (void *) &print_message_function, (void *) &data1);
+            pthread_create (&thread2, NULL, (void *) &print_message_function, (void *) &data2);
+         
+            pthread_join(thread1, NULL);
+            pthread_join(thread2, NULL);
+         
+            exit(0);
+        }
+         
+        int print_message_function ( void *ptr )
+        {
+            thdata *data;
+            data = (thdata *) ptr;  /* type cast to a pointer to thdata */
+         
+            /* do the work */
+            printf("Thread %d says%s \n", data->thread_no, data->message);
+         
+            return 0;
+        }
+
+    | 
+
+    Cross-compile the **thread-ex.c** file using the cross-compile
+    toolchain. In this example we will first add the toolchain to our PATH.
+    This only needs to be done once. We will also add the pthread library to
+    the compile line so that we will link with the library file that
+    provides the pthread\_\* functions.
+
+
+    ::
+
+      host# export PATH="<SDK INSTALL DIR>/linux-devkit/sysroots/x86_64-arago-linux/usr/bin/:$PATH"
+
+      host# ${TOOLCHAIN_PREFIX}gcc -lpthread thread-ex.c -o thread-ex
+
+
+.. ifconfig:: CONFIG_sdk not in ('PSDKL')
+
+    .. rubric:: Configure/Autotools
+       :name: configureautotools
+
+    The last case to cover is one where the **environment-setup** script is
+    useful. In this case we will download the **gst-plugins-bad** package and
+    configure and build it using the environment-setup script to configure
+    the system for the **autotools** to properly detect the libraries
+    available as pre-built libraries.
+
+    #. First download the
+       `gst-plugins-bad-0.10.11.tar.gz <http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-0.10.11.tar.gz>`__
+       package
+       wget
+       http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-0.10.11.tar.gz
+
+       .. raw:: html
+
+          <div
+          style="margin: 5px; padding: 5px 10px; background-color: #ffffec; border-left: 5px solid #ff6600;">
+
+       **IMPORTANT**
+       In order to build the gst-plugins-bad package you will need
+       libglib2.0-dev installed on your system. You can install this using
+       **sudo apt-get install libglib2.0-dev**
+
+       .. raw:: html
+
+          </div>
+
+    #. Extract the plugins tarball
+       **tar zxf gst-plugins-bad-0.10.11.tar.gz**
+    #. Change directory into the extracted sources
+       **cd gst-plugins-bad-0.10.11**
+    #. Source the **<SDK INSTALL DIR>/linux-devkit/environment-setup**
+       script to prepare to configure and build the plugins.
+       **source <SDK INSTALL DIR>/linux-devkit/environment-setup**
+    #. Now configure the package. We need to define the *host* setting to
+       tell the configuration utility what our host system is, and we will
+       also disable some plugins that are known to be bad.
+       **./configure --host=i686 --disable-deinterlace2 --disable-x264**
+    #. When the configuration is done the last sections will show which
+       plugins will be build based on the libraries available. This is the
+       key point behind what the environment-setup script provides. By
+       setting up the PKG\_CONFIG\_\* paths and other variables the
+       configure script was able to check for required libraries being
+       available to know which plugins to enable. Now that the sources have
+       been configured you can compile them with a simple make command.
+       **make**
+

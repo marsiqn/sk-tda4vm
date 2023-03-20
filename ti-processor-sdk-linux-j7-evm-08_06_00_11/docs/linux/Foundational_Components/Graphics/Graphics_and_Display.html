@@ -1,0 +1,963 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.6.1. Introduction &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../../../index.html"/>
+        <link rel="up" title="3.6. Graphics and Display" href="../../Foundational_Components_Graphics.html"/>
+        <link rel="next" title="3.7. Multimedia Video Codec" href="../../Foundational_Components_Multimedia_D5520_VXE384.html"/>
+        <link rel="prev" title="3.6. Graphics and Display" href="../../Foundational_Components_Graphics.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../../../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../Foundational_Components.html">3. Foundational Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_U-Boot.html">3.1. U-Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Kernel.html">3.2. Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Filesystem.html">3.3. Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Tools.html">3.4. Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_IPCLLD.html">3.5. IPC Low Level Driver</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../Foundational_Components_Graphics.html">3.6. Graphics and Display</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">3.6.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-architecture">3.6.2. Software Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#graphics-demos">3.6.3. Graphics Demos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#display">3.6.4. Display</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#finding-connector-id">3.6.4.1. Finding Connector ID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#finding-plane-id">3.6.4.2. Finding Plane ID</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#wayland-weston">3.6.5. Wayland/Weston</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#running-weston-clients">3.6.5.1. Running Weston clients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-multimedia-with-wayland-sink">3.6.5.2. Running multimedia with Wayland sink</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exiting-weston">3.6.5.3. Exiting Weston</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-ivi-shell-feature">3.6.5.4. Using IVI shell feature</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-powervr-tools">3.6.6. Using the PowerVR Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pvrtune">3.6.6.1. PVRTune</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pvrtrace">3.6.6.2. PVRTrace</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Multimedia_D5520_VXE384.html">3.7. Multimedia Video Codec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_Virtualization.html">3.8. Virtualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_ATF.html">3.9. ARM Trusted Firmware-A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Foundational_Components_OPTEE.html">3.10. OP-TEE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../Foundational_Components.html">3. Foundational Components</a> &raquo;</li>
+      
+          <li><a href="../../Foundational_Components_Graphics.html">3.6. Graphics and Display</a> &raquo;</li>
+      
+    <li>3.6.1. Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>3.6.1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>J721E device is enabled with 3D graphics
+accelerator based on the Rogue 8XE series from Imagination Technologies Inc.
+It enables the support of 3D graphics rendering using OpenGL® ES
+API’s. The OpenGL® ES API’s up to and including version 3.2 with
+render surfaces upto 4k and input textures upto 8k sizes are supported by
+the hardware.</p>
+<p>The following extensions are supported:</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-number">Table 3.1 </span><span class="caption-text">EGL client extensions</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>EGL_EXT_client_extensions</td>
+</tr>
+<tr class="row-even"><td>EGL_EXT_platform_base</td>
+</tr>
+<tr class="row-odd"><td>EGL_KHR_client_get_all_proc_addresses</td>
+</tr>
+<tr class="row-even"><td>EGL_KHR_debug</td>
+</tr>
+<tr class="row-odd"><td>EGL_EXT_platform_wayland</td>
+</tr>
+<tr class="row-even"><td>EGL_MESA_platform_gbm</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-number">Table 3.2 </span><span class="caption-text">EGL extensions</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>EGL_ANDROID_native_fence_sync</td>
+</tr>
+<tr class="row-even"><td>EGL_EXT_buffer_age</td>
+</tr>
+<tr class="row-odd"><td>EGL_EXT_create_context_robustness</td>
+</tr>
+<tr class="row-even"><td>EGL_EXT_image_dma_buf_import</td>
+</tr>
+<tr class="row-odd"><td>EGL_EXT_image_dma_buf_import_modifiers</td>
+</tr>
+<tr class="row-even"><td>EGL_IMG_context_priority</td>
+</tr>
+<tr class="row-odd"><td>EGL_KHR_config_attribs</td>
+</tr>
+<tr class="row-even"><td>EGL_KHR_create_context</td>
+</tr>
+<tr class="row-odd"><td>EGL_KHR_fence_sync</td>
+</tr>
+<tr class="row-even"><td>EGL_KHR_get_all_proc_addresses</td>
+</tr>
+<tr class="row-odd"><td>EGL_KHR_gl_renderbuffer_image</td>
+</tr>
+<tr class="row-even"><td>EGL_KHR_gl_texture_2D_image</td>
+</tr>
+<tr class="row-odd"><td>EGL_KHR_gl_texture_cubmap_image</td>
+</tr>
+<tr class="row-even"><td>EGL_KHR_image</td>
+</tr>
+<tr class="row-odd"><td>EGL_KHR_image_base</td>
+</tr>
+<tr class="row-even"><td>EGL_KHR_image_pixmap</td>
+</tr>
+<tr class="row-odd"><td>EGL_KHR_no_config_context</td>
+</tr>
+<tr class="row-even"><td>EGL_KHR_reusable_sync</td>
+</tr>
+<tr class="row-odd"><td>EGL_KHR_surfaceless_context</td>
+</tr>
+<tr class="row-even"><td>EGL_KHR_wait_sync</td>
+</tr>
+<tr class="row-odd"><td>EGL_MESA_configless_context</td>
+</tr>
+<tr class="row-even"><td>EGL_MESA_drm_image</td>
+</tr>
+<tr class="row-odd"><td>EGL_MESA_image_dma_buf_export</td>
+</tr>
+<tr class="row-even"><td>EGL_WL_bind_wayland_display</td>
+</tr>
+<tr class="row-odd"><td>EGL_IMG_cl_image</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id4">
+<caption><span class="caption-number">Table 3.3 </span><span class="caption-text">GL extensions</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>GL_ANDROID_extension_pack_es31a</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_blend_minmax</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_buffer_storage</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_clip_control</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_color_buffer_float</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_conservative_depth</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_copy_image</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_discard_framebuffer</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_draw_buffers</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_draw_buffers_indexed</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_draw_elements_base_vertex</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_EGL_image_array</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_float_blend</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_geometry_point_size</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_geometry_shader</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_gpu_shader5</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_memory_object</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_multisampled_render_to_texture</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_multisampled_render_to_texture2</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_occlusion_query_boolean</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_polygon_offset_clamp</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_primitive_bounding_box</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_pvrtc_sRGB</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_read_format_bgra</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_robustness</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_separate_shader_objects</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_shader_framebuffer_fetch</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_shader_group_vote</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_shader_implicit_conversions</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_shader_io_blocks</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_shader_non_constant_global_initializers</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_shader_pixel_local_storage</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_shader_pixel_local_storage2</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_shader_texture_lod</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_shadow_samplers</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_sparse_texture</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_sRGB_write_control</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_tessellation_point_size</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_tessellation_shader</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_texture_border_clamp</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_texture_buffer</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_texture_cube_map_array</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_texture_filter_anisotropic</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_texture_format_BGRA8888</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_texture_rg</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_texture_sRGB_decode</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_texture_sRGB_R8</td>
+</tr>
+<tr class="row-even"><td>GL_EXT_texture_sRGB_RG8</td>
+</tr>
+<tr class="row-odd"><td>GL_EXT_YUV_target</td>
+</tr>
+<tr class="row-even"><td>GL_IMG_bindless_texture</td>
+</tr>
+<tr class="row-odd"><td>GL_IMG_framebuffer_downsample</td>
+</tr>
+<tr class="row-even"><td>GL_IMG_multisampled_render_to_texture</td>
+</tr>
+<tr class="row-odd"><td>GL_IMG_program_binary</td>
+</tr>
+<tr class="row-even"><td>GL_IMG_texture_compression_pvrtc</td>
+</tr>
+<tr class="row-odd"><td>GL_IMG_texture_compression_pvrtc2</td>
+</tr>
+<tr class="row-even"><td>GL_IMG_texture_filter_cubic</td>
+</tr>
+<tr class="row-odd"><td>GL_IMG_texture_format_BGRA8888</td>
+</tr>
+<tr class="row-even"><td>GL_IMG_texture_npot</td>
+</tr>
+<tr class="row-odd"><td>GL_KHR_blend_equation_advanced</td>
+</tr>
+<tr class="row-even"><td>GL_KHR_blend_equation_advanced_coherent</td>
+</tr>
+<tr class="row-odd"><td>GL_KHR_debug</td>
+</tr>
+<tr class="row-even"><td>GL_KHR_robustness</td>
+</tr>
+<tr class="row-odd"><td>GL_KHR_texture_compression_astc_ldr</td>
+</tr>
+<tr class="row-even"><td>GL_KHR_compressed_ETC1_RGB8_texutre</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_depth24</td>
+</tr>
+<tr class="row-even"><td>GL_OES_depth_texture</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_draw_buffers_indexed</td>
+</tr>
+<tr class="row-even"><td>GL_OES_draw_elements_base_vertex</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_EGL_image_external_essl3</td>
+</tr>
+<tr class="row-even"><td>GL_OES_EGL_sync</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_element_index_uint</td>
+</tr>
+<tr class="row-even"><td>GL_OES_fragment_precision_high</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_geometry_point_size</td>
+</tr>
+<tr class="row-even"><td>GL_OES_geometry_shader</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_get_program_binary</td>
+</tr>
+<tr class="row-even"><td>GL_OES_gpu_shader5</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_mapbuffer</td>
+</tr>
+<tr class="row-even"><td>GL_OES_packed_depth_stencil</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_required_internalformat</td>
+</tr>
+<tr class="row-even"><td>GL_OES_rgb8_rgba8</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_sample_shading</td>
+</tr>
+<tr class="row-even"><td>GL_OES_sample_variables</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_shader_image_atomic</td>
+</tr>
+<tr class="row-even"><td>GL_OES_shader_io_blocks</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_shader_multisample_interpolation</td>
+</tr>
+<tr class="row-even"><td>GL_OES_standard_derivatives</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_surfaceless_context</td>
+</tr>
+<tr class="row-even"><td>GL_OES_tessellation_point_size</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_tessellation_shader</td>
+</tr>
+<tr class="row-even"><td>GL_OES_texture_border_clamp</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_texture_buffer</td>
+</tr>
+<tr class="row-even"><td>GL_OES_texture_cube_map_array</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_texture_float</td>
+</tr>
+<tr class="row-even"><td>GL_OES_texture_half_float</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_texture_npot</td>
+</tr>
+<tr class="row-even"><td>GL_OES_texture_stencil8</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_texture_storage_multisample_2d_array</td>
+</tr>
+<tr class="row-even"><td>GL_OES_vertex_array_object</td>
+</tr>
+<tr class="row-odd"><td>GL_OES_vertex_half_float</td>
+</tr>
+</tbody>
+</table>
+<p>For more information about the supported OpenGL® ES and EGL®
+extensions see:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.imgtec.com/reference-manuals/open-gl-es-extensions/topics/overview.html">https://docs.imgtec.com/reference-manuals/open-gl-es-extensions/topics/overview.html</a></li>
+<li><a class="reference external" href="https://registry.khronos.org/OpenGL/">https://registry.khronos.org/OpenGL/</a></li>
+</ul>
+<p>The OpenGL® ES and EGL® libraries are packaged with the
+Processor SDK Linux J721e and are used by graphics stacks such as Wayland/Weston. The
+drivers run on an ARM core and programs the firmware running inside a GPU core
+with rendering commands submitted by the user applications.</p>
+<p>Other features of the Rogue series of GPUs include bilinear and trilinear filtering.</p>
+<p>Support for the following pixel formats:</p>
+<table border="1" class="docutils" id="id11">
+<caption><span class="caption-number">Table 3.10 </span><span class="caption-text">Supported surface pixel formats</span><a class="headerlink" href="#id11" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>ARGB8888</td>
+</tr>
+<tr class="row-even"><td>BGRA8888</td>
+</tr>
+<tr class="row-odd"><td>RGB565</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id12">
+<caption><span class="caption-number">Table 3.11 </span><span class="caption-text">Supported texture pixel formats</span><a class="headerlink" href="#id12" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>ARGB4444</td>
+</tr>
+<tr class="row-even"><td>ARGB8888</td>
+</tr>
+<tr class="row-odd"><td>BGRA8888</td>
+</tr>
+<tr class="row-even"><td>RGB565</td>
+</tr>
+<tr class="row-odd"><td>RGBA5551</td>
+</tr>
+<tr class="row-even"><td>YUV420</td>
+</tr>
+<tr class="row-odd"><td>YUYV</td>
+</tr>
+<tr class="row-even"><td>NV12</td>
+</tr>
+</tbody>
+</table>
+<p>Support for up to 4Kx4K render surfaces.</p>
+<p>The rest of this page will cover the following topics:</p>
+<ul class="simple">
+<li>Software architecture of Graphics</li>
+<li>Instructions on how to run graphics demos</li>
+<li>Instructions on how to run DSS application</li>
+<li>Instructions on how launch Weston</li>
+<li>Instructions on how to run PVR tools</li>
+</ul>
+</div>
+<div class="section" id="software-architecture">
+<h1>3.6.2. Software Architecture<a class="headerlink" href="#software-architecture" title="Permalink to this headline">¶</a></h1>
+<p>The picture below shows the software architecture of Graphics in
+Processor SDK Linux J721e.</p>
+<div class="center"><div class="floatnone"><div class="figure align-center" id="id14">
+<img alt="../../../_images/rogue-graphics-software-stack.png" src="../../../_images/rogue-graphics-software-stack.png" />
+<p class="caption"><span class="caption-number">Fig. 3.4 </span><span class="caption-text">PSDK Linux Rogue Graphics Software Stack</span></p>
+</div>
+</div></div><p>Please note that RGX-KM in this context refers to the pvrsrvkm kernel module, which is currently provided at:
+<a class="reference external" href="https://git.ti.com/cgit/graphics/ti-img-rogue-driver">https://git.ti.com/cgit/graphics/ti-img-rogue-driver</a></p>
+<p>This is included by default in the SDK. The kernel module is located at:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # /lib/modules/$(uname -r)/extra/pvrsrvkm.ko
+</pre></div>
+</div>
+<p>It is loaded automatically by the rc.pvr init script in /etc/init.d/ .</p>
+</div>
+<div class="section" id="graphics-demos">
+<h1>3.6.3. Graphics Demos<a class="headerlink" href="#graphics-demos" title="Permalink to this headline">¶</a></h1>
+<p>Along with the graphics driver and userspace libraries, the SDK also includes
+example applications. Some of the demos are based on the IMG
+Native_SDK examples.</p>
+<p>The following demos are available to run under the Wayland windowing system.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # /usr/bin/SGX/demos/Wayland/OpenGLESDeferredShading
+target # /usr/bin/SGX/demos/Wayland/OpenGLESGaussianBlur
+target # /usr/bin/SGX/demos/Wayland/OpenGLESImageBasedLighting
+target # /usr/bin/SGX/demos/Wayland/OpenGLESIntroducingPVRCamera
+target # /usr/bin/SGX/demos/Wayland/OpenGLESIntroducingPVRUtils
+target # /usr/bin/SGX/demos/Wayland/OpenGLESIntroducingUIRenderer
+target # /usr/bin/SGX/demos/Wayland/OpenGLESNavigation2D
+target # /usr/bin/SGX/demos/Wayland/OpenGLESNavigation3D
+target # /usr/bin/SGX/demos/Wayland/OpenGLESParticleSystem
+</pre></div>
+</div>
+<p>Additionally demos using the Null Window System / KMS / DRM / EGLFS are
+provided with Qt. By default EGLFS will use the eglfs_kms backend.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # /usr/share/qt5/examples/opengl/hellogles3/hellogles3 -platform eglfs
+target # /usr/share/qt5/examples/opengl/2dpainting/2dpainting -platform eglfs
+target # /usr/share/qt5/examples/opengl/paintedwindow/paintedwindow -platform eglfs
+</pre></div>
+</div>
+<p>The default eglfs_kms configuration file for Qt5 is located at:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # /etc/qt5/eglfs_kms_cfg.json
+</pre></div>
+</div>
+<p>For more information about Qt’s EGLFS and using Qt5 in embedded
+applications see:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://doc.qt.io/qt-5/embedded-linux.html">https://doc.qt.io/qt-5/embedded-linux.html</a></li>
+</ul>
+</div>
+<div class="section" id="display">
+<h1>3.6.4. Display<a class="headerlink" href="#display" title="Permalink to this headline">¶</a></h1>
+<p>TI SoC’s are equipped with Display SubSystem (DSS) hardware to provide hardware
+acceleration for alpha blending of overlays and color conversion. The DSS
+hardware is exposed to the software drm API available through <code class="docutils literal"><span class="pre">libdrm</span></code> module.
+Through this drm interface, a user space program can perform <em>mode setting</em> of
+the display.</p>
+<p>The drm module models the display hardware as a series of abstract hardware
+blocks and manages them through the API. The blocks are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>CRTC<a class="footnote-reference" href="#f1" id="id1">[1]</a>: represents a scanout engine that generates video timing signal from
+the data pointed to by the scanout buffer</li>
+<li>Connector: represents where the video timing signal is sent across to the
+display</li>
+<li>Encoder: transforms the video timing signal from CRTC to a format that is
+suitable for sending across the connector</li>
+<li>Plane: represents the overlay buffer that a CRTC can be fed with</li>
+</ul>
+</div></blockquote>
+<p>A utility application <code class="docutils literal"><span class="pre">modetest</span></code> can be used to get the list of available drm
+blocks. All the information available for the device can be displayed by using
+it.</p>
+<div class="section" id="finding-connector-id">
+<h2>3.6.4.1. Finding Connector ID<a class="headerlink" href="#finding-connector-id" title="Permalink to this headline">¶</a></h2>
+<p>Run the below <code class="docutils literal"><span class="pre">modetest</span></code> command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # modetest -M tidss -c
+</pre></div>
+</div>
+<p>Look for the display device for which the connector ID is required -
+such as HDMI, LCD etc.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Connectors:
+id      encoder status          type    size (mm)       modes   encoders
+4       3       connected       HDMI-A  480x270         20      3
+  modes:
+        name refresh (Hz) hdisp hss hse htot vdisp vss vse vtot)
+  1920x1080 60 1920 2008 2052 2200 1080 1084 1089 1125 flags: phsync, pvsync; type: preferred, driver
+...
+16      15      connected       unknown 0x0             1       15
+  modes:
+        name refresh (Hz) hdisp hss hse htot vdisp vss vse vtot)
+  800x480 60 800 1010 1040 1056 480 502 515 525 flags: nhsync, nvsync; type: preferred, driver
+</pre></div>
+</div>
+<p>The modes displayed are the various resolutions supported by the connected
+display.</p>
+</div>
+<div class="section" id="finding-plane-id">
+<h2>3.6.4.2. Finding Plane ID<a class="headerlink" href="#finding-plane-id" title="Permalink to this headline">¶</a></h2>
+<p>To find the Plane ID, run the <code class="docutils literal"><span class="pre">modetest</span></code> command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # modetest -M tidss -p
+</pre></div>
+</div>
+<p>which should show something like below:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Planes:
+id      crtc    fb      CRTC x,y        x,y     gamma size
+19      0       0       0,0             0,0     0
+ formats: RG16 RX12 XR12 RA12 AR12 XR15 AR15 RG24 RX24 XR24 RA24 AR24 NV12 YUYV UYVY
+ props:
+ ...
+20      0       0       0,0             0,0     0
+ formats: RG16 RX12 XR12 RA12 AR12 XR15 AR15 RG24 RX24 XR24 RA24 AR24 NV12 YUYV UYVY
+ props:
+ ...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="wayland-weston">
+<h1>3.6.5. Wayland/Weston<a class="headerlink" href="#wayland-weston" title="Permalink to this headline">¶</a></h1>
+<p>The supported Wayland/Weston version brings in the multiple display
+support in extended desktop mode and the ability to drag-and-drop
+windows from one display to the other.</p>
+<p>To launch Weston, do the following:</p>
+<p>On the target console:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # unset WAYLAND_DISPLAY
+</pre></div>
+</div>
+<p>On the default display:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # weston --tty=1 --display=&lt;default connector-id&gt;
+</pre></div>
+</div>
+<p>On the secondary display:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # weston --tty=1 --display=&lt;secondary connector-id&gt;
+</pre></div>
+</div>
+<p>On all connected displays (LCD and HDMI):</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # weston --tty=1
+</pre></div>
+</div>
+<p>By default, the screensaver timeout is configured to 300 seconds. The user can
+change the screensaver timeout using a command line option:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>--idle-time=&lt;number of seconds&gt;
+</pre></div>
+</div>
+<p>For example, to set timeout of 10 minutes and Weston configured to
+display on all connectors, use the below command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>weston --tty=1 --idle-time=600
+</pre></div>
+</div>
+<p>To disable the screen timeout and to configure Weston to display on all
+connectors, use the below command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>weston --tty=1 --idle-time=0
+</pre></div>
+</div>
+<p>If you face any issues with the above procedure, please refer
+<a class="reference external" href="http://processors.wiki.ti.com/index.php/GLSDK_FAQs#Unable_to_run_Weston_on_the_GLSDK_release">GLSDK_FAQs#Unable_to_run_Weston_on_the_GLSDK_release</a>
+for troubling shooting tips.</p>
+<p>The filesystem comes with a preconfigured <strong>weston.ini</strong> file which will
+be located in</p>
+<p><strong>/etc/weston.ini</strong></p>
+<div class="section" id="running-weston-clients">
+<h2>3.6.5.1. Running Weston clients<a class="headerlink" href="#running-weston-clients" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">Weston client examples can run from the command line on a serial port
+console or an SSH console. After launching Weston, the user should be
+able to use the keyboard and the mouse for various controls.</div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span># /usr/bin/weston-flower
+# /usr/bin/weston-clickdot
+# /usr/bin/weston-cliptest
+# /usr/bin/weston-dnd
+# /usr/bin/weston-editor
+# /usr/bin/weston-eventdemo
+# /usr/bin/weston-image /usr/share/weston/terminal.png
+# /usr/bin/weston-resizor
+# /usr/bin/weston-simple-egl
+# /usr/bin/weston-simple-shm
+# /usr/bin/weston-simple-touch
+# /usr/bin/weston-smoke
+# /usr/bin/weston-info
+# /usr/bin/weston-terminal
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-multimedia-with-wayland-sink">
+<h2>3.6.5.2. Running multimedia with Wayland sink<a class="headerlink" href="#running-multimedia-with-wayland-sink" title="Permalink to this headline">¶</a></h2>
+<p>The GStreamer video sink for Wayland is the waylandsink. To use this
+video-sink for video playback:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # gst-launch-1.0 playbin uri=file://&lt;path-to-file-name&gt; video-sink=waylandsink
+</pre></div>
+</div>
+</div>
+<div class="section" id="exiting-weston">
+<h2>3.6.5.3. Exiting Weston<a class="headerlink" href="#exiting-weston" title="Permalink to this headline">¶</a></h2>
+<p>Terminate all Weston clients before exiting Weston. If you have invoked
+Weston from the serial console, exit Weston by pressing Ctrl-C.</p>
+<p>If Weston was started automatically by the init system then it can be stopped
+with:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # /etc/init.d/weston stop
+</pre></div>
+</div>
+<p>It is also possible to invoke Weston from the native console, exit
+Weston by pressing Ctrl-Alt-Backspace.</p>
+</div>
+<div class="section" id="using-ivi-shell-feature">
+<h2>3.6.5.4. Using IVI shell feature<a class="headerlink" href="#using-ivi-shell-feature" title="Permalink to this headline">¶</a></h2>
+<p>The SDK also has support for configuring Weston ivi-shell. The default
+shell that is configured in the SDK is the desktop-shell.</p>
+<p>To change the shell to ivi-shell, the user will have to add the
+following lines into the /etc/weston.ini.</p>
+<p>To switch back to the desktop-shell can be done by commenting these
+lines in the /etc/weston.ini (comments begin with a ‘#’ at the start of
+line).</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[core]
+shell=ivi-shell.so
+</pre></div>
+</div>
+<p>After the above configuration is completed, we can restart Weston by
+running the following commands</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target# /etc/init.d/weston stop
+target# /etc/init.d/weston start
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When Weston starts with ivi-shell, the default background is
+black, this is different from the desktop-shell that brings up a window
+with background.</p>
+</div>
+<p>With ivi-shell configured for Weston, Wayland client applications use
+ivi-application protocol to be managed by a central HMI window management.</p>
+<p>Applications must support the ivi_application Wayland protocol to be managed by
+the HMI central controller with an unique numeric ID.</p>
+<p>Some important references to Weston IVI-shell can be found at the following
+link:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://wayland.pages.freedesktop.org/weston/toc/ivi-shell.html">https://wayland.pages.freedesktop.org/weston/toc/ivi-shell.html</a></li>
+</ul>
+<div class="section" id="running-qt-applications-with-ivi-shell">
+<h3>3.6.5.4.1. Running QT applications with IVI shell<a class="headerlink" href="#running-qt-applications-with-ivi-shell" title="Permalink to this headline">¶</a></h3>
+<p>To run the QT application with ivi-shell, set the
+QT_WAYLAND_SHELL_INTEGRATION environment variable to ivi-shell.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>export QT\_WAYLAND\_SHELL\_INTEGRATION=ivi-shell
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-the-powervr-tools">
+<h1>3.6.6. Using the PowerVR Tools<a class="headerlink" href="#using-the-powervr-tools" title="Permalink to this headline">¶</a></h1>
+<p>The suite of PowerVR Tools is designed to enable rapid graphics application
+development. It targets a range of areas including asset exporting and
+optimization, PC emulation, prototyping environments, on-line and off-line
+performance analysis tools and many more. Please refer to <a class="reference external" href="https://www.imgtec.com/developers/powervr-sdk-tools/installers/">PowerVR-SDK</a> for
+additional details on the tools and detailed documentation.</p>
+<p>The target file system includes a subset of PowerVR tools such as
+PVRScope and PVRTrace recorder libraries from Imagination PowerVR SDK to
+profile and trace GFX activities. In addition, it also includes
+PVRPerfServerDeveloper tool.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are experiencing issues with any of the tools try updating to
+the latest provided by Imagination at
+<a class="reference external" href="https://developer.imaginationtech.com/">https://developer.imaginationtech.com/</a></p>
+</div>
+<div class="section" id="pvrtune">
+<h2>3.6.6.1. PVRTune<a class="headerlink" href="#pvrtune" title="Permalink to this headline">¶</a></h2>
+<p>The PVRTune utility is a real-time GPU performance analysis tool. It
+captures hardware timing data and counters which facilitate the
+identification of performance bottlenecks. PVRPerfServerDeveloper should
+be used along with the PVRTune running on the PC to gather data on the
+SGX loading and activity threads. You can invoke the tool with the below
+command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # /opt/img-powervr-sdk/PVRHub/PVRPerfServer/PVRPerfServerDeveloper
+</pre></div>
+</div>
+</div>
+<div class="section" id="pvrtrace">
+<h2>3.6.6.2. PVRTrace<a class="headerlink" href="#pvrtrace" title="Permalink to this headline">¶</a></h2>
+<p>The PVRTrace is an OpenGL® ES API recording and analysis utility.
+PVRTrace GUI provides off-line tools to inspect captured data, identify
+redundant calls, highlight costly shaders and many more. The default
+filesystem contains helper scripts to obtain the PVRTrace of the
+graphics application. This trace can then be played back on the PC using
+the PVRTrace Utility.</p>
+<p>To start tracing, use the below commands as reference:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # cp /opt/img-powervr-sdk/PVRHub/Scripts/start_tracing.sh ~/.
+target # ./start_tracing.sh &lt;log-filename&gt; &lt;application-to-be-traced&gt;
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target # ./start_tracing.sh westonapp weston-simple-egl
+</pre></div>
+</div>
+<p>The above command will do the following:</p>
+<ol class="arabic simple">
+<li>Setup the required environment for the tracing</li>
+<li>Create a directory under the current working directory called
+pvrtrace</li>
+<li>Launch the application specified by the user</li>
+<li>Start tracing the PVR Interactions while recording the traces to a file under
+the current directory</li>
+</ol>
+<p>To end the tracing, the user can invoke the Ctrl-C and the trace file path
+will be displayed.</p>
+<p>The trace file can then be transferred to a PC, and we can visualize the
+application using the host side PVRTrace utility. Please refer <a class="reference external" href="https://www.imgtec.com/developers/powervr-sdk-tools/installers/">PowerVR-SDK</a> for
+more details.</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>CRTC stands for cathode-ray tube controller, a throw back to the old
+<a class="reference external" href="https://en.wikipedia.org/wiki/Cathode-ray_tube">cathode-ray tubes TV’s</a>
+which had a controller that generated video timings based on the data
+it is being fed by a buffer.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Foundational_Components_Multimedia_D5520_VXE384.html" class="btn btn-neutral float-right" title="3.7. Multimedia Video Codec" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../Foundational_Components_Graphics.html" class="btn btn-neutral" title="3.6. Graphics and Display" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

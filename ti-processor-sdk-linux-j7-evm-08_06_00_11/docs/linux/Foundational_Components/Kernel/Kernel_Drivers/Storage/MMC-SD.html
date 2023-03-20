@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.2.2.19. MMC/SD &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../../../../../index.html"/>
+        <link rel="up" title="3.2.2. Kernel Drivers" href="../../../../Foundational_Components_Kernel_Drivers.html"/>
+        <link rel="next" title="3.2.2.20. UART" href="../UART.html"/>
+        <link rel="prev" title="3.2.2.18. NAND" href="NAND.html"/> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../../../../../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../Overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../Foundational_Components.html">3. Foundational Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_U-Boot.html">3.1. U-Boot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../../Foundational_Components_Kernel.html">3.2. Kernel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../../Foundational_Components_Kernel_Users_Guide.html">3.2.1. Users Guide</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../../../Foundational_Components_Kernel_Drivers.html">3.2.2. Kernel Drivers</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../ADC.html">3.2.2.1. ADC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Audio.html">3.2.2.2. Audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Camera/CSI2RX.html">3.2.2.3. CSI2RX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Crypto.html">3.2.2.4. Crypto</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../MCAN.html">3.2.2.5. MCAN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Display/DSS7.html">3.2.2.6. DSS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../GPIO.html">3.2.2.7. GPIO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../HYPERFLASH.html">3.2.2.8. HyperBus and HyperFlash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../I2C.html">3.2.2.9. I2C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Network/CPSW-Ethernet.html">3.2.2.10. CPSW Ethernet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PCIe/PCIe_End_Point.html">3.2.2.11. PCIe End Point</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PCIe/PCIe_Backplane.html">3.2.2.12. PCIe Backplane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PCIe/PCIe_Root_Complex.html">3.2.2.13. PCIe Root Complex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../Foundational_Components_Kernel_Drivers_Power_Management.html">3.2.2.14. Power Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../QSPI.html">3.2.2.15. OSPI/QSPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../SERDES/SERDES.html">3.2.2.16. SERDES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../SPI.html">3.2.2.17. SPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NAND.html">3.2.2.18. NAND</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">3.2.2.19. MMC/SD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../UART.html">3.2.2.20. UART</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../UFS.html">3.2.2.21. UFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../USB/CDNS3.html">3.2.2.22. USB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../VTM.html">3.2.2.23. Voltage &amp; Thermal Management (VTM)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Foundational_Components_Kernel_LTP-DDT_Validation.html">3.2.3. LTP-DDT Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Foundational_Components_Kernel_FAQs.html">3.2.4. FAQs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Filesystem.html">3.3. Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Tools.html">3.4. Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_IPCLLD.html">3.5. IPC Low Level Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Graphics.html">3.6. Graphics and Display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Multimedia_D5520_VXE384.html">3.7. Multimedia Video Codec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Virtualization.html">3.8. Virtualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_ATF.html">3.9. ARM Trusted Firmware-A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_OPTEE.html">3.10. OP-TEE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../../Foundational_Components.html">3. Foundational Components</a> &raquo;</li>
+      
+          <li><a href="../../../../Foundational_Components_Kernel.html">3.2. Kernel</a> &raquo;</li>
+      
+          <li><a href="../../../../Foundational_Components_Kernel_Drivers.html">3.2.2. Kernel Drivers</a> &raquo;</li>
+      
+    <li>3.2.2.19. MMC/SD</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mmc-sd">
+<h1>3.2.2.19. MMC/SD<a class="headerlink" href="#mmc-sd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>3.2.2.19.1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The multimedia card high-speed/SDIO (MMC/SDIO) host controller provides
+an interface between a local host (LH) such as a microprocessor unit
+(MPU) or digital signal processor (DSP) and either MMC, SD® memory
+cards, or SDIO cards and handles MMC/SDIO transactions with minimal LH
+intervention.</p>
+<img alt="../../../../../_images/Mmcsd_Driver.png" src="../../../../../_images/Mmcsd_Driver.png" />
+<p>MMC/SD Driver Architecture</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>3.2.2.19.2. References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>JEDEC eMMC Homepage
+[<a class="reference external" href="http://www.jedec.org/category/technology-focus-area/flash-memory-ssds-ufs-emmc">http://www.jedec.org/category/technology-focus-area/flash-memory-ssds-ufs-emmc</a>]</li>
+<li>SD ORG Homepage [<a class="reference external" href="http://www.sdcard.org">http://www.sdcard.org</a>]</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="acronyms-definitions">
+<h2>3.2.2.19.3. Acronyms &amp; Definitions<a class="headerlink" href="#acronyms-definitions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Acronym</th>
+<th class="head">Definition</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>MMC</td>
+<td>Multimedia Card</td>
+</tr>
+<tr class="row-odd"><td>HS-MMC</td>
+<td>High Speed MMC</td>
+</tr>
+<tr class="row-even"><td>SD</td>
+<td>Secure Digital</td>
+</tr>
+<tr class="row-odd"><td>SDHC</td>
+<td>SD High Capacity</td>
+</tr>
+<tr class="row-even"><td>SDIO</td>
+<td>SD Input/Output</td>
+</tr>
+</tbody>
+</table>
+<p>Table:  <strong>MMC/SD: Acronyms</strong></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="features">
+<h2>3.2.2.19.4. Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<p>The SD/MMC driver supports the following features:</p>
+<ul class="simple">
+<li>Support ADMA for DMA transfers</li>
+<li>HS400 speed mode</li>
+<li>Support for both built-in and module mode</li>
+<li>ext2/ext3/ext4 file system support</li>
+</ul>
+</div>
+<div class="section" id="supported-high-speed-modes">
+<h2>3.2.2.19.5. Supported High Speed Modes<a class="headerlink" href="#supported-high-speed-modes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>SD</li>
+</ul>
+<table border="1" class="colwidths-auto docutils">
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Platform</th>
+<th class="head">SDR104</th>
+<th class="head">DDR50</th>
+<th class="head">SDR50</th>
+<th class="head">SDR25</th>
+<th class="head">SDR12</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>J721e-EVM</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>eMMC</li>
+</ul>
+<table border="1" class="colwidths-auto docutils">
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Platform</th>
+<th class="head">DDR52</th>
+<th class="head">HS200</th>
+<th class="head">HS400</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>J721e-EVM</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="driver-configuration">
+<h2>3.2.2.19.6. Driver Configuration<a class="headerlink" href="#driver-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The default kernel configuration enables support for MMC/SD driver as
+built-in to kernel. TI SDHCI driver is used. Following options need to be
+configured in Linux Kernel for successfully selecting SDHCI driver for
+J721E.</p>
+<ul class="simple">
+<li>Enable SDHCI support (CONFIG_MMC_SDHCI)</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Device Drivers --&gt;
+   MMC/SD/SDIO card support --&gt;
+      &lt;*&gt; Secure Digital Host Controller Interface support
+</pre></div>
+</div>
+<ul class="simple">
+<li>Enable SDHCI platform helper (CONFIG_MMC_SDHCI_PLTFM)</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Device Drivers --&gt;
+   MMC/SD/SDIO card support --&gt;
+      Secure Digital Host Controller Interface support --&gt;
+         &lt;*&gt; SDHCI platform and OF driver helper
+</pre></div>
+</div>
+<ul class="simple">
+<li>Enable SDHCI controller for TI device (CONFIG_MMC_SDHCI_AM654)</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Device Drivers --&gt;
+   MMC/SD/SDIO card support --&gt;
+      &lt;*&gt; Support for the SDHCI Controller in TI&#39;s AM654 SOCs
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../UART.html" class="btn btn-neutral float-right" title="3.2.2.20. UART" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="NAND.html" class="btn btn-neutral" title="3.2.2.18. NAND" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

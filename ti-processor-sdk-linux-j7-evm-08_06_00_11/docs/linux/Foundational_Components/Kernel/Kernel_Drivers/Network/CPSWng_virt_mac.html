@@ -1,0 +1,753 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.2.2.10.3.2.3.1. CPSWng virtual MAC (remoteproc) &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../../../../../index.html"/>
+        <link rel="up" title="3.2.2.10.3.2. CPSWng Ethernet" href="CPSWng.html"/>
+        <link rel="next" title="3.2.2.10.3.2.3.2. CPSWng Native Ethernet" href="CPSWng-Native-Ethernet.html"/>
+        <link rel="prev" title="3.2.2.10.3.2. CPSWng Ethernet" href="CPSWng.html"/> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../../../../../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../Overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../Foundational_Components.html">3. Foundational Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_U-Boot.html">3.1. U-Boot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../../Foundational_Components_Kernel.html">3.2. Kernel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../../Foundational_Components_Kernel_Users_Guide.html">3.2.1. Users Guide</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../../../Foundational_Components_Kernel_Drivers.html">3.2.2. Kernel Drivers</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../ADC.html">3.2.2.1. ADC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Audio.html">3.2.2.2. Audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Camera/CSI2RX.html">3.2.2.3. CSI2RX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Crypto.html">3.2.2.4. Crypto</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../MCAN.html">3.2.2.5. MCAN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Display/DSS7.html">3.2.2.6. DSS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../GPIO.html">3.2.2.7. GPIO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../HYPERFLASH.html">3.2.2.8. HyperBus and HyperFlash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../I2C.html">3.2.2.9. I2C</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="CPSW-Ethernet.html">3.2.2.10. CPSW Ethernet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PCIe/PCIe_End_Point.html">3.2.2.11. PCIe End Point</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PCIe/PCIe_Backplane.html">3.2.2.12. PCIe Backplane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../PCIe/PCIe_Root_Complex.html">3.2.2.13. PCIe Root Complex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../Foundational_Components_Kernel_Drivers_Power_Management.html">3.2.2.14. Power Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../QSPI.html">3.2.2.15. OSPI/QSPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../SERDES/SERDES.html">3.2.2.16. SERDES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../SPI.html">3.2.2.17. SPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Storage/NAND.html">3.2.2.18. NAND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Storage/MMC-SD.html">3.2.2.19. MMC/SD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../UART.html">3.2.2.20. UART</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../UFS.html">3.2.2.21. UFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../USB/CDNS3.html">3.2.2.22. USB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../VTM.html">3.2.2.23. Voltage &amp; Thermal Management (VTM)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Foundational_Components_Kernel_LTP-DDT_Validation.html">3.2.3. LTP-DDT Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../Foundational_Components_Kernel_FAQs.html">3.2.4. FAQs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Filesystem.html">3.3. Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Tools.html">3.4. Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_IPCLLD.html">3.5. IPC Low Level Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Graphics.html">3.6. Graphics and Display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Multimedia_D5520_VXE384.html">3.7. Multimedia Video Codec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_Virtualization.html">3.8. Virtualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_ATF.html">3.9. ARM Trusted Firmware-A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Foundational_Components_OPTEE.html">3.10. OP-TEE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../../Foundational_Components.html">3. Foundational Components</a> &raquo;</li>
+      
+          <li><a href="../../../../Foundational_Components_Kernel.html">3.2. Kernel</a> &raquo;</li>
+      
+          <li><a href="../../../../Foundational_Components_Kernel_Drivers.html">3.2.2. Kernel Drivers</a> &raquo;</li>
+      
+          <li><a href="CPSW-Ethernet.html">3.2.2.10. CPSW Ethernet</a> &raquo;</li>
+      
+          <li><a href="CPSWng.html">3.2.2.10.3.2. CPSWng Ethernet</a> &raquo;</li>
+      
+    <li>3.2.2.10.3.2.3.1. CPSWng virtual MAC (remoteproc)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cpswng-virtual-mac-remoteproc">
+<span id="cpswng-virt-mac"></span><h1>3.2.2.10.3.2.3.1. CPSWng virtual MAC (remoteproc)<a class="headerlink" href="#cpswng-virtual-mac-remoteproc" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a><ul>
+<li><a class="reference internal" href="#virtual-mac-switch-mode" id="id2">Virtual MAC switch mode</a></li>
+<li><a class="reference internal" href="#virtual-mac-only-mode" id="id3">Virtual MAC only mode</a></li>
+<li><a class="reference internal" href="#drivers-initialization" id="id4">Drivers initialization</a></li>
+<li><a class="reference internal" href="#rpmsg-kdrv-switch-driver" id="id5">rpmsg_kdrv_switch driver</a></li>
+<li><a class="reference internal" href="#j721e-cpsw-virt-mac-driver" id="id6">j721e-cpsw-virt-mac driver</a></li>
+<li><a class="reference internal" href="#network-data-flow" id="id7">Network data flow</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#driver-configuration" id="id8">Driver Configuration</a></li>
+<li><a class="reference internal" href="#device-tree-bindings" id="id9">Device tree bindings</a></li>
+<li><a class="reference internal" href="#user-guide" id="id10">User guide</a><ul>
+<li><a class="reference internal" href="#starting-the-interface" id="id11">Starting the interface</a></li>
+<li><a class="reference internal" href="#set-mac-address" id="id12">Set MAC address</a></li>
+<li><a class="reference internal" href="#ethtool-interface" id="id13">ethtool interface</a><ul>
+<li><a class="reference internal" href="#get-driver-information" id="id14">Get driver information</a></li>
+<li><a class="reference internal" href="#display-standard-information-about-device-link" id="id15">Display standard information about device/link</a></li>
+<li><a class="reference internal" href="#show-permanent-hardware-address" id="id16">Show permanent hardware address</a></li>
+<li><a class="reference internal" href="#rx-tx-checksum-offload" id="id17">RX/TX checksum offload</a></li>
+<li><a class="reference internal" href="#driver-testing" id="id18">Driver testing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#interrupt-pacing" id="id19">Interrupt pacing</a></li>
+<li><a class="reference internal" href="#multicast-mc-filtering" id="id20">Multicast (MC) filtering</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id1">3.2.2.10.3.2.3.1.1. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The TI Jacinto 7 SoC has integrated nine-port Gigabit Ethernet Switch subsystem
+into device MAIN domain named CPSW0 and has 5 or 8 external Ethernet ports.</p>
+<p>The Processor SDK Linux J721e on the Jacinto 7 family of SoC’s does not allow direct access to CPSW0 from Linux and
+the CPSW0 is placed under exclusive control of the EthSwitch firmware running on one of the R5F cores (main_r5fss0_core0 by default).</p>
+<p>Only the EthSwitch firmware has full control over Jacinto 7 CPSW0 and allows segregate
+Ethernet traffic for each attached Remote CPU by using programable ALE classifiers and
+exclusive UDMA TX channels and RX flows. The EthSwitch firmware supports the rpmsg-kdrv protocol and presents itself
+as a number of rpmsg-kdrv devices, which provide CPSW0 resource management and debugging services for each attached Remote CPU.</p>
+<p>The Processor SDK Linux J721e on the Jacinto 7 family of SoC’s contains a solution to allow sending/receiving Ethernet traffic
+directed to/from CPU Core running Linux using a standard Linux network device.
+The provided solution is implemented by two drivers:
+- drivers/rpmsg-kdrv/rpmsg_kdrv_switch.c
+- drivers/net/ethernet/ti/j721e-cpsw-virt-mac.c</p>
+<p>This solution is illustrated below.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Overall TI remoteproc/virtio/rpmsg/rpmsg-kdrv description is out of scope of this section.</p>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span>User space           +------+
++--------------------+ethX  +----------------------------------------+
+                     +--^---+
+                       |
+                       |
+               +-------v-----+
+               |Net core     |
+               +-----^-------+
+                     |
+      +--------------v--------------------+ rpmsg_remotedev/
+      | main_r5fss_cpswng_virt_macX       | rpmsg_remotedev_eth_switch_ops API
+      | ethernet/ti/j721e-cpsw-virt-mac.c &lt;--------+
+      +-----------------------------------+        |
+                                                   |
+                          +------------------------v------+
+                          | mpu_1_0_ethswitch-device-0 or |
+                          | mpu_1_0_ethmac-device-1       |
+                          | rpmsg-kdrv/rpmsg_kdrv_switch.c|
+                          +-------------^-----------------+
+       rpmsg_kdr Bus                    |
+     +---------------------^--------+--------------------------+
+                           |
+                      +----+--------+
+                      | rpmsg-kdrv  |
+                      |             |
+                      +----^--------+
+       RPMSG Bus           |
+     +---------------------+-----------------^-----------------+
+                                             |
+                                    +--------+--------------+
+                                    |   virtio_rpmsg_bus    |
+                                    |                       |
+                                    +--------^--------------+
+                                             |
+                                             |
+                                    +--------v--------------+
+                                    | remoteproc            |
+                                    | ti_k3_r5_remoteproc   |
+                                    +--------+--------------+
+Kernel                                       |
++--------------------------------------------|------------------------+
+           +---------------------------------v------------+
+           |SoC                                           |
+           |  +------------+        +------------------+  |
+           |  |            |        |main_r5fss0_core0 |  |
+           |  |  CPSWnG    &lt;--------+                  |  |
+           |  +------------+        +------------------+  |
+           |                                              |
+           +----------------------------------------------+
+</pre></div>
+</div>
+<p>Depending on ethSwitch firmware configuration two types of rpmsg-kdrv devices are registered:</p>
+<p><strong>mpu_1_0_ethswitch-device-0</strong> - virtual MAC interface which operates as part of the switch represented by number of CPSWng external ports, so called <em>virtual MAC switch mode</em>.
+Only one rpmsg-kdrv device of this type is supported.</p>
+<p><strong>mpu_1_0_ethmac-device-X</strong> - virtual MAC interface which operated with dedicated CPSWng external port, so called <em>virtual MAC only mode</em></p>
+<p>The separate standard Linux network interfaces are created for every registered rpmsg-kdrv devices.</p>
+<p>The Processor SDK Linux J721e on the Jacinto 7 family of SoC contains ethSwitch firmware which is configured to instantiate one mpu_1_0_ethswitch-device-0 and one mpu_1_0_ethmac-device-1.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The EthSwitch FW configuration description is out of scope of this section.</p>
+</div>
+<div class="section" id="virtual-mac-switch-mode">
+<h3><a class="toc-backref" href="#id2">3.2.2.10.3.2.3.1.1.1. Virtual MAC switch mode</a><a class="headerlink" href="#virtual-mac-switch-mode" title="Permalink to this headline">¶</a></h3>
+<p>In virtual MAC switch mode (mpu_1_0_ethswitch-device-0) the j721e-cpsw-virt-mac driver operates as part of the switch represented by number of CPSWng external ports.</p>
+<p>It can receive only traffic segregated to it by ethSwitch firmware which are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>unicast packets to assigned MAC address</li>
+<li>multicast (MC) packets from registered MC addresses (exclusive, see <a class="reference internal" href="#cpswng-virt-mac-mc-filtering"><span class="std std-ref">Multicast (MC) filtering</span></a>)</li>
+</ul>
+</div></blockquote>
+<p>It can send any kind of packets, but how they are forwarded inside CPSWng switch HW is defined by learning process and ethSwitch firmware configuration.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The EthSwitch FW configuration description is out of scope of this section.</p>
+</div>
+</div>
+<div class="section" id="virtual-mac-only-mode">
+<h3><a class="toc-backref" href="#id3">3.2.2.10.3.2.3.1.1.2. Virtual MAC only mode</a><a class="headerlink" href="#virtual-mac-only-mode" title="Permalink to this headline">¶</a></h3>
+<p>In virtual MAC only mode (mpu_1_0_ethmac-device-1) the j721e-cpsw-virt-mac driver operates with dedicated CPSWng external port X.</p>
+<p>It can receive all non-VLAN tagged traffic from dedicated CPSWng external port X including unicast (to assigned MAC address) and multicats packets by default.</p>
+<p>It should not receive packets from CPSWng external ports operated as switch.</p>
+<p>It can send any kind of packets to dedicated CPSWng external port X and those packets expected to egress only through this external port X and not be forwarded to any CPSWng external ports operated as switch.</p>
+<p>The Linux network interface (netdev) in this mode operates in ALLMULTI mode which can’t be disabled, and also supports promisc mode, which enables reception of VLAN tagged packets.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="drivers-initialization">
+<h3><a class="toc-backref" href="#id4">3.2.2.10.3.2.3.1.1.3. Drivers initialization</a><a class="headerlink" href="#drivers-initialization" title="Permalink to this headline">¶</a></h3>
+<p>The Linux TI remoteproc core ensures proper R5F core initialization, loads and starts the EthSwitch firmware,
+and creates the default virtio devices for interacting with this firmware.
+The virtio_rpmsg_bus driver performs discovery of the RPMSG devices and creates an rpmsg-kdrv device,
+which, in turn, will trigger the rpmsg-kdrv core to discover “mpu_1_0_ethswitch-device-0” or “mpu_1_0_ethmac-device-1” and probe the rpmsg_kdrv_switch driver</p>
+<p>The j721e-cpsw-virt-mac driver is started separately by the Linux core once the corresponding main_r5fss_cpswng_virt_macX device has been created by the Linux DT parsing code.
+Once started, the j721e-cpsw-virt-mac driver will wait for rpmsg_kdrv_switch driver to be probed.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The EthSwitch FW may also be loaded by the bootloader, and, in this case, the remoteproc components will be started in “IPC-only” mode.</p>
+</div>
+<p>Drivers initialization Linux kernel log example for Virtual MAC switch mode:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>rpmsg-kdrv-eth-switch rpmsg-kdrv-1-mpu_1_0_ethswitch-device-0: Device info: permissions: 0FFFFFFF uart_id: 2
+rpmsg-kdrv-eth-switch rpmsg-kdrv-1-mpu_1_0_ethswitch-device-0: FW ver 0.2 (rev 0)  3/Oct/2021 SHA:31ed829b
+j721e-cpsw-virt-mac main_r5fss_cpsw9g_virt_mac0: rpmsg attach_ext - rx_mtu:1522 features:00000003 tx_mtu[0]:2024 flow_idx:172 tx_cpsw_psil_dst_id:51712 mac_addr:70:ff:76:1d:92:c1 mac-only:0
+j721e-cpsw-virt-mac main_r5fss_cpsw9g_virt_mac0: virt_cpsw_nuss mac loaded
+j721e-cpsw-virt-mac main_r5fss_cpsw9g_virt_mac0: rdev_features:00000003 rdev_mtu:1522 flow_id:172 tx_psil_dst_id:4A00 mac_only:0
+j721e-cpsw-virt-mac main_r5fss_cpsw9g_virt_mac0: local_mac_addr:00:00:00:00:00:00 rdev_mac_addr:70:ff:76:1d:92:c1
+</pre></div>
+</div>
+<p>Drivers initialization Linux kernel log example for Virtual MAC only mode:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>rpmsg-kdrv-eth-switch rpmsg-kdrv-3-mpu_1_0_ethmac-device-1: Device info: permissions: 0FFFFFFF uart_id: 2
+rpmsg-kdrv-eth-switch rpmsg-kdrv-3-mpu_1_0_ethmac-device-1: FW ver 0.2 (rev 0)  3/Oct/2021 SHA:31ed829b
+j721e-cpsw-virt-mac main-r5fss-cpsw9g-virt-mac1: rpmsg attach_ext - rx_mtu:1522 features:00000007 tx_mtu[0]:2024 flow_idx:173 tx_cpsw_psil_dst_id:51713 mac_addr:70:ff:76:1d:92:c2 mac-only:1
+j721e-cpsw-virt-mac main-r5fss-cpsw9g-virt-mac1: virt_cpsw_nuss mac loaded
+j721e-cpsw-virt-mac main-r5fss-cpsw9g-virt-mac1: rdev_features:00000007 rdev_mtu:1522 flow_id:173 tx_psil_dst_id:4A01 mac_only:1
+j721e-cpsw-virt-mac main-r5fss-cpsw9g-virt-mac1: local_mac_addr:00:00:00:00:00:00 rdev_mac_addr:70:ff:76:1d:92:c2
+</pre></div>
+</div>
+</div>
+<div class="section" id="rpmsg-kdrv-switch-driver">
+<h3><a class="toc-backref" href="#id5">3.2.2.10.3.2.3.1.1.4. rpmsg_kdrv_switch driver</a><a class="headerlink" href="#rpmsg-kdrv-switch-driver" title="Permalink to this headline">¶</a></h3>
+<p>The rpmsg_kdrv_switch driver (drivers/rpmsg-kdrv/rpmsg_kdrv_switch.c) does not perform any functions by iteslf,
+except checking for the supported EthSwitch FW version. It’s intended to provide the RPMSG-KDRV rpmsg_remotedev API interface to be used by the j721e-cpsw-virt-mac driver.
+Features controlled by the RPMSG-KDRV rpmsgi_remotedev API include:
+- DMA resources allocation: TX UDMA channel and RX Flow
+- MAC addresses assignment
+- ARP helper for ARP requests processing from remote Net Hosts
+- dbg: IPC ping
+- dbg: CPSW0 register access
+- dbg: statistic print request on R5F console (ioctl)</p>
+</div>
+<div class="section" id="j721e-cpsw-virt-mac-driver">
+<h3><a class="toc-backref" href="#id6">3.2.2.10.3.2.3.1.1.5. j721e-cpsw-virt-mac driver</a><a class="headerlink" href="#j721e-cpsw-virt-mac-driver" title="Permalink to this headline">¶</a></h3>
+<p>The j721e-cpsw-virt-mac driver (drivers/net/ethernet/ti/j721e-cpsw-virt-mac.c) follows the standard Linux network interface architecture and supports the following features:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Network device up/down</li>
+<li>Automatic (or manual) MAC address assignment</li>
+<li>IP address assignment</li>
+<li>Basic Ethertool functions</li>
+<li>RX/TX csum offload (if enabled by EthSwitch FW)</li>
+<li>SW Interrupt Pacing using timers.</li>
+</ul>
+</div></blockquote>
+<p><em>Virtual MAC switch mode</em></p>
+<blockquote>
+<div><ul class="simple">
+<li>Multicast (MC) packet filtering</li>
+</ul>
+</div></blockquote>
+<p><em>Virtual MAC only mode</em></p>
+<blockquote>
+<div><ul class="simple">
+<li>ALLMULTI mode - always on</li>
+<li>promisc mode</li>
+</ul>
+</div></blockquote>
+<p><em>Not supported</em>:</p>
+<ul class="simple">
+<li>HW Interrupt Pacing is not supported.</li>
+</ul>
+</div>
+<div class="section" id="network-data-flow">
+<h3><a class="toc-backref" href="#id7">3.2.2.10.3.2.3.1.1.6. Network data flow</a><a class="headerlink" href="#network-data-flow" title="Permalink to this headline">¶</a></h3>
+<p>The EthSwitch FW is responsible for UDMA resource management and allocation between attached remote cores.
+The j721e-cpsw-virt-mac driver requests the EthSwitch FW for available UDMA resources during initialization by performing an attach operation: TX channel and RX flow through the Control path (rpmsg_remotedev API).
+In the current design, the EthSwitch FW allocates dedicated (not shared) TX UDMA channel for each attached core,
+but the EthSwitch FW controls RX UDMA channel and only provides dedicated UDMA RX flow to attached cores.</p>
+<p>Hence, after allocation, the j721e-cpsw-virt-mac driver is responsible for the full TX UDMA channel initialization (including TX and TX completion ring initialization).
+The j721e-cpsw-virt-mac driver also starts/stops the TX UDMA channel.
+For RX side, the j721e-cpsw-virt-mac driver only performs UDMA RX flow initialization (including RX free descriptor and RX ring initialization).</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span> User space          +------+
++--------------------+ethX  +----------------------------------------+
+                     +--^---+
+                        |
+                        |
+                +-------v-----+
+                |Net core     |
+                +-----^-------+
+                      |
+       +--------------v-------+
+       | j721e-cpsw-virt-mac  |   Control Path
+       |                      &lt;----------+
+       +----+---^-------------+          |
+            |   |                        |
+            |   |                        |
+            |   |              +---------v---------+
+TX channel  |   |RX flow       | rpmsg_kdrv_switch |
+            |   |              |                   |
+            |   |              +---------^---------+
+            |   |                        |
+         Data Path                       |
+       +----+---+-------------------------------------+
+       |    |   |                        |      SoC   |
+       |  +-v---+------+                 |            |
+       |  |            |                 |            |
+       |  |  UDMA      |                 |            |
+       |  +---+--------+                 |            |
+       |      |                          |            |
+       |  +---v--------+        +--------v---------+  |
+       |  |            |        |main_r5fss0_core0 |  |
+       |  |  CPSWnG    &lt;--------+                  |  |
+       |  +------------+        +------------------+  |
+       |                                              |
+       +----------------------------------------------+
+</pre></div>
+</div>
+<p>TThe EthSwitch FW needs to know which traffic to segregate to the Linux Host; therefore, the j721e-cpsw-virt-mac driver
+registers the MAC address assigned to the virt_mac Network device within EthSwitch FW using Control path.</p>
+<p>Once configured, the network data can be passed between the Linux virt_mac Network device and the CPSW0 without interaction with EthSwitch FW.</p>
+</div>
+</div>
+<div class="section" id="driver-configuration">
+<h2><a class="toc-backref" href="#id8">3.2.2.10.3.2.3.1.2. Driver Configuration</a><a class="headerlink" href="#driver-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The Processor SDK Linux J721e package has a Jacinto 7 rpmsg_kdrv_switch and j721e-cpsw-virt-mac drivers enabled by default and built as modules.
+In case of custom builds, please ensure following configs are enabled.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>CONFIG_RPMSG_KDRV
+CONFIG_RPMSG_KDRV_ETH_SWITCH
+CONFIG_TI_RDEV_ETH_SWITCH_VIRT_EMAC
+</pre></div>
+</div>
+</div>
+<div class="section" id="device-tree-bindings">
+<h2><a class="toc-backref" href="#id9">3.2.2.10.3.2.3.1.3. Device tree bindings</a><a class="headerlink" href="#device-tree-bindings" title="Permalink to this headline">¶</a></h2>
+<p>The DT bindings description can be found at:</p>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://git.ti.com/ti-linux-kernel/ti-linux-kernel/blobs/ti-linux-5.10.y/Documentation/devicetree/bindings/net/ti,cpsw-virt-mac.txt">Documentation/devicetree/bindings/net/ti,cpsw-virt-mac.txt</a></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="user-guide">
+<h2><a class="toc-backref" href="#id10">3.2.2.10.3.2.3.1.4. User guide</a><a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="starting-the-interface">
+<h3><a class="toc-backref" href="#id11">3.2.2.10.3.2.3.1.4.1. Starting the interface</a><a class="headerlink" href="#starting-the-interface" title="Permalink to this headline">¶</a></h3>
+<p>Eth0 can be started by default or configured manually:</p>
+<p><em>DHCP</em></p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>udhcpc -i ethX
+ip link set dev ethX up
+</pre></div>
+</div>
+<p><em>Manual IP address configuration</em></p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>ip addr add &lt;ip&gt;/24 dev ethX
+ip link set dev ethX up
+
+&lt; or &gt;
+
+ifconfig ethX &lt;ip&gt; netmask &lt;mask&gt; up
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-mac-address">
+<h3><a class="toc-backref" href="#id12">3.2.2.10.3.2.3.1.4.2. Set MAC address</a><a class="headerlink" href="#set-mac-address" title="Permalink to this headline">¶</a></h3>
+<p>The j721e-cpsw-virt-mac supports changing the HW MAC address, but this operation can be performed only when the network device is inactive (down).</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>ip link set dev ethX down
+ip link set dev ethX address &lt;MAC-addr&gt;
+ip link set dev ethX up
+</pre></div>
+</div>
+</div>
+<div class="section" id="ethtool-interface">
+<h3><a class="toc-backref" href="#id13">3.2.2.10.3.2.3.1.4.3. ethtool interface</a><a class="headerlink" href="#ethtool-interface" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="get-driver-information">
+<h4><a class="toc-backref" href="#id14">3.2.2.10.3.2.3.1.4.3.1. Get driver information</a><a class="headerlink" href="#get-driver-information" title="Permalink to this headline">¶</a></h4>
+<p>The CPSW0 interface can be identified by using <code class="docutils literal"><span class="pre">ethtool</span> <span class="pre">-i|--driver</span></code> command.
+It also provides some information about supported features.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span># ethtool -i &lt;dev&gt;
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="display-standard-information-about-device-link">
+<h4><a class="toc-backref" href="#id15">3.2.2.10.3.2.3.1.4.3.2. Display standard information about device/link</a><a class="headerlink" href="#display-standard-information-about-device-link" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-text"><div class="highlight"><pre><span></span># ethtool eth0
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This command is supported, but not very useful, as the link is always up and no PHY.</p>
+</div>
+</div>
+<div class="section" id="show-permanent-hardware-address">
+<h4><a class="toc-backref" href="#id16">3.2.2.10.3.2.3.1.4.3.3. Show permanent hardware address</a><a class="headerlink" href="#show-permanent-hardware-address" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-text"><div class="highlight"><pre><span></span># ethtool -P eth0
+Permanent address: a0:f6:fd:a6:46:6e&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="rx-tx-checksum-offload">
+<h4><a class="toc-backref" href="#id17">3.2.2.10.3.2.3.1.4.3.4. RX/TX checksum offload</a><a class="headerlink" href="#rx-tx-checksum-offload" title="Permalink to this headline">¶</a></h4>
+<p>The driver enables RX checksum offload by default. The current status can be obtained by using “ethtool -k” command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span># ethtool -k &lt;dev&gt;
+....
+rx-checksumming: on
+tx-checksumming: off
+    tx-checksum-ipv4: off [fixed]
+    tx-checksum-ip-generic: off
+</pre></div>
+</div>
+<p>It can be disabled/enabled by using “ethtool -K” command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>ethtool -K &lt;dev&gt; rx-checksum on|off
+ethtool -K &lt;dev&gt; tx-checksum-ip-generic on|off
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">TX checksum offload enablement is controlled by EthSwitch FW and current status provided to j721e-cpsw-virt-mac driver.</p>
+</div>
+</div>
+<div class="section" id="driver-testing">
+<h4><a class="toc-backref" href="#id18">3.2.2.10.3.2.3.1.4.3.5. Driver testing</a><a class="headerlink" href="#driver-testing" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-text"><div class="highlight"><pre><span></span># ethtool -t|--test &lt;dev&gt;
+...
+RPMSG Ping test
+RPMSG Read reg
+RPMSG Dump stat
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>The j721e-cpsw-virt-mac can run several types of tests (if enabled by EthSwitch FW):</dt>
+<dd><ul class="first last simple">
+<li>RPMSG Ping test: sends ping command to EthSwitch FW and checks if the same data returned back</li>
+<li>RPMSG Read reg: sends CPSW0 CPSW_SS_CPSW_NUSS_IDVER_REG (0x0C000000) read register command to EthSwitch FW</li>
+<li>RPMSG Dump stat: sends command to EthSwitch FW to dump current status and statistics</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="interrupt-pacing">
+<h3><a class="toc-backref" href="#id19">3.2.2.10.3.2.3.1.4.4. Interrupt pacing</a><a class="headerlink" href="#interrupt-pacing" title="Permalink to this headline">¶</a></h3>
+<p>The Interrupt pacing (IRQ coalescing) based on hrtimers for RX/TX data path separately can be enabled by ethtool commands (min value is 20us):</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>#  ethtool -C ethX tx-usecs N
+#  ethtool -C ethX rx-usecs N
+</pre></div>
+</div>
+<p>The Interrupt pacing (IRQ coalescing) configuration can be retrieved by commands:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>#  ethtool -c ethX
+</pre></div>
+</div>
+<p>It is also possible to use standard Linux Net core hard irqs deferral feature which can be enabled by configuring:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/sys/class/net/ethX/
+ gro_flush_timeout (in ns)
+ napi_defer_hard_irqs (number of retries)
+</pre></div>
+</div>
+<p>Enabling of hard IRQ will be deferred napi_defer_hard_irqs times with gro_flush_timeout timeout.</p>
+<p>The main difference of the hard irqs deferral feature from ethtool interrupt pacing (IRQ coalescing) is that it affects on both RX/TX data path simultaneously.</p>
+</div>
+<div class="section" id="multicast-mc-filtering">
+<span id="cpswng-virt-mac-mc-filtering"></span><h3><a class="toc-backref" href="#id20">3.2.2.10.3.2.3.1.4.5. Multicast (MC) filtering</a><a class="headerlink" href="#multicast-mc-filtering" title="Permalink to this headline">¶</a></h3>
+<p>The EthFW supports MC filtering which allows to offload MC addresses list to EthFW and so enables MC traffic to be forwarded to Linux.</p>
+<p>The EthFW supports two logical types of MC addresses:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>exclusive MC addresses</em> : such MC addresses will be exclusively directed to the Linux only through j721e-cpsw-virt-mac driver netdev.</li>
+<li><em>shared MC addresses</em> : such MC addresses belongs to statically configurable by EthFW MC addresses range. In this case MC packets will be delivered to Linux host by other means (i.e. shared memory based TAP interface) and not through j721e-cpsw-virt-mac driver netdev.
+Shared MC addresses intended to be used when it’s required to deliver MC packets to more then one CPU cores present on Jacinto 7 SoC.</li>
+<li><em>reserved MC addresses</em> : such MC addresses belongs to reserved, statically configurable by EthFW MC addresses range.
+Reserved MC addresses intended to be consumed by EthFW itself only.</li>
+</ul>
+<p>The j721e-cpsw-virt-mac driver doesn’t distinguish between exclusive, shared and reserved MC addresses and offloads all requested MC addresses, but if MC address is shared or reserved - the offload operation become NOP from the j721e-cpsw-virt-mac driver point of view.</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The EthSwitch FW configuration description and shared MC addresses processing is out of scope of this section.</p>
+</div>
+<p>MC MAC addresses can be added/deleted using <em>ip maddr</em> command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span># Add MC address 239.255.1.4
+ip maddr add 01:00:5e:7f:01:04 dev ethX
+ip maddr show dev ethX
+2:      ethX
+    ...
+    link  01:00:5e:00:00:fb users 2
+    link  01:00:5e:00:00:fc users 2
+    link  01:00:5e:7f:01:03 users 2
+    link  01:00:5e:7f:01:04 users 2 static
+    ^^^^
+
+# Del MC address 239.255.1.4
+ip maddr del 01:00:5e:7f:01:04 dev eth0
+</pre></div>
+</div>
+<p>or by using Linux socket IOCTL SIOCADDMULTI/SIOCDELMULTI:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>ip route add 239.255.1.3 dev eth1
+iperf -s -B 239.255.1.3 -u&amp;
+ip maddr show dev ethX
+2:      ethX
+    ...
+    link  01:00:5e:7f:01:03 users 2
+    inet  239.255.1.3
+    ^^^^
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CPSWng-Native-Ethernet.html" class="btn btn-neutral float-right" title="3.2.2.10.3.2.3.2. CPSWng Native Ethernet" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="CPSWng.html" class="btn btn-neutral" title="3.2.2.10.3.2. CPSWng Ethernet" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

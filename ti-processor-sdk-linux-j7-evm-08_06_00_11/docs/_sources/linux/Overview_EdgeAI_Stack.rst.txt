@@ -1,0 +1,12 @@
+.. include:: /replacevars.rst.inc
+
+Edge AI Stack and OOB Demos
+===========================
+
+This section is applicable for the ``tisdk-edgeai-image`` only. Refer to below for documentation on the Out of Box Demos that can be run when booting with this image:
+
+.. toctree::
+   :maxdepth: 1
+
+   /system/Demo_User_Guides/Edge_AI_Gallery_User_Guide
+

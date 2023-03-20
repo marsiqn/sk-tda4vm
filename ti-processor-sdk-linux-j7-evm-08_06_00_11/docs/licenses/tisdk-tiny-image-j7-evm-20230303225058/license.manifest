@@ -1,0 +1,220 @@
+PACKAGE NAME: base-files
+PACKAGE VERSION: 3.0.14
+RECIPE NAME: base-files
+LICENSE: GPLv2
+
+PACKAGE NAME: base-passwd
+PACKAGE VERSION: 3.5.29
+RECIPE NAME: base-passwd
+LICENSE: GPLv2
+
+PACKAGE NAME: busybox
+PACKAGE VERSION: 1.31.1
+RECIPE NAME: busybox
+LICENSE: GPLv2 & bzip2-1.0.4
+
+PACKAGE NAME: busybox-hwclock
+PACKAGE VERSION: 1.31.1
+RECIPE NAME: busybox
+LICENSE: GPLv2 & bzip2-1.0.4
+
+PACKAGE NAME: busybox-syslog
+PACKAGE VERSION: 1.31.1
+RECIPE NAME: busybox
+LICENSE: GPLv2 & bzip2-1.0.4
+
+PACKAGE NAME: busybox-udhcpc
+PACKAGE VERSION: 1.31.1
+RECIPE NAME: busybox
+LICENSE: GPLv2 & bzip2-1.0.4
+
+PACKAGE NAME: external-arm-toolchain
+PACKAGE VERSION: 2019.12
+RECIPE NAME: external-arm-toolchain
+LICENSE: MIT
+
+PACKAGE NAME: init-ifupdown
+PACKAGE VERSION: 1.0
+RECIPE NAME: init-ifupdown
+LICENSE: GPLv2
+
+PACKAGE NAME: initscripts
+PACKAGE VERSION: 1.0
+RECIPE NAME: initscripts
+LICENSE: GPLv2
+
+PACKAGE NAME: initscripts-functions
+PACKAGE VERSION: 1.0
+RECIPE NAME: initscripts
+LICENSE: GPLv2
+
+PACKAGE NAME: kmod
+PACKAGE VERSION: 26
+RECIPE NAME: kmod
+LICENSE: GPL-2.0+ & LGPL-2.1+
+
+PACKAGE NAME: ldconfig
+PACKAGE VERSION: 2019.12
+RECIPE NAME: external-arm-toolchain
+LICENSE: MIT
+
+PACKAGE NAME: libattr
+PACKAGE VERSION: 2.4.48
+RECIPE NAME: attr
+LICENSE: LGPLv2.1+
+
+PACKAGE NAME: libpam
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: libpam-runtime
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: modutils-initscripts
+PACKAGE VERSION: 1.0
+RECIPE NAME: modutils-initscripts
+LICENSE: PD
+
+PACKAGE NAME: netbase
+PACKAGE VERSION: 6.1
+RECIPE NAME: netbase
+LICENSE: GPLv2
+
+PACKAGE NAME: packagegroup-arago-sysvinit-boot
+PACKAGE VERSION: 1.0
+RECIPE NAME: packagegroup-arago-sysvinit-boot
+LICENSE: MIT
+
+PACKAGE NAME: pam-plugin-deny
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-env
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-faildelay
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-group
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-lastlog
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-limits
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-mail
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-motd
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-nologin
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-permit
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-rootok
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-securetty
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-shells
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-unix
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: pam-plugin-warn
+PACKAGE VERSION: 1.3.1
+RECIPE NAME: libpam
+LICENSE: GPLv2+ | BSD
+
+PACKAGE NAME: run-postinsts
+PACKAGE VERSION: 1.0
+RECIPE NAME: run-postinsts
+LICENSE: MIT
+
+PACKAGE NAME: shadow
+PACKAGE VERSION: 4.8.1
+RECIPE NAME: shadow
+LICENSE: BSD-3-Clause | Artistic-1.0
+
+PACKAGE NAME: shadow-base
+PACKAGE VERSION: 4.8.1
+RECIPE NAME: shadow
+LICENSE: BSD-3-Clause | Artistic-1.0
+
+PACKAGE NAME: shadow-securetty
+PACKAGE VERSION: 4.6
+RECIPE NAME: shadow-securetty
+LICENSE: MIT
+
+PACKAGE NAME: sysvinit
+PACKAGE VERSION: 2.96
+RECIPE NAME: sysvinit
+LICENSE: GPLv2+
+
+PACKAGE NAME: sysvinit-inittab
+PACKAGE VERSION: 2.88dsf
+RECIPE NAME: sysvinit-inittab
+LICENSE: GPLv2
+
+PACKAGE NAME: sysvinit-pidof
+PACKAGE VERSION: 2.96
+RECIPE NAME: sysvinit
+LICENSE: GPLv2+
+
+PACKAGE NAME: update-alternatives-opkg
+PACKAGE VERSION: 0.4.2
+RECIPE NAME: opkg-utils
+LICENSE: GPLv2+
+
+PACKAGE NAME: update-rc.d
+PACKAGE VERSION: 0.8
+RECIPE NAME: update-rc.d
+LICENSE: GPLv2+
+
+PACKAGE NAME: util-linux-sulogin
+PACKAGE VERSION: 2.35.1
+RECIPE NAME: util-linux
+LICENSE: GPLv2+ & LGPLv2.1+ & BSD-3-Clause & BSD-4-Clause
+
+PACKAGE NAME: zlib
+PACKAGE VERSION: 1.2.11
+RECIPE NAME: zlib
+LICENSE: Zlib
+

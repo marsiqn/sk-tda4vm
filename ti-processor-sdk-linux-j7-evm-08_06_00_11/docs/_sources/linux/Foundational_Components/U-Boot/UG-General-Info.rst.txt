@@ -1,0 +1,1900 @@
+.. include:: /replacevars.rst.inc
+
+General Information
+-------------------
+
+Getting the U-Boot Source Code
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| The easiest way to get access to the U-boot source code is by
+  downloading and installing the Processor SDK Linux. Once installed,
+  the U-Boot source code is included in the SDK's board-support
+  directory. For your convenience the sources also includes the U-Boot's
+  git repository including commit history.
+| Alternatively, U-Boot sources can directly be fetched from GIT.
+
+  .. ifconfig:: CONFIG_sdk in ('PLSDK')
+
+      The GIT repo URL, branch and commit id can be found in the
+      :ref:`release-specific-build-information-u-boot` section of the release notes.
+
+|
+
+.. _Build-U-Boot-label:
+
+Build U-Boot
+^^^^^^^^^^^^
+.. note::
+    The following commands are intended to be run from the root of the
+    U-Boot tree unless otherwise specified. The root of the U-Boot tree is
+    the top-level directory and can be identified by looking for the
+    "MAINTAINERS" file.
+
+.. ifconfig:: CONFIG_part_family in ('General_family', 'AM335X_family', 'AM437X_family')
+
+    We strongly recommend the use of separate object directories when
+    building. This is done with O= parameter to make. We also recommend that
+    you use an output directory name that is identical to the configuration
+    target name. That way if you are working with multiple configuration
+    targets it is very easy to know which folder contains the u-boot
+    binaries that you are interested in.
+
+    .. rubric:: Setting the tool chain path
+
+    We strongly recommend using the toolchain that came with the Linux Core
+    release that corresponds to this U-Boot release. For e.g:
+
+    ::
+
+        export PATH=$HOME/<TOOLCHAIN_PATH>/bin:$PATH
+
+    .. rubric:: Cleaning the Sources
+
+    If you did not use a separate object directory:
+
+    ::
+
+        $ make CROSS_COMPILE=arm-none-linux-gnueabihf- distclean
+
+    If you used 'O=am335x\_evm' as your object directory:
+
+    ::
+
+        $ rm -rf ./am335x_evm
+
+    .. rubric:: Compiling MLO and u-boot
+
+    Building of both u-boot and SPL is done at the same time. You must
+    however first configure the build for the board you are working with.
+    Use the following table to determine what defconfig to use to configure
+    with:
+
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | Board                      | SD Boot                     | eMMC Boot                | NAND Boot                                  | UART Boot                | Ethernet Boot            | USB Ethernet Boot        | USB Host Boot                           | SPI Boot                                 |
+    +============================+=============================+==========================+============================================+==========================+==========================+==========================+=========================================+==========================================+
+    | AM335x GP EVM              | am335x\_evm\_defconfig      |                          | am335x\_evm\_defconfig                     | am335x\_evm\_defconfig   | am335x\_evm\_defconfig   | am335x\_evm\_defconfig   |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | AM335x EVM-SK              | am335x\_evm\_defconfig      |                          |                                            | am335x\_evm\_defconfig   |                          | am335x\_evm\_defconfig   |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | AM335x ICE                 | am335x\_evm\_defconfig      |                          |                                            | am335x\_evm\_defconfig   |                          |                          |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | BeagleBone Black           | am335x\_evm\_defconfig      | am335x\_evm\_defconfig   |                                            | am335x\_evm\_defconfig   |                          |                          |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | BeagleBone White           | am335x\_evm\_defconfig      |                          |                                            | am335x\_evm\_defconfig   |                          |                          |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | AM437x GP EVM              | am43xx\_evm\_defconfig      |                          | am43xx\_evm\_defconfig                     | am43xx\_evm\_defconfig   | am43xx\_evm\_defconfig   | am43xx\_evm\_defconfig   | am43xx\_evm\_usbhost\_boot\_defconfig   |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | AM437x EVM-Sk              | am43xx\_evm\_defconfig      |                          |                                            |                          |                          |                          | am43xx\_evm\_usbhost\_boot\_defconfig   |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | AM437x IDK                 | am43xx\_evm\_defconfig      |                          |                                            |                          |                          |                          |                                         | am43xx\_evm\_qspiboot\_defconfig (XIP)   |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | AM437x ePOS EVM            | am43xx\_evm\_defconfig      |                          | am43xx\_evm\_defconfig                     |                          |                          |                          | am43xx\_evm\_usbhost\_boot\_defconfig   |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | AM572x GP EVM              | am57xx\_evm\_defconfig      |                          |                                            | am57xx\_evm\_defconfig   |                          |                          |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | AM572x IDK                 | am57xx\_evm\_defconfig      |                          |                                            |                          |                          |                          |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | AM571x IDK                 | am57xx\_evm\_defconfig      |                          |                                            |                          |                          |                          |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | DRA74x/DRA72x/DRA71x EVM   | dra7xx\_evm\_defconfig      | dra7xx\_evm\_defconfig   | dra7xx\_evm\_defconfig (DRA71x EVM only)   |                          |                          |                          |                                         | dra7xx\_evm\_defconfig(QSPI)             |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | K2HK EVM                   |                             |                          | k2hk\_evm\_defconfig                       | k2hk\_evm\_defconfig     | k2hk\_evm\_defconfig     |                          |                                         | k2hk\_evm\_defconfig                     |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | K2L EVM                    |                             |                          | k2l\_evm\_defconfig                        | k2l\_evm\_defconfig      |                          |                          |                                         | k2l\_evm\_defconfig                      |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | K2E EVM                    |                             |                          | k2e\_evm\_defconfig                        | k2e\_evm\_defconfig      |                          |                          |                                         | k2e\_evm\_defconfig                      |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | K2G GP EVM                 | k2g\_evm\_defconfig         |                          |                                            | k2g\_evm\_defconfig      | k2g\_evm\_defconfig      |                          |                                         | k2g\_evm\_defconfig                      |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | K2G ICE                    | k2g\_evm\_defconfig         |                          |                                            |                          |                          |                          |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+    | OMAP-L138 LCDK             | omapl138\_lcdk\_defconfig   |                          | omapl138\_lcdk\_defconfig                  |                          |                          |                          |                                         |                                          |
+    +----------------------------+-----------------------------+--------------------------+--------------------------------------------+--------------------------+--------------------------+--------------------------+-----------------------------------------+------------------------------------------+
+
+    Then (Use 'am335x_evm' and 'AM335x GP EVM' in this example):
+
+    ::
+
+        $ make CROSS_COMPILE=arm-none-linux-gnueabihf- O=am335x_evm am335x_evm_defconfig
+        $ make CROSS_COMPILE=arm-none-linux-gnueabihf- O=am335x_evm
+
+    .. note::
+        Not all possible build targets for a given platform are listed
+        here as the community has additional build targets that are not
+        supported by TI. To find these read the 'boards.cfg' file and look for
+        the build target listed above. And please note that the main config file
+        will leverage other files under include/configs, as seen by #include
+        statements.
+
+
+.. ifconfig:: CONFIG_part_family not in ('General_family', 'AM335X_family', 'AM437X_family')
+
+
+    .. ifconfig:: CONFIG_part_variant not in ('AM65X', 'AM64X')
+    
+      .. note:: Note about HSM Rearchitecture
+
+         After HSM rearchitecture in bootloader, loading of remote cores with firmware 
+         will be supported at A72 SPL stage only and not at R5 SPL stage. Early loading
+         of remote core firmware in R5 SPL requires core reset functionality. As part 
+         of HSM rearchitecture, this functionality has moved into the DM service which 
+         requires SPL to re-implement device and clock control. This support is not 
+         present in Uboot R5 SPL due to memory constraints on the existing 64-bit TI devices.
+    
+    Several prebuilt images are required from the TI Processor SDK for building U-Boot on K3 based platforms.
+    
+    .. ifconfig:: CONFIG_part_variant in ('AM62X')
+    	
+    	Go `here <../../../devices/AM62X/linux/Overview/Download_and_Install_the_SDK.html>`__ to download and install the SDK.
+
+    .. ifconfig:: CONFIG_part_variant in ('AM64X')
+	
+    	Go `here <../../../devices/AM64X/linux/Overview/Download_and_Install_the_SDK.html>`__ to download and install the SDK.
+
+    TI-u-boot is included in the SDK in <path to tisdk>/board-support. Ensure that the u-boot version matches the
+    :ref:`release-specific-build-information-u-boot`.
+
+
+    .. rubric:: Getting Security Dev Tool
+    
+    core-secdev-k3 is included in the SDK inside board-support directory.	
+    ::
+
+        $ export TI_SECURE_DEV_PKG=<path-to-board-support-directory>/core-secdev-k3
+
+    .. rubric:: Setting the tool chain path
+
+    We strongly recommend using the toolchain that came with the Linux Core
+    release that corresponds to this U-Boot release. For e.g:
+
+    ::
+
+        export PATH=$HOME/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin:$PATH
+        export PATH=$HOME/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/bin:$PATH
+
+    .. rubric:: Compiling R5 and ARM64 images
+
+    Use the following table to determine what defconfig to use to configure with:
+
+    .. ifconfig:: CONFIG_part_variant in ('AM65X')
+
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |  Board                     |            SD/eMMC Boot         |           UART boot            |           OSPI boot            |         Hyper Flash            |           USB DFU              |
+        +============================+=================================+================================+================================+================================+================================+
+        |    AM65x EVM/IDK           |    am65x\_evm\_r5\_defconfig    |   am65x\_evm\_r5\_defconfig    |   am65x\_evm\_r5_defconfig     |                                |                                |
+        |                            |    am65x\_evm\_a53\_defconfig   |   am65x\_evm\_a53\_defconfig   |   am65x\_evm\_a53\_defconfig   |                                |                                |
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |    AM65x HS EVM/IDK        | am65x\_hs\_evm\_r5\_defconfig   | am65x\_hs\_evm\_r5\_defconfig  | am65x\_hs\_evm\_r5_defconfig   |                                |                                |
+        |                            | am65x\_hs\_evm\_a53\_defconfig  | am65x\_hs\_evm\_a53\_defconfig | am65x\_hs\_evm\_a53\_defconfig |                                |                                |
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
+
+       *on GP*
+
+       .. code-block:: console
+          
+          R5 
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am65x_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+
+          A53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am65x_evm_a53_defconfig O=<output directory>/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin O=<output directory>/a53
+
+        
+       *on HS*
+
+       .. code-block:: console
+          
+          R5 
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am65x_hs_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+
+          A53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am65x_hs_evm_a53_defconfig O=<output directory>/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin.signed TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin.signed O=<output directory>/a53
+
+
+    .. ifconfig:: CONFIG_part_variant in ('J721E')
+
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |  Board                     |            SD/eMMC Boot         |           UART boot            |           OSPI boot            |         Hyper Flash            |           USB DFU              |
+        +============================+=================================+================================+================================+================================+================================+
+        |    J721E EVM               |    j721e\_evm\_r5\_defconfig    |   j721e\_evm\_r5\_defconfig    |   j721e\_evm\_r5\_defconfig    |   j721e\_evm\_r5\_defconfig    |   j721e\_evm\_r5\_defconfig    |
+        |                            |    j721e\_evm\_a72\_defconfig   |   j721e\_evm\_a72\_defconfig   |   j721e\_evm\_a72\_defconfig   |   j721e\_evm\_a72\_defconfig   |   j721e\_evm\_a72\_defconfig   |
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |    J721E SK                |    j721e\_evm\_r5\_defconfig    |   j721e\_evm\_r5\_defconfig    |   j721e\_evm\_r5\_defconfig    |                                |                                |
+        |                            |    j721e\_evm\_a72\_defconfig   |   j721e\_evm\_a72\_defconfig   |   j721e\_evm\_a72\_defconfig   |                                |                                |
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |    J721E HS EVM            | j721e\_hs\_evm\_r5\_defconfig   | j721e\_hs\_evm\_r5\_defconfig  | j721e\_hs\_evm\_r5\_defconfig  | j721e\_hs\_evm\_r5\_defconfig  | j721e\_hs\_evm\_r5\_defconfig  |
+        |                            | j721e\_hs\_evm\_a72\_defconfig  | j721e\_hs\_evm\_a72\_defconfig | j721e\_hs\_evm\_a72\_defconfig | j721e\_hs\_evm\_a72\_defconfig | j721e\_hs\_evm\_a72\_defconfig |
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+   
+
+       *on GP*
+
+       .. code-block:: console
+
+          R5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- j721e_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+
+          A72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- j721e_evm_a72_defconfig O=<output directory>/a72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin DM=<path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f O=<output directory>/a72
+
+       *on HS*
+
+       .. code-block:: console
+
+          R5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- j721e_hs_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+
+
+          A72
+          $ ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_testb_mcu1_0_release_strip.xer5f ipc_echo_testb_mcu1_0_release_strip.xer5f.signed
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- j721e_hs_evm_a72_defconfig O=<output directory>/a72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin.signed TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin.signed DM=<path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f.signed O=<output directory>/a72
+          
+
+    .. ifconfig:: CONFIG_part_variant in ('J7200', 'DRA821A')
+
+        +----------------------------+---------------------------------+--------------------------------+
+        |  Board                     |            SD/eMMC Boot         |           UART boot            |
+        +============================+=================================+================================+
+        |    J7200 EVM               |    j7200\_evm\_r5\_defconfig    |   j7200\_evm\_r5\_defconfig    |
+        |                            |    j7200\_evm\_a72\_defconfig   |   j7200\_evm\_a72\_defconfig   |
+        +----------------------------+---------------------------------+--------------------------------+
+        |    J7200 HS EVM            |  j7200\_hs\_evm\_r5\_defconfig  | j7200\_hs\_evm\_r5\_defconfig  |
+        |                            |  j7200\_hs\_evm\_a72\_defconfig | j7200\_hs\_evm\_a72\_defconfig |
+        +----------------------------+---------------------------------+--------------------------------+
+
+       *on GP*
+
+       .. code-block:: console
+
+          R5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- j7200_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+          $ cd ../k3-image-gen-<version>
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j7200 SBL=<output directory>/r5/spl/u-boot-spl.bin SYSFW_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j7200-gp.bin
+
+          A72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- j7200_evm_a72_defconfig O=<output directory>/a72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin DM=<path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f O=<output directory>/a72
+
+	  
+       *on HS*
+
+       .. code-block:: console
+
+          R5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- j7200_hs_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+          $ cd ../k3-image-gen-<version>
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j7200 HS=1 SW_REV=1 SBL=<output directory>/r5/spl/u-boot-spl.bin SYSFW_HS_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j7200-hs-enc.bin SYSFW_HS_INNER_CERT_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j7200-hs-cert.bin
+
+          A72
+          $ ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh <path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f <path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f/ipc_echo_testb_mcu1_0_release_strip.xer5f.signed
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- j7200_hs_evm_a72_defconfig O=<output directory>/a72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin.signed TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin.signed DM=<path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f.signed O=<output directory>/a72
+
+
+
+    .. ifconfig:: CONFIG_part_variant in ('AM64X')
+
+        +----------------------------+---------------------------------+---------------------------------+--------------------------------+--------------------------------+
+        |  Board                     |            SD Boot              |            eMMC Boot            |           UART boot            |           OSPI boot            |
+        +============================+=================================+=================================+================================+================================+
+        |    AM64X EVM               |    am64x\_evm\_r5\_defconfig    |    am64x\_evm\_r5\_defconfig    |   am64x\_evm\_r5\_defconfig    |   am64x\_evm\_r5\_defconfig    |
+        |                            |    am64x\_evm\_a53\_defconfig   |    am64x\_evm\_a53\_defconfig   |   am64x\_evm\_a53\_defconfig   |   am64x\_evm\_a53\_defconfig   |
+        +----------------------------+---------------------------------+---------------------------------+--------------------------------+--------------------------------+
+        |    AM64X SK                |    am64x\_evm\_r5\_defconfig    |                                 |   am64x\_evm\_r5\_defconfig    |   am64x\_evm\_r5\_defconfig    |
+        |                            |    am64x\_evm\_a53\_defconfig   |                                 |   am64x\_evm\_a53\_defconfig   |   am64x\_evm\_a53\_defconfig   |
+        +----------------------------+---------------------------------+---------------------------------+--------------------------------+--------------------------------+
+
+        .. note::
+
+            Where to get the sources:
+
+            - `ti-u-boot <https://git.ti.com/cgit/ti-u-boot/ti-u-boot/>`__ Branch: ti-u-boot-2021.01
+            - `ti-k3-image-gen <https://git.ti.com/cgit/k3-image-gen/k3-image-gen/>`__ Branch: master
+            - `ti-linux-firmware <https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/>`__ Branch: ti-linux-firmware
+            - `arm-trusted-firmware <https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/>`__ Commit: 2fcd408bb3a6756767a43c073c597cef06e7f2d5
+            - `optee-os <https://github.com/OP-TEE/optee_os.git/>`__ Commit: 3bc3809afe372ca7e8216fc5d7a64e965bb4ad70
+
+            Notice: arm-trusted-firmware and optee-os are now sourced from upstream.
+
+        ::
+
+          $ export UBOOT_DIR=<path-to-ti-u-boot>
+          $ export K3IG_DIR=<path-to-k3-image-gen>
+          $ export SYSFW_DIR=<path-to-ti-linux-firmware>/ti-sysfw
+          $ export TFA_DIR=<path-to-arm-trusted-firmware>
+          $ export OPTEE_DIR=<path-to-ti-optee-os>
+
+        .. note::
+
+            The instructions below assume all binaries are built manually. For instructions to build bl31.bin go to: :ref:`foundational-components-optee`. For instructions to build bl32.bin/tee-pager_v2.bin
+            go to: :ref:`foundational-components-atf`. To use existing images, go to <path-to-tisdk>/board-support/prebuilt-images to get the pre-build binares that come in the pre-built sdk.
+
+        *on HS-FS*
+
+        .. code-block:: console
+
+          R5
+          To build u-boot-spl.bin for tiboot3.bin. Saved in $UBOOT_DIR/out/r5.
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am64x_evm_r5_defconfig O=$UBOOT_DIR/out/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=$UBOOT_DIR/out/r5
+
+          To build tiboot3-am64x_sr2-hs-fs-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin, TISCI HS-FS FW.
+          $ cd $K3IG_DIR
+          $ make CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am64x_sr2 SOC_TYPE=hs-fs SBL=$UBOOT_DIR/out/r5/spl/u-boot-spl.bin SYSFW_DIR=$SYSFW_DIR
+
+          Sign OPTEE and ATF binaries
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh bl31.bin bl31.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh bl32.bin bl32.bin.signed
+
+          A53
+          To build tispl.bin and u-boot.img. Saved in $UBOOT_DIR/out/a53. Requires bl31.bin.signed and bl32.bin.signed.
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am64x_evm_a53_defconfig O=$UBOOT_DIR/out/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=$TFA_DIR/build/k3/lite/release/bl31.bin.signed TEE=$OPTEE_DIR/out/arm-plat-k3/core/bl32.bin.signed  O=$UBOOT_DIR/out/a53
+
+
+        *on GP*
+
+        .. code-block:: console
+
+          R5
+          To build u-boot-spl.bin for tiboot3.bin. Saved in $UBOOT_DIR/out/r5.
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am64x_evm_r5_defconfig O=$UBOOT_DIR/out/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=$UBOOT_DIR/out/r5
+
+          To build tiboot3-am64x-gp-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin and ti-sci-firmware-am64x-gp.bin.
+          $ cd $K3IG_DIR
+          $ make CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am64x SOC_TYPE=gp SBL=$UBOOT_DIR/out/r5/spl/u-boot-spl.bin SYSFW_DIR=$SYSFW_DIR
+
+          A53
+          To build tispl.bin_unsigned and u-boot.img_unsigned. Saved in $UBOOT_DIR/out/a53. Requires bl31.bin and tee-pager_v2.bin.
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am64x_evm_a53_defconfig O=$UBOOT_DIR/out/a53
+          $ make CROSS_COMPILE=aarch64-none-linux-gnu- ATF=$TFA_DIR/build/k3/lite/release/bl31.bin TEE=$OPTEE_DIR/out/arm-plat-k3/core/tee-pager_v2.bin O=$UBOOT_DIR/out/a53
+
+        *on HS*
+
+        .. code-block:: console
+
+          R5
+          To build u-boot-spl.bin for tiboot3.bin. Saved in $UBOOT_DIR/out/r5.
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am64x_evm_r5_defconfig O=$UBOOT_DIR/out/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=$UBOOT_DIR/out/r5
+
+          To build tiboot3-am64x_sr2-hs-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin, TISCI HS-SE FW
+          $ cd $K3IG_DIR
+          $ make CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am64x_sr2 SOC_TYPE=hs SBL=$UBOOT_DIR/out/r5/spl/u-boot-spl.bin SYSFW_DIR=$SYSFW_DIR
+
+          Sign OPTEE and ATF binaries
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh bl31.bin bl31.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh bl32.bin bl32.bin.signed
+
+          A53
+          To build tispl.bin and u-boot.img. Saved in $UBOOT_DIR/out/a53. Requires bl31.bin.signed and bl32.bin.signed.
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am64x_evm_a53_defconfig O=$UBOOT_DIR/out/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=$TFA_DIR/build/k3/lite/release/bl31.bin.signed TEE=$OPTEE_DIR/out/arm-plat-k3/core/bl32.bin.signed  O=$UBOOT_DIR/out/a53
+
+    .. ifconfig:: CONFIG_part_variant in ('J721S2')
+
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |  Board                     |            SD/eMMC Boot         |           UART boot            |           OSPI boot            |           USB DFU              |
+        +============================+=================================+================================+================================+================================+
+        |    J721S2 EVM              |    j721s2\_evm\_r5\_defconfig   |   j721s2\_evm\_r5\_defconfig   |   j721s2\_evm\_r5\_defconfig   |   j721s2\_evm\_r5\_defconfig   |
+        |                            |    j721s2\_evm\_a72\_defconfig  |   j721s2\_evm\_a72\_defconfig  |   j721s2\_evm\_a72\_defconfig  |   j721s2\_evm\_a72\_defconfig  |
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |    J721S2 HS EVM           | j721s2\_hs\_evm\_r5\_defconfig  | j721s2\_hs\_evm\_r5\_defconfig | j721s2\_hs\_evm\_r5\_defconfig | j721s2\_hs\_evm\_r5\_defconfig |
+        |                            | j721s2\_hs\_evm\_a72\_defconfig | j721s2\_ha\_evm\_a72\_defconfig| j721s2\_hs\_evm\_a72\_defconfig| j721s2\_hs\_evm\_a72\_defconfig|
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |    AM68A HS-FS SK          |    j721s2\_evm\_r5\_defconfig   |   j721s2\_evm\_r5\_defconfig   |   j721s2\_evm\_r5\_defconfig   |                                |
+        |                            |    j721s2\_evm\_a72\_defconfig  |   j721s2\_evm\_a72\_defconfig  |   j721s2\_evm\_a72\_defconfig  |                                |
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+
+
+        *on GP*
+
+        .. code-block:: console
+
+          R5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- j721s2_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+          $ cd ../k3-image-gen-<version>
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j721s2 SBL=<output directory>/r5/spl/u-boot-spl.bin SYSFW_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721s2-gp.bin
+
+          A72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- j721s2_evm_a72_defconfig O=<output directory>/a72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin DM=<path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f O=<output directory>/a72
+
+        |
+
+	    *on HS*
+
+        .. code-block:: console
+
+          R5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- j721s2_hs_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+          $ cd ../k3-image-gen-<version>
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j721s2 HS=1 SW_REV=1 SBL=<output directory>/r5/spl/u-boot-spl.bin SYSFW_HS_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721s2-hs-enc.bin SYSFW_HS_INNER_CERT_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721s2--hs-cert.bin
+
+          A72
+          $ ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh <path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f <path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f/ipc_echo_testb_mcu1_0_release_strip.xer5f.signed
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- j721s2_hs_evm_a72_defconfig O=<output directory>/a72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin.signed TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin.signed DM=<path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f.signed O=<output directory>/a72
+
+        |
+
+	    *on HS-FS*
+
+        .. code-block:: console
+
+          R5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- j721s2_hs_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+
+          To build tiboot3-j721s2_sr1-hs-fs-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin, ti-sci-firmware-j721s2-sr1-hs-fs-cert.bin and ti-sci-firmware-j721s2-sr1-hs-fs-enc.bin
+          $ cd ../k3-image-gen-<version>
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j721s2 HS=1 SW_REV=1 SBL=<output directory>/r5/spl/u-boot-spl.bin SYSFW_HS_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721s2-sr1-hs-fs-enc.bin SYSFW_HS_INNER_CERT_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721s2-sr1-hs-fs-cert.bin
+
+          A72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- j721s2_hs_evm_a72_defconfig O=<output directory>/a72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin DM=<path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f O=<output directory>/a72
+
+
+   .. ifconfig:: CONFIG_part_variant in ('J784S4')
+
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |  Board                     |            SD/eMMC Boot         |           UART boot            |           OSPI boot            |           USB DFU              |
+        +============================+=================================+================================+================================+================================+
+        |    J784S4 EVM              |    j784s4\_evm\_r5\_defconfig   |   j784s4\_evm\_r5\_defconfig   |   j784s4\_evm\_r5\_defconfig   |   j784s4\_evm\_r5\_defconfig   |
+        |                            |    j784s4\_evm\_a72\_defconfig  |   j784s4\_evm\_a72\_defconfig  |   j784s4\_evm\_a72\_defconfig  |   j784s4\_evm\_a72\_defconfig  |
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+
+        |    AM69A HS-FS SK          |    j784s4\_evm\_r5\_defconfig   |   j784s4\_evm\_r5\_defconfig   |   j784s4\_evm\_r5\_defconfig   |                                |
+        |                            |    j784s4\_evm\_a72\_defconfig  |   j784s4\_evm\_a72\_defconfig  |   j784s4\_evm\_a72\_defconfig  |                                |
+        +----------------------------+---------------------------------+--------------------------------+--------------------------------+--------------------------------+
+
+       *on GP*
+
+       .. code-block:: console
+
+          R5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- j784s4_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+          $ cd ../k3-image-gen-<version>
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j784s4 SBL=<output directory>/r5/spl/u-boot-spl.bin SYSFW_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j784s4-gp.bin
+
+          A72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- j784s4_evm_a72_defconfig O=<output directory>/a72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin DM=<path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f O=<output directory>/a72
+
+       *on HS-FS*
+
+       .. code-block:: console
+
+          R5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- j784s4_evm_r5_defconfig O=<output directory>/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=<output directory>/r5
+
+          To build tiboot3-j784s4-hs-fs-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin, ti-sci-firmware-j784s4-hs-fs-cert.bin and ti-sci-firmware-j784s4-hs-fs-enc.bin
+          $ cd ../k3-image-gen-<version>
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j784s4 HS=1 SOC_TYPE=hs-fs SBL=<output directory>/r5/spl/u-boot-spl.bin SYSFW_HS_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j784s4-hs-fs-enc.bin SYSFW_HS_INNER_CERT_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j784s4-hs-fs-cert.bin
+
+          A72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- j784s4_evm_a72_defconfig O=<output directory>/a72
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=<path to tisdk>/board-support/prebuilt-images/bl31.bin TEE=<path to tisdk>/board-support/prebuilt-images/bl32.bin DM=<path to tisdk>/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f O=<output directory>/a72
+
+   .. ifconfig:: CONFIG_part_variant in ('AM62X')
+
+        +----------------------------+---------------------------------+---------------------------------+--------------------------------+--------------------------------+----------------------------------------+
+        |  Board                     |            SD Boot              |            eMMC Boot            |           UART boot            |           OSPI boot            |                USB DFU                 |
+        +============================+=================================+=================================+================================+================================+========================================+
+        |    AM62X SK                |    am62x\_evm\_r5\_defconfig    |    am62x\_evm\_r5\_defconfig    |   am62x\_evm\_r5\_defconfig    |   am62x\_evm\_r5\_defconfig    |   am62x\_evm\_r5\_usbdfu\_defconfig    |
+        |                            |    am62x\_evm\_a53\_defconfig   |    am62x\_evm\_a53\_defconfig   |   am62x\_evm\_a53\_defconfig   |   am62x\_evm\_a53\_defconfig   |   am62x\_evm\_a53\_defconfig           |
+        +----------------------------+---------------------------------+---------------------------------+--------------------------------+--------------------------------+----------------------------------------+
+        |    AM62X LP SK             |    am62x\_lpsk\_r5\_defconfig   |    am62x\_lpsk\_r5\_defconfig   |   am62x\_lpsk\_r5\_defconfig   |   am62x\_lpsk\_r5\_defconfig   |                                        |
+        |                            |    am62x\_lpsk\_a53\_defconfig  |    am62x\_lpsk\_a53\_defconfig  |   am62x\_lpsk\_a53\_defconfig  |   am62x\_lpsk\_a53\_defconfig  |                                        |
+        +----------------------------+---------------------------------+---------------------------------+--------------------------------+--------------------------------+----------------------------------------+
+        .. note::
+
+            Where to get the sources:
+
+            - `ti-u-boot <https://git.ti.com/git/ti-u-boot/ti-u-boot.git/>`__ Branch: ti-u-boot-2021.01
+            - `ti-k3-image-gen <https://git.ti.com/git/k3-image-gen/k3-image-gen.git/>`__ Branch: master
+            - `ti-linux-firmware <https://git.ti.com/git/processor-firmware/ti-linux-firmware.git/>`__ Branch: ti-linux-firmware
+            - `arm-trusted-firmware <https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/>`__ Commit: 1309c6c805190bd376c0561597653f3f8ecd0f58
+            - `optee-os <https://github.com/OP-TEE/optee_os.git/>`__ Commit: d6c5d0037b46f46caf71d67d7825d4b722cbcddf
+
+            Notice: arm-trusted-firmware and optee-os are now sourced from upstream.
+
+        ::
+
+          $ export UBOOT_DIR=<path-to-ti-u-boot>
+          $ export K3IG_DIR=<path-to-k3-image-gen>
+          $ export SYSFW_DIR=<path-to-ti-linux-firmware>/ti-sysfw
+          $ export DMFW_DIR=<path-to-ti-linux-firmware>/ti-dm/am62xx
+          $ export TFA_DIR=<path-to-arm-trusted-firmware>
+          $ export OPTEE_DIR=<path-to-ti-optee-os>
+
+        .. note::
+
+            The instructions below assume all binaries are built manually. For instructions to build bl31.bin go to: :ref:`foundational-components-optee`. For instructions to build tee-pager_v2.bin (bl32.bin)
+            go to: :ref:`foundational-components-atf`. To use existing images, go to <path-to-tisdk>/board-support/prebuilt-images to obtain pre-build binares that come in the pre-built sdk.
+
+        *on HS-FS*
+
+        .. code-block:: console
+
+          R5
+          To build u-boot-spl.bin for signed tiboot3.bin. Saved in $UBOOT_DIR/out/r5.
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am62x_evm_r5_defconfig O=$UBOOT_DIR/out/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=$UBOOT_DIR/out/r5
+
+          To build tiboot3-am62x-hs-fs-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin and HS-FS TIFS FW.
+          $ cd $K3IG_DIR
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am62x SOC_TYPE=hs-fs SBL=$UBOOT_DIR/out/r5/spl/u-boot-spl.bin SYSFW_DIR=$SYSFW_DIR
+
+          Sign bl31.bin binary found in $OPTEE_DIR/out/arm-plat-k3/core, sign tee-pager_v2.bin (bl32.bin) found in $TFA_DIR/build/k3/lite/release, and ipc_echo_testb_mcu1_0_release_strip.xer5f found in $DMFW_DIR.
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh bl31.bin bl31.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh tee-pager_v2.bin bl32.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh ipc_echo_testb_mcu1_0_release_strip.xer5f ipc_echo_testb_mcu1_0_release_strip.xer5f.signed
+
+          A53
+          To build signed tispl.bin_HS and signed u-boot.img_HS. Saved in $UBOOT_DIR/out/a53. Requires bl31.bin.signed and bl32.bin.signed.
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am62x_evm_a53_defconfig O=$UBOOT_DIR/out/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=$TFA_DIR/build/k3/lite/release/bl31.bin.signed TEE=$OPTEE_DIR/out/arm-plat-k3/core/bl32.bin.signed DM=$DMFW_DIR/ipc_echo_testb_mcu1_0_release_strip.xer5f.signed O=$UBOOT_DIR/out/a53
+
+
+        *on GP*
+
+        .. code-block:: console
+
+          R5
+          To build u-boot-spl.bin for tiboot3.bin. Saved in $UBOOT_DIR/out/r5.
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am62x_evm_r5_defconfig O=$UBOOT_DIR/out/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=$UBOOT_DIR/out/r5
+
+          To build tiboot3-am62x-gp-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin and ti-fs-firmware-am62x-gp.bin.
+          $ cd $K3IG_DIR
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am62x SOC_TYPE=gp SBL=$UBOOT_DIR/out/r5/spl/u-boot-spl.bin SYSFW_DIR=$SYSFW_DIR
+
+          A53
+          To build tispl.bin and u-boot.img. Saved in $UBOOT_DIR/out/a53. Requires bl31.bin, tee-pager_v2.bin, and ipc_echo_testb_mcu1_0_release_strip.xer5f.
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am62x_evm_a53_defconfig O=$UBOOT_DIR/out/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=$TFA_DIR/build/k3/lite/release/bl31.bin TEE=$OPTEE_DIR/out/arm-plat-k3/core/tee-pager_v2.bin DM=$DMFW_DIR/ipc_echo_testb_mcu1_0_release_strip.xer5f O=$UBOOT_DIR/out/a53
+
+        *on HS*
+
+        .. code-block:: console
+
+          R5
+          To build u-boot-spl.bin for signed tiboot3.bin. Saved in $UBOOT_DIR/out/r5.
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am62x_evm_r5_defconfig O=$UBOOT_DIR/out/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=$UBOOT_DIR/out/r5
+
+          To build tiboot3-am62x-hs-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin and TIFS HS-SE FW.
+          $ cd $K3IG_DIR
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am62x SOC_TYPE=hs SBL=$UBOOT_DIR/out/r5/spl/u-boot-spl.bin SYSFW_DIR=$SYSFW_DIR
+
+          Sign bl31.bin binary found in $OPTEE_DIR/out/arm-plat-k3/core, sign tee-pager_v2.bin (bl32.bin) found in $TFA_DIR/build/k3/lite/release, and ipc_echo_testb_mcu1_0_release_strip.xer5f found in $DMFW_DIR.
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh bl31.bin bl31.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh tee-pager_v2.bin bl32.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh ipc_echo_testb_mcu1_0_release_strip.xer5f ipc_echo_testb_mcu1_0_release_strip.xer5f.signed
+
+          A53
+          To build signed tispl.bin_HS and signed u-boot.img_HS. Saved in $UBOOT_DIR/out/a53. Requires bl31.bin.signed and bl32.bin.signed.
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am62x_evm_a53_defconfig O=$UBOOT_DIR/out/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=$TFA_DIR/build/k3/lite/release/bl31.bin.signed TEE=$OPTEE_DIR/out/arm-plat-k3/core/bl32.bin.signed DM=$DMFW_DIR/ipc_echo_testb_mcu1_0_release_strip.xer5f.signed O=$UBOOT_DIR/out/a53
+
+   .. ifconfig:: CONFIG_part_variant in ('AM62AX')
+
+        +-----------------------------+----------------------------------+--------------------------------------+
+        |  Board                      |            SD Boot               |            USB DFU                   |
+        +=============================+==================================+======================================+
+        |    AM62AX SK                |    am62ax\_evm\_r5\_defconfig    |    am62ax\_evm\_r5\_usbdfu_defconfig |
+        |                             |    am62ax\_evm\_a53\_defconfig   |    am62ax\_evm\_a53\_defconfig       |
+        +-----------------------------+----------------------------------+--------------------------------------+
+
+        .. note::
+
+            Where to get the sources:
+
+            - `ti-u-boot <https://git.ti.com/git/ti-u-boot/ti-u-boot.git/>`__ Branch: ti-u-boot-2021.01
+            - `ti-k3-image-gen <https://git.ti.com/git/k3-image-gen/k3-image-gen.git/>`__ Branch: master
+            - `ti-linux-firmware <https://git.ti.com/git/processor-firmware/ti-linux-firmware.git/>`__ Branch: ti-linux-firmware
+            - `arm-trusted-firmware <https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/>`__ Commit: 2fcd408bb3a6756767a43c073c597cef06e7f2d5
+            - `optee-os <https://github.com/OP-TEE/optee_os.git/>`__ Commit: 3bc3809afe372ca7e8216fc5d7a64e965bb4ad70
+
+            Notice: arm-trusted-firmware and optee-os are now sourced from upstream.
+
+        ::
+
+          $ export UBOOT_DIR=<path-to-ti-u-boot>
+          $ export K3IG_DIR=<path-to-k3-image-gen>
+          $ export SYSFW_DIR=<path-to-ti-linux-firmware>/ti-sysfw
+          $ export DMFW_DIR=<path-to-ti-linux-firmware>/ti-dm/am62axx
+          $ export TFA_DIR=<path-to-arm-trusted-firmware>
+          $ export OPTEE_DIR=<path-to-ti-optee-os>
+
+        .. note::
+
+            The instructions below assume all binaries are built manually. For instructions to build bl31.bin go to: :ref:`foundational-components-optee`. For instructions to build tee-pager_v2.bin (bl32.bin)
+            go to: :ref:`foundational-components-atf`. To use existing images, go to <path-to-tisdk>/board-support/prebuilt-images to obtain pre-build binares that come in the pre-built sdk.
+
+        *on HS-FS*
+
+        .. code-block:: console
+
+          R5
+          To build u-boot-spl.bin for signed tiboot3.bin. Saved in $UBOOT_DIR/out/r5.
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am62ax_evm_r5_defconfig O=$UBOOT_DIR/out/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=$UBOOT_DIR/out/r5
+
+          To build tiboot3-am62ax-hs-fs-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin and TIFS HS-FS FW.
+          $ cd $K3IG_DIR
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am62ax SOC_TYPE=hs-fs SBL=$UBOOT_DIR/out/r5/spl/u-boot-spl.bin SYSFW_DIR=$SYSFW_DIR
+
+          Sign bl31.bin binary found in $OPTEE_DIR/out/arm-plat-k3/core, sign tee-pager_v2.bin (bl32.bin) found in $TFA_DIR/build/k3/lite/release, and ipc_echo_testb_mcu1_0_release_strip.xer5f found in $DMFW_DIR.
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh bl31.bin bl31.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh tee-pager_v2.bin bl32.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh ipc_echo_testb_mcu1_0_release_strip.xer5f ipc_echo_testb_mcu1_0_release_strip.xer5f.signed
+
+          A53
+          To build signed tispl.bin_HS and signed u-boot.img_HS. Saved in $UBOOT_DIR/out/a53. Requires bl31.bin.signed and bl32.bin.signed.
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am62ax_evm_a53_defconfig O=$UBOOT_DIR/out/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=$TFA_DIR/build/k3/lite/release/bl31.bin.signed TEE=$OPTEE_DIR/out/arm-plat-k3/core/bl32.bin.signed DM=$DMFW_DIR/ipc_echo_testb_mcu1_0_release_strip.xer5f.signed O=$UBOOT_DIR/out/a53
+
+
+        *on GP*
+
+        .. code-block:: console
+
+          R5
+          To build u-boot-spl.bin for tiboot3.bin. Saved in $UBOOT_DIR/out/r5.
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am62ax_evm_r5_defconfig O=$UBOOT_DIR/out/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=$UBOOT_DIR/out/r5
+
+          To build tiboot3-am62ax-gp-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin and ti-fs-firmware-am62ax-gp.bin.
+          $ cd $K3IG_DIR
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am62ax SOC_TYPE=gp SBL=$UBOOT_DIR/out/r5/spl/u-boot-spl.bin SYSFW_DIR=$SYSFW_DIR
+
+          A53
+          To build tispl.bin and u-boot.img. Saved in $UBOOT_DIR/out/a53. Requires bl31.bin, tee-pager_v2.bin, and ipc_echo_testb_mcu1_0_release_strip.xer5f.
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am62ax_evm_a53_defconfig O=$UBOOT_DIR/out/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=$TFA_DIR/build/k3/lite/release/bl31.bin TEE=$OPTEE_DIR/out/arm-plat-k3/core/tee-pager_v2.bin DM=$DMFW_DIR/ipc_echo_testb_mcu1_0_release_strip.xer5f O=$UBOOT_DIR/out/a53
+
+        *on HS*
+
+        .. code-block:: console
+
+          R5
+          To build u-boot-spl.bin for signed tiboot3.bin. Saved in $UBOOT_DIR/out/r5.
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- am62ax_evm_r5_defconfig O=$UBOOT_DIR/out/r5
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=$UBOOT_DIR/out/r5
+
+          To build tiboot3-am62ax-hs-evm.bin. Saved in $K3IG_DIR. Requires u-boot-spl.bin and TIFS HS-SE FW.
+          $ cd $K3IG_DIR
+          $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am62ax SOC_TYPE=hs SBL=$UBOOT_DIR/out/r5/spl/u-boot-spl.bin SYSFW_DIR=$SYSFW_DIR
+
+          Sign bl31.bin binary found in $OPTEE_DIR/out/arm-plat-k3/core, sign tee-pager_v2.bin (bl32.bin) found in $TFA_DIR/build/k3/lite/release, and ipc_echo_testb_mcu1_0_release_strip.xer5f found in $DMFW_DIR.
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh bl31.bin bl31.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh tee-pager_v2.bin bl32.bin.signed
+          $ $TI_SECURE_DEV_PKG/scripts/secure-binary-image.sh ipc_echo_testb_mcu1_0_release_strip.xer5f ipc_echo_testb_mcu1_0_release_strip.xer5f.signed
+
+          A53
+          To build signed tispl.bin_HS and signed u-boot.img_HS. Saved in $UBOOT_DIR/out/a53. Requires bl31.bin.signed and bl32.bin.signed.
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- am62ax_evm_a53_defconfig O=$UBOOT_DIR/out/a53
+          $ make ARCH=arm CROSS_COMPILE=aarch64-none-linux-gnu- ATF=$TFA_DIR/build/k3/lite/release/bl31.bin.signed TEE=$OPTEE_DIR/out/arm-plat-k3/core/bl32.bin.signed DM=$DMFW_DIR/ipc_echo_testb_mcu1_0_release_strip.xer5f.signed O=$UBOOT_DIR/out/a53
+
+.. rubric:: Dependent Project location
+
+    - In case of not using the TI SDK and instead building U-Boot out of mainline, then
+      k3-image-gen (For generating tiboot3.bin) project is
+      located `here <https://git.ti.com/cgit/k3-image-gen/k3-image-gen>`__
+    - Linux Firmware (for device specific ti-dm and ti-sysfw binaries) project
+      is located `here <https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/tree/?h=ti-linux-firmware>`__.
+      Images are under ti-dm and ti-sysfw folders
+
+    .. ifconfig:: CONFIG_part_variant in ('AM65X')
+
+      .. rubric:: Building SYSFW
+ 
+      - In case of building and generating sysfw.itb rather than downloading from
+        prebuilt download location, below is the instructions on how to do it.
+
+        *on GP*
+
+        .. code-block:: console
+
+           $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am65x SYSFW_PATH=<path to tisdk>/board-support/prebuilt-images/ti-sci-firmware-am65x-gp.bin
+
+        *on HS SR1/SR1.1*
+
+        .. code-block:: console
+
+           $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am65x HS=1 SYSFW_HS_PATH=<path to tisdk>/board-support/prebuilt-images/ti-sci-firmware-am65x-hs-enc.bin SYSFW_HS_INNER_CERT_PATH=<path to tisdk>/board-support/prebuilt-images/ti-sci-firmware-am65x-hs-cert.bin
+
+        *on HS SR2*
+
+        .. code-block:: console
+
+           $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=am65x_sr2 HS=1 SYSFW_HS_PATH=<path to tisdk>/board-support/prebuilt-images/ti-sci-firmware-am65x_sr2-hs-enc.bin SYSFW_HS_INNER_CERT_PATH=<path tto tisdk>/board-support/prebuilt-images/ti-sci-firmware-am65x_sr2-hs-cert.bin
+
+    .. ifconfig:: CONFIG_part_variant in ('J721E')
+
+      .. rubric:: Building SYSFW
+ 
+      - In case of building and generating sysfw.itb rather than downloading from
+        prebuilt download location, below is the instructions on how to do it.
+
+        *on GP*
+
+        .. code-block:: console
+
+           $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j721e SYSFW_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721e-gp.bin
+
+        *on HS SR1*
+
+        .. code-block:: console
+
+           $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j721e HS=1 SYSFW_HS_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721e-enc.bin SYSFW_HS_INNER_CERT_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721e-cert.bin
+  
+        *on HS SR2*
+
+        .. code-block:: console
+
+           $ make ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- SOC=j721e_sr1_1 HS=1 SYSFW_HS_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721e-enc.bin SYSFW_HS_INNER_CERT_PATH=<path to tisdk>/board-support/prebuilt-images/ti-fs-firmware-j721e-cert.bin
+
+.. ifconfig:: CONFIG_part_variant in ('AM65X', 'J721E', 'J7200', 'AM64X', 'AM62X', 'AM62AX')
+
+    .. rubric:: Target Images
+        :name: target-images
+
+    Copy the below images to the boot partition of an SD card and boot.
+    Instructions to format the SD card can be found `here <Overview/Processor_SDK_Linux_create_SD_card_script.html>`__.
+
+    .. ifconfig:: CONFIG_part_variant in ('AM65X')
+
+       - tiboot3.bin from <output directory>/r5
+       - tispl.bin, u-boot.img from <output directory>/a53
+       - sysfw.itb from <path to tisdk>/board-support/prebuilt-images/
+
+    .. ifconfig:: CONFIG_part_variant in ('J721E')
+
+       - tiboot3.bin from <output directory>/r5
+       - tispl.bin, u-boot.img from <output directory>/a72
+       - sysfw.itb from <path to tisdk>/board-support/prebuilt-images/
+
+    .. ifconfig:: CONFIG_part_variant in ('J7200')
+
+       - tiboot3.bin from <path to K3-image-gen> (This is combined image of tiboot3.bin and sysfw.itb)
+       - tispl.bin, u-boot.img from <output directory>/a72
+
+    .. ifconfig:: CONFIG_part_variant in ('AM64X')
+
+       - tiboot3.bin from <path to K3-image-gen> (This is combined image of tiboot3.bin and sysfw.itb)
+       - tispl.bin, u-boot.img from <output directory>/a53
+
+    .. ifconfig:: CONFIG_part_variant in ('AM62X', 'AM62AX')
+
+       - tiboot3.bin from <path to K3-image-gen>
+       - tispl.bin, u-boot.img from <output directory>/a53
+
+
+Image Formats
+^^^^^^^^^^^^^^^
+
+    .. ifconfig:: CONFIG_part_variant not in ('J7200', 'DRA821A', 'AM64X', 'J721S2', 'J721E', 'AM62X', 'AM62AX')
+
+       - tiboot3.bin
+
+       .. code-block:: console
+
+            +-----------------------+
+            |        X.509          |
+            |      Certificate      |
+            | +-------------------+ |
+            | |                   | |
+            | |        R5         | |
+            | |   u-boot-spl.bin  | |
+            | |                   | |
+            | +-------------------+ |
+            | |                   | |
+            | |     FIT header    | |
+            | | +---------------+ | |
+            | | |               | | |
+            | | |   DTB 1...N   | | |
+            | | +---------------+ | |
+            | +-------------------+ |
+            +-----------------------+
+
+       - tispl.bin
+
+       .. code-block:: console
+
+            +-----------------------+
+            |                       |
+            |       FIT HEADER      |
+            | +-------------------+ |
+            | |                   | |
+            | |      ARM64 ATF    | |
+            | +-------------------+ |
+            | |                   | |
+            | |     ARM64 OPTEE   | |
+            | +-------------------+ |
+            | |                   | |
+            | |      ARM64 SPL    | |
+            | +-------------------+ |
+            | |                   | |
+            | |   SPL DTB 1...N   | |
+            | +-------------------+ |
+            +-----------------------+
+
+       - sysfw.itb
+
+       .. code-block:: console
+
+            +-----------------------+
+            |                       |
+            |       FIT HEADER      |
+            | +-------------------+ |
+            | |                   | |
+            | |     sysfw.bin     | |
+            | +-------------------+ |
+            | |                   | |
+            | |    board config   | |
+            | +-------------------+ |
+            | |                   | |
+            | |     PM config     | |
+            | +-------------------+ |
+            | |                   | |
+            | |     RM config     | |
+            | +-------------------+ |
+            | |                   | |
+            | |    Secure config  | |
+            | +-------------------+ |
+            +-----------------------+
+
+    .. ifconfig:: CONFIG_part_variant in ('J721E')
+
+       - tiboot3.bin
+
+       .. code-block:: console
+
+            +-----------------------+
+            |        X.509          |
+            |      Certificate      |
+            | +-------------------+ |
+            | |                   | |
+            | |        R5         | |
+            | |   u-boot-spl.bin  | |
+            | |                   | |
+            | +-------------------+ |
+            | |                   | |
+            | |     FIT header    | |
+            | | +---------------+ | |
+            | | |               | | |
+            | | |   DTB 1...N   | | |
+            | | +---------------+ | |
+            | +-------------------+ |
+            +-----------------------+
+
+       - tispl.bin
+
+       .. code-block:: console
+
+            +-----------------------+
+            |                       |
+            |       FIT HEADER      |
+            | +-------------------+ |
+            | |                   | |
+            | |      A72 ATF      | |
+            | +-------------------+ |
+            | |                   | |
+            | |     A72 OPTEE     | |
+            | +-------------------+ |
+            | |                   | |
+            | |      R5 DM FW     | |
+            | +-------------------+ |
+            | |                   | |
+            | |      A72 SPL      | |
+            | +-------------------+ |
+            | |                   | |
+            | |   SPL DTB 1...N   | |
+            | +-------------------+ |
+            +-----------------------+
+
+       - sysfw.itb
+
+       .. code-block:: console
+
+            +-----------------------+
+            |                       |
+            |       FIT HEADER      |
+            | +-------------------+ |
+            | |                   | |
+            | |     sysfw.bin     | |
+            | +-------------------+ |
+            | |                   | |
+            | |    board config   | |
+            | +-------------------+ |
+            | |                   | |
+            | |     PM config     | |
+            | +-------------------+ |
+            | |                   | |
+            | |     RM config     | |
+            | +-------------------+ |
+            | |                   | |
+            | |    Secure config  | |
+            | +-------------------+ |
+            +-----------------------+
+
+    .. ifconfig:: CONFIG_part_variant in ('J7200', 'J721S2')
+
+        - tiboot3.bin:
+
+           .. code-block:: console
+
+                    +-----------------------+
+                    |        X.509          |
+                    |      Certificate      |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |        R5         | |
+                    | |   u-boot-spl.bin  | |
+                    | |                   | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |     FIT header    | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |   DTB 1...N   | | |
+                    | | +---------------+ | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |      FIT HEADER   | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |   sysfw.bin   | | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |  board config | | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |   PM config   | | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |   RM config   | | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | | Secure config | | |
+                    | | +---------------+ | |
+                    | +-------------------+ |
+                    +-----------------------+
+
+        - tispl.bin
+
+           .. code-block:: console
+
+                    +-----------------------+
+                    |                       |
+                    |       FIT HEADER      |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |      A72 ATF      | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |     A72 OPTEE     | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |      R5 DM FW     | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |      A72 SPL      | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |   SPL DTB 1...N   | |
+                    | +-------------------+ |
+                    +-----------------------+
+
+    .. ifconfig:: CONFIG_part_variant in ('AM64X')
+
+        - tiboot3.bin:
+
+           .. code-block:: console
+
+                    +-----------------------+
+                    |        X.509          |
+                    |      Certificate      |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |        R5         | |
+                    | |   u-boot-spl.bin  | |
+                    | |                   | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |     FIT header    | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |   DTB 1...N   | | |
+                    | | +---------------+ | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |      FIT HEADER   | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |   sysfw.bin   | | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |  board config | | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |   PM config   | | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | |   RM config   | | |
+                    | | +---------------+ | |
+                    | | |               | | |
+                    | | | Secure config | | |
+                    | | +---------------+ | |
+                    | +-------------------+ |
+                    +-----------------------+
+
+        - tispl.bin
+
+           .. code-block:: console
+
+                    +-----------------------+
+                    |                       |
+                    |       FIT HEADER      |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |      A53 ATF      | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |     A53 OPTEE     | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |      A53 SPL      | |
+                    | +-------------------+ |
+                    | |                   | |
+                    | |   SPL DTB 1...N   | |
+                    | +-------------------+ |
+                    +-----------------------+
+
+    .. ifconfig:: CONFIG_part_variant in ('AM62X', 'AM62AX')
+
+       - tiboot3.bin:
+
+       .. code-block:: console
+
+            +-----------------------+
+            |        X.509          |
+            |      Certificate      |
+            | +-------------------+ |
+            | |                   | |
+            | |        R5         | |
+            | |   u-boot-spl.bin  | |
+            | |                   | |
+            | +-------------------+ |
+            | |                   | |
+            | |TIFS with board cfg| |
+            | |                   | |
+            | +-------------------+ |
+            | |                   | |
+            | |                   | |
+            | |     FIT header    | |
+            | | +---------------+ | |
+            | | |               | | |
+            | | |   DTB 1...N   | | |
+            | | +---------------+ | |
+            | +-------------------+ |
+            +-----------------------+
+
+       - tispl.bin
+
+       .. code-block:: console
+
+            +-----------------------+
+            |                       |
+            |       FIT HEADER      |
+            | +-------------------+ |
+            | |                   | |
+            | |      A53 ATF      | |
+            | +-------------------+ |
+            | |                   | |
+            | |     A53 OPTEE     | |
+            | +-------------------+ |
+            | |                   | |
+            | |      R5 DM FW     | |
+            | +-------------------+ |
+            | |                   | |
+            | |      A53 SPL      | |
+            | +-------------------+ |
+            | |                   | |
+            | |   SPL DTB 1...N   | |
+            | +-------------------+ |
+            +-----------------------+
+
+Boot Flow
+^^^^^^^^^
+.. ifconfig:: CONFIG_part_family in ('General_family', 'AM335X_family', 'AM437X_family')
+
+    Booting the Linux kernel on an embedded platform is not as simple as simply
+    pointing a program counter to the kernel location and letting the processor
+    run. This section will review the four bootloader software stages that must
+    be run before the kernel can be booted and run on the device.
+
+    Application processors such as the the AM335x are complex pieces of hardware,
+    but have limited internal RAM (e.g., 128KB). Because of this limited amount
+    of RAM, multiple bootloader stages are needed. These bootloader stages
+    systematically unlock the full functionality of the device so that all
+    complexities of the device are available to the kernel.
+
+    There are four distinct bootloader stages:
+
+    .. Image:: /images/U-Boot_Boot_Order_32bit.png
+
+    1. ROM Code
+
+    The first stage bootloader is housed in ROM on the device. The ROM code is
+    the first block of code that is automatically run on device start-up or
+    after power-on reset (POR). The ROM bootloader code is hardcoded into the
+    device and cannot be changed by the user. Because of this, it is important
+    to get an understanding of what exactly the ROM code is doing.
+
+    The ROM code has two main functions:
+
+    * Configuration of the device and initialization of primary peripherals
+      such as stack setup, configuring the Watchdog Timer (see TRM for details)
+      as well as the PLL and system clocks configuration
+    * Readies the device for next bootloader by checking boot sources for next
+      stage of bootloader (SPL) as well as loading the actual next stage
+      bootloader code into memory and starting it
+
+    The list of booting devices that the ROM code will search through for the
+    second stage bootloader is configured by the voltage levels set on the
+    devices SYSBOOT pins on startup. These pins also set other boot parameters
+    (i.e. expected crystal frequency, bus width of external memory). For more
+    information on the SYSBOOT pins and associated boot parameters see the
+    device TRM.
+
+    2. SPL or MLO
+
+    The second stage bootloader is known as the SPL (Secondary Program Loader),
+    but is sometimes referred to as the MLO (MMC Card Loader). The SPL is the
+    first stage of U-Boot, and must be loaded from one of the boot sources into
+    internal RAM. The SPL has very limited configuration or user interaction,
+    and mainly serves to initialize the external DDR memory and set-up the boot
+    process for the next bootloader stage: U-Boot.
+
+    3. U-Boot
+
+    U-Boot allows for powerful command-based control over the kernel boot
+    environment via a serial terminal. The user has control over a number of
+    parameters such as boot arguments and the kernel boot command. In addition,
+    U-Boot environment variables can be configured. These environment variables
+    are stored in the **uEnv.txt** file on your storage medium or directly in
+    a Flash-based memory if configured such. These environment variables can be
+    viewed, modified, and saved using the **env print**, **env set**, and
+    **env save** commands, respectively. U-Boot is also a very useful tool to
+    program and manipulate a wide range of external memory devices as well as
+    a helpful aid during custom board bringup.
+
+    4. Linux Kernel
+
+    **zImage** is the compressed kernel image wrapped with header info that
+    describes the kernel. This header includes the target architecture, the
+    operating system, kernel size, entry points, etc. The loading of the kernel
+    image is typically performed through the use of scripts stored in the U-Boot
+    environment (all starting with the **bootcmd** ENV variable that gets
+    executed after the autoboot countdown expires or manually by entering the
+    **boot** command at the U-Boot prompt). This also involves passing a board-
+    specific device tree blob (DTB) as an argument to U-Boot's **bootz**
+    command that will extract and start the actual kernel.
+
+.. ifconfig:: CONFIG_part_family not in ('General_family', 'AM335X_family', 'AM437X_family')
+
+    On K3 architecture based devices, ROM supports boot only via MCU(R5). This means that
+    bootloader has to run on R5 core. In order to meet this constraint, keeping
+    safety in picture and to have faster boot time, the software boot architecture
+    is designed as below:
+
+    .. ifconfig:: CONFIG_part_family not in ('J7_family', 'AM64X_family', 'AM62X_family', 'AM62AX_family')
+
+         .. code-block:: console
+
+             +------------------------------------------------------------------------+
+             |        DMSC            |         R5            |        ARM64          |
+             +------------------------------------------------------------------------+
+             |    +--------+          |                       |                       |
+             |    |  Reset |          |                       |                       |
+             |    +--------+          |                       |                       |
+             |         :              |                       |                       |
+             |    +--------+          |   +-----------+       |                       |
+             |    | *ROM*  |----------|-->| Reset rls |       |                       |
+             |    +--------+          |   +-----------+       |                       |
+             |    |        |          |         :             |                       |
+             |    |  ROM   |          |         :             |                       |
+             |    |services|          |         :             |                       |
+             |    |        |          |   +-------------+     |                       |
+             |    |        |          |   |  *R5 ROM*   |     |                       |
+             |    |        |          |   +-------------+     |                       |
+             |    |        |<---------|---|Load and auth|     |                       |
+             |    |        |          |   | tiboot3.bin |     |                       |
+             |    |        |          |   +-------------+     |                       |
+             |    |        |          |         :             |                       |
+             |    |        |          |         :             |                       |
+             |    |        |          |         :             |                       |
+             |    |        |          |   +-------------+     |                       |
+             |    |        |          |   |  *R5 SPL*   |     |                       |
+             |    |        |          |   +-------------+     |                       |
+             |    |        |          |   |    Load     |     |                       |
+             |    |        |          |   |  sysfw.itb  |     |                       |
+             |    | Start  |          |   +-------------+     |                       |
+             |    | System |<---------|---|    Start    |     |                       |
+             |    |Firmware|          |   |    SYSFW    |     |                       |
+             |    +--------+          |   +-------------+     |                       |
+             |        :               |   |             |     |                       |
+             |    +---------+         |   |   Load      |     |                       |
+             |    | *SYSFW* |         |   |   system    |     |                       |
+             |    +---------+         |   | Config data |     |                       |
+             |    |         |<--------|---|             |     |                       |
+             |    |         |         |   +-------------+     |                       |
+             |    |         |         |   |             |     |                       |
+             |    |         |         |   |    DDR      |     |                       |
+             |    |         |         |   |   config    |     |                       |
+             |    |         |         |   +-------------+     |                       |
+             |    |         |         |   |             |     |                       |
+             |    |         |<--------|---| Start A53   |     |                       |
+             |    |         |         |   |  and Reset  |     |                       |
+             |    |         |         |   +-------------+     |                       |
+             |    |         |         |                       |     +-----------+     |
+             |    |         |---------|-----------------------|---->| Reset rls |     |
+             |    |         |         |                       |     +-----------+     |
+             |    |  DMSC   |         |                       |          :            |
+             |    |Services |         |                       |     +-----------+     |
+             |    |         |<--------|-----------------------|---->|*ATF/OPTEE*|     |
+             |    |         |         |                       |     +-----------+     |
+             |    |         |         |                       |          :            |
+             |    |         |         |                       |     +-----------+     |
+             |    |         |<--------|-----------------------|---->| *A53 SPL* |     |
+             |    |         |         |                       |     +-----------+     |
+             |    |         |         |                       |     |   Load    |     |
+             |    |         |         |                       |     | u-boot.img|     |
+             |    |         |         |                       |     +-----------+     |
+             |    |         |         |                       |          :            |
+             |    |         |         |                       |     +-----------+     |
+             |    |         |<--------|-----------------------|---->| *U-Boot*  |     |
+             |    |         |         |                       |     +-----------+     |
+             |    |         |         |                       |     |  prompt   |     |
+             |    |         |         |                       |     +-----------+     |
+             |    +---------+         |                       |                       |
+             |                        |                       |                       |
+             +------------------------------------------------------------------------+
+
+    .. ifconfig:: CONFIG_part_variant in ('J721E')
+
+        .. code-block:: console
+
+            +------------------------------------------------------------------------+-----------------------+
+            |        DMSC            |      MCU R5           |        A72            |  MAIN R5/C66x/C7x     |
+            +------------------------------------------------------------------------+-----------------------+
+            |    +--------+          |                       |                       |                       |
+            |    |  Reset |          |                       |                       |                       |
+            |    +--------+          |                       |                       |                       |
+            |         :              |                       |                       |                       |
+            |    +--------+          |   +-----------+       |                       |                       |
+            |    | *ROM*  |----------|-->| Reset rls |       |                       |                       |
+            |    +--------+          |   +-----------+       |                       |                       |
+            |    |        |          |         :             |                       |                       |
+            |    |  ROM   |          |         :             |                       |                       |
+            |    |services|          |         :             |                       |                       |
+            |    |        |          |   +-------------+     |                       |                       |
+            |    |        |          |   |  *R5 ROM*   |     |                       |                       |
+            |    |        |          |   +-------------+     |                       |                       |
+            |    |        |<---------|---|Load and auth|     |                       |                       |
+            |    |        |          |   | tiboot3.bin |     |                       |                       |
+            |    |        |          |   +-------------+     |                       |                       |
+            |    |        |          |         :             |                       |                       |
+            |    |        |          |         :             |                       |                       |
+            |    |        |          |         :             |                       |                       |
+            |    |        |          |   +-------------+     |                       |                       |
+            |    |        |          |   |  *R5 SPL*   |     |                       |                       |
+            |    |        |          |   +-------------+     |                       |                       |
+            |    |        |          |   |    Load     |     |                       |                       |
+            |    |        |          |   |  sysfw.itb  |     |                       |                       |
+            |    | Start  |          |   +-------------+     |                       |                       |
+            |    | System |<---------|---|    Start    |     |                       |                       |
+            |    |Firmware|          |   |    SYSFW    |     |                       |                       |
+            |    +--------+          |   +-------------+     |                       |                       |
+            |        :               |   |             |     |                       |                       |
+            |    +---------+         |   |   Load      |     |                       |                       |
+            |    | *SYSFW* |         |   |   system    |     |                       |                       |
+            |    +---------+         |   | Config data |     |                       |                       |
+            |    |         |<--------|---|             |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |    DDR      |     |                       |                       |
+            |    |         |         |   |   config    |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |    Load     |     |                       |                       |
+            |    |         |         |   |  tispl.bin  |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |   Load R5   |     |                       |                       |
+            |    |         |         |   |   firmware  |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |<--------|---| Start A72   |     |                       |                       |
+            |    |         |         |   | and jump to |     |                       |                       |
+            |    |         |         |   | DM fw image |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |---------|-----------------------|---->| Reset rls |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |  TIFS   |         |                       |          :            |                       |
+            |    |Services |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|---->|*ATF/OPTEE*|     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |          :            |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|---->| *A72 SPL* |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |     |   Load    |     |                       |
+            |    |         |         |                       |     | u-boot.img|     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |          :            |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|---->| *U-Boot*  |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |     |  prompt   |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |     |  Load R5  |     |                       |
+            |    |         |         |                       |     |  Firmware |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|-----|  Start R5 |     |      +-----------+    |
+            |    |         |---------|-----------------------|-----+-----------+-----|----->| R5 starts |    |
+            |    |         |         |                       |     |  Load C6  |     |      +-----------+    |
+            |    |         |         |                       |     |  Firmware |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|-----|  Start C6 |     |      +-----------+    |
+            |    |         |---------|-----------------------|-----+-----------+-----|----->| C6 starts |    |
+            |    |         |         |                       |     |  Load C7  |     |      +-----------+    |
+            |    |         |         |                       |     |  Firmware |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|-----|  Start C7 |     |      +-----------+    |
+            |    |         |---------|-----------------------|-----+-----------+-----|----->| C7 starts |    |
+            |    +---------+         |                       |                       |      +-----------+    |
+            |                        |                       |                       |                       |
+            +------------------------------------------------------------------------+-----------------------+
+
+    .. ifconfig:: CONFIG_part_variant in ('J7200', 'J721S2', 'J784S4')
+
+        .. code-block:: console
+
+            +------------------------------------------------------------------------+-----------------------+
+            |        SMS             |      MCU R5           |        A72            |  MAIN R5/C7x          |
+            +------------------------------------------------------------------------+-----------------------+
+            |    +--------+          |                       |                       |                       |
+            |    |  Reset |          |                       |                       |                       |
+            |    +--------+          |                       |                       |                       |
+            |         :              |                       |                       |                       |
+            |    +--------+          |   +-----------+       |                       |                       |
+            |    | *ROM*  |----------|-->| Reset rls |       |                       |                       |
+            |    +--------+          |   +-----------+       |                       |                       |
+            |    |        |          |         :             |                       |                       |
+            |    |  ROM   |          |         :             |                       |                       |
+            |    |services|          |         :             |                       |                       |
+            |    |        |          |   +-------------+     |                       |                       |
+            |    |        |          |   |  *R5 ROM*   |     |                       |                       |
+            |    |        |          |   +-------------+     |                       |                       |
+            |    |        |<---------|---|Load and auth|     |                       |                       |
+            |    |        |          |   | tiboot3.bin |     |                       |                       |
+            |    | Start  |          |   +-------------+     |                       |                       |
+            |    |  TIFS  |<---------|---|    Start    |     |                       |                       |
+            |    |        |          |   |    TIFS     |     |                       |                       |
+            |    +--------+          |   +-------------+     |                       |                       |
+            |        :               |   |             |     |                       |                       |
+            |    +---------+         |   |   Load      |     |                       |                       |
+            |    | *TIFS*  |         |   |   system    |     |                       |                       |
+            |    +---------+         |   | Config data |     |                       |                       |
+            |    |         |<--------|---|             |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |         :             |                       |                       |
+            |    |         |         |         :             |                       |                       |
+            |    |         |         |         :             |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |  *R5 SPL*   |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |    DDR      |     |                       |                       |
+            |    |         |         |   |   config    |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |    Load     |     |                       |                       |
+            |    |         |         |   |  tispl.bin  |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |   Load R5   |     |                       |                       |
+            |    |         |         |   |   firmware  |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |<--------|---| Start A72   |     |                       |                       |
+            |    |         |         |   | and jump to |     |                       |                       |
+            |    |         |         |   | DM fw image |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |---------|-----------------------|---->| Reset rls |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |  TIFS   |         |                       |          :            |                       |
+            |    |Services |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|---->|*ATF/OPTEE*|     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |          :            |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|---->| *A72 SPL* |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |     |   Load    |     |                       |
+            |    |         |         |                       |     | u-boot.img|     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |          :            |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|---->| *U-Boot*  |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |     |  prompt   |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |     |  Load R5  |     |                       |
+            |    |         |         |                       |     |  Firmware |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|-----|  Start R5 |     |      +-----------+    |
+            |    |         |---------|-----------------------|-----+-----------+-----|----->| R5 starts |    |
+            |    |         |         |                       |     |  Load C7  |     |      +-----------+    |
+            |    |         |         |                       |     |  Firmware |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|-----|  Start C7 |     |      +-----------+    |
+            |    |         |---------|-----------------------|-----+-----------+-----|----->| C7 starts |    |
+            |    |         |         |                       |                       |      +-----------+    |
+            |    |         |         |                       |                       |                       |
+            |    +---------+         |                       |                       |                       |
+            |                        |                       |                       |                       |
+            +------------------------------------------------------------------------+-----------------------+
+
+    .. ifconfig:: CONFIG_part_variant in ('AM64X')
+
+        .. code-block:: console
+
+            +------------------------------------------------------------------------+-----------------------+
+            |        DMSC            |      MAIN R50         |         A53           |   MAIN R51            |
+            +------------------------------------------------------------------------+-----------------------+
+            |    +--------+          |                       |                       |                       |
+            |    |  Reset |          |                       |                       |                       |
+            |    +--------+          |                       |                       |                       |
+            |         :              |                       |                       |                       |
+            |    +--------+          |   +-----------+       |                       |                       |
+            |    | *ROM*  |----------|-->| Reset rls |       |                       |                       |
+            |    +--------+          |   +-----------+       |                       |                       |
+            |    |        |          |         :             |                       |                       |
+            |    |  ROM   |          |         :             |                       |                       |
+            |    |services|          |         :             |                       |                       |
+            |    |        |          |   +-------------+     |                       |                       |
+            |    |        |          |   |  *R5 ROM*   |     |                       |                       |
+            |    |        |          |   +-------------+     |                       |                       |
+            |    |        |<---------|---|Load and auth|     |                       |                       |
+            |    |        |          |   | tiboot3.bin |     |                       |                       |
+            |    | Start  |          |   +-------------+     |                       |                       |
+            |    | SYSFW  |<---------|---|    Start    |     |                       |                       |
+            |    |        |          |   |    SYSFW    |     |                       |                       |
+            |    +--------+          |   +-------------+     |                       |                       |
+            |        :               |   |             |     |                       |                       |
+            |    +---------+         |   |   Load      |     |                       |                       |
+            |    | *SYSFW* |         |   |   system    |     |                       |                       |
+            |    +---------+         |   | Config data |     |                       |                       |
+            |    |         |<--------|---|             |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |         :             |                       |                       |
+            |    |         |         |         :             |                       |                       |
+            |    |         |         |         :             |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |  *R5 SPL*   |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |    DDR      |     |                       |                       |
+            |    |         |         |   |   config    |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |   |    Load     |     |                       |                       |
+            |    |         |         |   |  tispl.bin  |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |<--------|---| Start A53   |     |                       |                       |
+            |    |         |         |   +-------------+     |                       |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |---------|-----------------------|---->| Reset rls |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |  SYSFW  |         |                       |          :            |                       |
+            |    |Services |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|---->|*ATF/OPTEE*|     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |          :            |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|---->| *A53 SPL* |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |     |   Load    |     |                       |
+            |    |         |         |                       |     | u-boot.img|     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |          :            |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|---->| *U-Boot*  |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |     |  prompt   |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |         |                       |     |  Load R5  |     |                       |
+            |    |         |         |                       |     |  Firmware |     |                       |
+            |    |         |         |                       |     +-----------+     |                       |
+            |    |         |<--------|-----------------------|-----|  Start R5 |     |      +-----------+    |
+            |    |         |---------|-----------------------|-----+-----------+-----|----->| R5 starts |    |
+            |    |         |         |                       |                       |      +-----------+    |
+            |    |         |         |                       |                       |                       |
+            |    +---------+         |                       |                       |                       |
+            |                        |                       |                       |                       |
+            +------------------------------------------------------------------------+-----------------------+
+
+    .. ifconfig:: CONFIG_part_variant in ('AM62X')
+
+        .. code-block:: console
+
+            +------------------------------------------------------------------------+
+            |        TIFS            |      Main R5          |        A53            |
+            +------------------------------------------------------------------------+
+            |    +--------+          |                       |                       |
+            |    |  Reset |          |                       |                       |
+            |    +--------+          |                       |                       |
+            |         :              |                       |                       |
+            |    +--------+          |   +-----------+       |                       |
+            |    | *ROM*  |----------|-->| Reset rls |       |                       |
+            |    +--------+          |   +-----------+       |                       |
+            |    |        |          |         :             |                       |
+            |    |  ROM   |          |         :             |                       |
+            |    |services|          |         :             |                       |
+            |    |        |          |   +-------------+     |                       |
+            |    |        |          |   |  *R5 ROM*   |     |                       |
+            |    |        |          |   +-------------+     |                       |
+            |    |        |<---------|---|Load and auth|     |                       |
+            |    |        |          |   | tiboot3.bin |     |                       |
+            |    +--------+          |   +-------------+     |                       |
+            |    |        |<---------|---| Load sysfw  |     |                       |
+            |    |        |          |   | part to TIFS|     |                       |
+            |    |        |          |   | core        |     |                       |
+            |    |        |          |   +-------------+     |                       |
+            |    |        |          |         :             |                       |
+            |    |        |          |         :             |                       |
+            |    |        |          |         :             |                       |
+            |    |        |          |   +-------------+     |                       |
+            |    |        |          |   |  *R5 SPL*   |     |                       |
+            |    |        |          |   +-------------+     |                       |
+            |    |        |          |   |    DDR      |     |                       |
+            |    |        |          |   |   config    |     |                       |
+            |    |        |          |   +-------------+     |                       |
+            |    |        |          |   |    Load     |     |                       |
+            |    |        |          |   |  tispl.bin  |     |                       |
+            |    |        |          |   +-------------+     |                       |
+            |    |        |          |   |   Load R5   |     |                       |
+            |    |        |          |   |   firmware  |     |                       |
+            |    |        |          |   +-------------+     |                       |
+            |    |        |<---------|---| Start A53   |     |                       |
+            |    |        |          |   | and jump to |     |                       |
+            |    |        |          |   | DM fw image |     |                       |
+            |    |        |          |   +-------------+     |                       |
+            |    |        |          |                       |     +-----------+     |
+            |    |        |----------|-----------------------|---->| Reset rls |     |
+            |    |        |          |                       |     +-----------+     |
+            |    |  TIFS  |          |                       |          :            |
+            |    |Services|          |                       |     +-----------+     |
+            |    |        |<---------|-----------------------|---->|*ATF/OPTEE*|     |
+            |    |        |          |                       |     +-----------+     |
+            |    |        |          |                       |          :            |
+            |    |        |          |                       |     +-----------+     |
+            |    |        |<---------|-----------------------|---->| *A53 SPL* |     |
+            |    |        |          |                       |     +-----------+     |
+            |    |        |          |                       |     |   Load    |     |
+            |    |        |          |                       |     | u-boot.img|     |
+            |    |        |          |                       |     +-----------+     |
+            |    |        |          |                       |          :            |
+            |    |        |          |                       |     +-----------+     |
+            |    |        |<---------|-----------------------|---->| *U-Boot*  |     |
+            |    |        |          |                       |     +-----------+     |
+            |    |        |          |                       |     |  prompt   |     |
+            |    |        |----------|-----------------------|-----+-----------+-----|
+            |    +--------+          |                       |                       |
+            |                        |                       |                       |
+            +------------------------------------------------------------------------+
+
+    Here |__SYSFW_CORE_NAME__| acts as master and provides all the critical services. R5/ARM64
+    requests |__SYSFW_CORE_NAME__| to get these services done as shown in the above diagram.
+
+U-Boot Environment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Please note that on many boards we modify the environment during system
+start for a variety of variables such as **board\_name** and if unset,
+**ethaddr**. When we restore defaults some variables will become unset,
+and this can lead to other things not working such as **findfdt** that
+rely on these run-time set variables.
+
+.. rubric:: Restoring defaults
+   :name: restoring-defaults
+
+It is possible to reset the set of U-Boot environment variables to their
+defaults and if desired, save them to where the environment is stored,
+if applicable. It is also required to restore the default setting when
+u-boot version changes from an upgrade or downgrade. To do so, issue the
+following commands:
+
+::
+
+    U-Boot # env default -f -a
+    U-Boot # saveenv
+
+| 
+
+.. rubric:: Networking Environment
+   :name: networking-environment
+
+When using a USB-Ethernet dongle a valid MAC address must be set in the
+environment. To create a valid address please read `**this
+page** <http://www.denx.de/wiki/view/DULG/WhereCanIGetAValidMACAddress>`__.
+Then issue the following command:
+
+::
+
+    U-Boot # setenv usbethaddr value:from:link:above
+
+You can use the **printenv** command to see if **usbethaddr** is already
+set.
+
+Then start the USB subsystem:
+
+::
+
+    U-Boot # usb start
+
+The default behavior of U-Boot is to utilize all information that a DHCP
+server passes to us when the user issues the **dhcp** command. This will
+include the dhcp parameter *next-server* which indicates where to fetch
+files from via TFTP. There may be times however where the dhcp server on
+your network provides incorrect information and you are unable to modify
+the server. In this case the following steps can be helpful:
+
+::
+
+    U-Boot # setenv autoload no
+    U-Boot # dhcp
+    U-Boot # setenv serverip correct.server.ip
+    U-Boot # tftp
+
+Another alternative is to utilize the full syntax of the tftp command:
+
+::
+
+    U-Boot # setenv autoload no
+    U-Boot # dhcp
+    U-Boot # tftp ${loadaddr} server.ip:fileName
+
+Available RAM for image download
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To know the amount of RAM available for downloading images or for other
+usage, use ``bdinfo`` command.
+
+::
+
+    => bdinfo
+    arch_number = 0x00000000
+    boot_params = 0x80000100
+    DRAM bank   = 0x00000000
+    -> start    = 0x80000000
+    -> size     = 0x7F000000
+    baudrate    = 115200 bps
+    TLB addr    = 0xFEFF0000
+    relocaddr   = 0xFEF30000
+    reloc off   = 0x7E730000
+    irq_sp      = 0xFCEF8880
+    sp start    = 0xFCEF8870
+    Early malloc usage: 890 / 2000
+
+After booting, U-Boot relocates itself (along with its various reserved
+RAM areas) and places itself at end of available RAM (starting at
+``relocaddr`` in ``bdinfo`` output above). Only the stack is located
+just before that area. The address of top of the stack is in
+``sp start`` in ``bdinfo`` output and it grows downwards. Users should
+reserve at least about 1MB for stack, so in the example output above,
+RAM in the range of ``[0x80000000, 0xFCE00000]`` is safely available for
+use.
+
+Device Trees
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A note about device trees. Now all supported boards are required to use a
+device tree to boot. To facilitate this in supported platforms, a command
+in U-Boot environment **findfdt** is available that will set the **fdtfile**
+variable to the name of the device tree to use, as found with the kernel
+sources. In the Keystone-2 family devices (K2H/K/E/L/G), it is specified
+by **name\_fdt** variable for each platform. The device tree is expected
+to be loaded from the same media as the kernel, and from the same relative path.
+
+.. _AM64-SRAM-Layout-label:
+
+SRAM memory Layout during R5 SPL bootloader stage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The SRAM memory layout explains the memory used for Bootloader's operation.
+
+    .. ifconfig:: CONFIG_part_variant in ('AM64X')
+
+        -  In SDK 08.00 release, USB DFU boot mode support has been added in AM64. For
+           USB DFU boot mode there is a limitation on the load address of boot
+           images to be less than 0x70001000. In order to overcome this limitation,
+           the R5 SPL load address has been moved to 0x70000000.  Given below is the
+           SRAM memory layout in SDK 08.00 release, during R5 SPL bootloader stage.
+
+        .. code-block:: console
+
+            ┌──────────────────────────────────────┐0x70000000
+            │                                      │
+            │                                      │
+            │                                      │
+            │    SPL IMAGE (Max size 1.5 MB)       │
+            │                                      │
+            │                                      │
+            │                                      │
+            ├──────────────────────────────────────┤0x7017FFFF
+            │                                      │
+            │           SPL STACK                  │
+            │                                      │
+            ├──────────────────────────────────────┤0x70192727
+            │          GLOBAL DATA(216 B)          │
+            ├──────────────────────────────────────┤0x701927FF
+            │                                      │
+            │       INITIAL HEAP (32 KB)           │
+            │                                      │
+            ├──────────────────────────────────────┤0x7019A7FF
+            │                                      │
+            │          BSS  (20 KB)                │
+            ├──────────────────────────────────────┤0x7019F7FF
+            │         EEPROM DATA (2 KB)           │
+            ├──────────────────────────────────────┤0x7019FFFF
+            │                                      │
+            │                                      │
+            │            TF-A (123 KB)             │
+            │                                      │
+            │                                      │
+            ├──────────────────────────────────────┤0x701BEBFB
+            │   BOOT PARAMETER INDEX TABLE (5124 B)│
+            ├──────────────────────────────────────┤0x701BFFFF
+            │                                      │
+            │        UNALLOCATED  AREA(128 KB)     │
+            │                                      │
+            ├──────────────────────────────────────┤0x701DFFFF
+            │                                      │
+            │      DMSC CODE AREA (128 KB)         │
+            │                                      │
+            └──────────────────────────────────────┘0x701FFFFF
+
+        - In SDK 08.01 release, TF-A will be moved to 0x701c0000 and 128 KB will be
+          reserved for it. Given below is the memory layout after making this change.
+
+        .. code-block:: console
+
+            ┌──────────────────────────────────────┐0x70000000
+            │                                      │
+            │                                      │
+            │                                      │
+            │    SPL IMAGE (Max size 1.5 MB)       │
+            │                                      │
+            │                                      │
+            │                                      │
+            ├──────────────────────────────────────┤0x7017FFFF
+            │                                      │
+            │           SPL STACK                  │
+            │                                      │
+            ├──────────────────────────────────────┤0x70192727
+            │          GLOBAL DATA(216 B)          │
+            ├──────────────────────────────────────┤0x701927FF
+            │                                      │
+            │       INITIAL HEAP (32 KB)           │
+            │                                      │
+            ├──────────────────────────────────────┤0x7019A7FF
+            │                                      │
+            │          BSS  (20 KB)                │
+            ├──────────────────────────────────────┤0x7019F7FF
+            │         EEPROM DATA (2 KB)           │
+            ├──────────────────────────────────────┤0x7019FFFF
+            │                                      │
+            │                                      │
+            │     UNALLOCATED AREA (123 KB)        │
+            │                                      │
+            │                                      │
+            ├──────────────────────────────────────┤0x701BEBFB
+            │   BOOT PARAMETER INDEX TABLE (5124 B)│
+            ├──────────────────────────────────────┤0x701BFFFF
+            │                                      │
+            │             TF-A (128 KB)            │
+            │                                      │
+            ├──────────────────────────────────────┤0x701DFFFF
+            │                                      │
+            │      DMSC CODE AREA (128 KB)         │
+            │                                      │
+            └──────────────────────────────────────┘0x701FFFFF
+
+        - In the last 128 KB of memory used by DMSC during run time, initial 80 KB
+          gets freed after a security handover happens. The last 48 KB still will be used by DMSC.
+        - For more details on Security handover see `here <https://software-dl.ti.com/tisci/esd/latest/6_topic_user_guides/security_handover.html>`__ .
+
+    .. ifconfig:: CONFIG_part_variant in ('AM62X')
+
+        .. code-block:: console
+
+            ┌──────────────────────────────────────┐0x43c00000
+            │                                      │
+            │                                      │
+            │               SPL IMAGE              │
+            │           (Max size 204 KB)          │
+            │            (excluding BSS)           │
+            │                                      │
+            │                                      │
+            ├──────────────────────────────────────┤0x43c33000
+            │                                      │
+            │             EMPTY (18KB)             │
+            │                                      │
+            ├──────────────────────────────────────┤0x43c37800
+            │                                      │
+            │                                      │
+            │             BSS (20 KB)              │
+            │                                      │
+            │                                      │
+            ├──────────────────────────────────────┤0x43c3c800
+            │                                      │
+            │        DM config data (1.5KB)        │
+            │                                      │
+            ├──────────────────────────────────────┤0x43c3cd82
+            │                                      │
+            │                                      │
+            │              EMPTY (9KB)             │
+            │                                      │
+            │                                      │
+            ├──────────────────────────────────────┤0x43c3f290
+            │                                      │
+            │       ROM Boot parameter table       │
+            │    + Extended boot info (3.5 KB)     │
+            │                                      │
+            ├──────────────────────────────────────┤0x43c3ffff
+            .                                      .
+            .                                      .
+            .                                      .
+            ├──────────────────────────────────────┤0x70000000
+            │                                      │
+            │                                      │
+            │                STACK                 │
+            │                                      │
+            │                                      │
+            ├──────────────────────────────────────┤0x70006f1f
+            │             Global Data              │
+            ├──────────────────────────────────────┤0x70006fff
+            │                                      │
+            │                HEAP                  │
+            │                                      │
+            └──────────────────────────────────────┘0x7000ffff

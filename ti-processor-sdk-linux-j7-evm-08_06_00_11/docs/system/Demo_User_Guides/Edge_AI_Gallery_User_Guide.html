@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.6.1. Edge AI Gallery - User Guide &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../../index.html"/>
+        <link rel="up" title="1.6. Edge AI Stack and OOB Demos" href="../../linux/Overview_EdgeAI_Stack.html"/>
+        <link rel="next" title="1.7. Processor SDK Technical Support" href="../../linux/Overview_Technical_Support.html"/>
+        <link rel="prev" title="1.6. Edge AI Stack and OOB Demos" href="../../linux/Overview_EdgeAI_Stack.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../linux/Overview.html">1. Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../linux/Overview_Getting_Started_Guide.html">1.1. Getting Started Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linux/Overview_Building_the_SDK.html">1.2. Building the SDK with Yocto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linux/Overview_Top_Level_Makefile.html">1.3. Simplified SDK Build using Top-Level Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linux/Overview_Directory_Structure_Overview.html">1.4. Directory Structure Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linux/Overview_PSDKLA_PSDKRA_Summary.html">1.5. Processor SDK RTOS</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../linux/Overview_EdgeAI_Stack.html">1.6. Edge AI Stack and OOB Demos</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1.6.1. Edge AI Gallery - User Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">1.6.1.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-prerequisites">1.6.1.2. Hardware Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#launching-and-using-the-edge-ai-gallery">1.6.1.3. Launching and Using the edge AI gallery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-edge-ai-gallery">1.6.1.4. Building the edge AI gallery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../linux/Overview_Technical_Support.html">1.7. Processor SDK Technical Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linux/Overview_GPLv3_Disclaimer.html">1.8. GPLv3 Disclaimer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../linux/Foundational_Components.html">3. Foundational Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../linux/How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../linux/Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../linux/Overview.html">1. Overview</a> &raquo;</li>
+      
+          <li><a href="../../linux/Overview_EdgeAI_Stack.html">1.6. Edge AI Stack and OOB Demos</a> &raquo;</li>
+      
+    <li>1.6.1. Edge AI Gallery - User Guide</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="edge-ai-gallery-user-guide">
+<span id="edge-ai-gallery-user-guide-label"></span><h1>1.6.1. Edge AI Gallery - User Guide<a class="headerlink" href="#edge-ai-gallery-user-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>1.6.1.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This section is applicable for the <cite>tisdk-edgeai-image</cite> only. It has a QT based Out of Box application setup so that
+user can test the prepackaged models, with sample images, videos and optionally with a connected camera.
+The Demo also allows users to add their custom models, images, and videos to extend the functionality.</p>
+<p>All of the necessary equipment requirement and instructions are provided here.</p>
+</div>
+<div class="section" id="hardware-prerequisites">
+<h2>1.6.1.2. Hardware Prerequisites<a class="headerlink" href="#hardware-prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>TI J721E Device</li>
+<li>PC (Windows or Linux, to use serial terminal console)</li>
+<li>HDMI Monitor (to view the Demo on Display)</li>
+<li>IMX219 Camera</li>
+<li>USB Mouse</li>
+<li>SD card (minimum 16GB)</li>
+<li>Ethernet connection (if serial terminal console is not accessible)</li>
+</ul>
+</div>
+<div class="section" id="launching-and-using-the-edge-ai-gallery">
+<h2>1.6.1.3. Launching and Using the edge AI gallery<a class="headerlink" href="#launching-and-using-the-edge-ai-gallery" title="Permalink to this headline">¶</a></h2>
+<p>The edge AI gallery launches on Linux startup. Follow the below instructions to use it.</p>
+<ol class="arabic simple">
+<li>Connect the Display, IMX219 Camera, Mouse, Ethernet and Power on the board. The application will launch when the Device is fully booted.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/am62a_edge_ai_gallery_home.jpg"><img alt="../../_images/am62a_edge_ai_gallery_home.jpg" src="../../_images/am62a_edge_ai_gallery_home.jpg" style="width: 407px; height: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Once started, You can click on one of the <code class="docutils literal"><span class="pre">Image</span> <span class="pre">Classification</span></code>, <code class="docutils literal"><span class="pre">Object</span> <span class="pre">Detection</span></code> or <code class="docutils literal"><span class="pre">Semantic</span> <span class="pre">Segmentation</span></code> to validate the models with a fixed GStreamer pipeline.</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/am62a_edge_ai_gallery_cl.jpg"><img alt="../../_images/am62a_edge_ai_gallery_cl.jpg" src="../../_images/am62a_edge_ai_gallery_cl.jpg" style="width: 407px; height: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/am62a_edge_ai_gallery_od.jpg"><img alt="../../_images/am62a_edge_ai_gallery_od.jpg" src="../../_images/am62a_edge_ai_gallery_od.jpg" style="width: 407px; height: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/am62a_edge_ai_gallery_ss.jpg"><img alt="../../_images/am62a_edge_ai_gallery_ss.jpg" src="../../_images/am62a_edge_ai_gallery_ss.jpg" style="width: 407px; height: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>To switch to a new pipeline, click on the same button again to stop the currently running pipeline.</li>
+<li>To create and run a custom pipeline, click on <code class="docutils literal"><span class="pre">Custom</span></code> button. You’ll be provided with a popup menu to choose the below options.<ul>
+<li>Input Type: Image, Video or Camera</li>
+<li>Input: Image/Video file or Camera Device (For Image or Video files, the path displayed next to the dropdown heading is where you can add your custom files)</li>
+<li>Model: Models available in the file system (The path displayed next to the dropdown heading is where you can add your custom models)</li>
+</ul>
+</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/am62a_edge_ai_gallery_popup.jpg"><img alt="../../_images/am62a_edge_ai_gallery_popup.jpg" src="../../_images/am62a_edge_ai_gallery_popup.jpg" style="width: 407px; height: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic" start="5">
+<li><p class="first">Select the 3 options as described above and click on <code class="docutils literal"><span class="pre">Start</span></code> to generate and start the pipeline.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As the note suggests, it might take a while for custom pipeline to start.</p>
+</div>
+</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/am62a_edge_ai_gallery_custom.jpg"><img alt="../../_images/am62a_edge_ai_gallery_custom.jpg" src="../../_images/am62a_edge_ai_gallery_custom.jpg" style="width: 407px; height: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic" start="6">
+<li><p class="first">Click on <code class="docutils literal"><span class="pre">Custom</span></code> button again to stop the custom pipeline.</p>
+</li>
+<li><p class="first">For ease of use, the IP addr of the device is displayed at the bottom right when Network is connected.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The IP addr is polled only for the first 100 seconds after the application has started.</p>
+</div>
+</li>
+<li><p class="first">To close the application and go to the Wallpaper screen, use the close button on the top right corner.</p>
+</li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/am62a_edge_ai_gallery_wallpaper.jpg"><img alt="../../_images/am62a_edge_ai_gallery_wallpaper.jpg" src="../../_images/am62a_edge_ai_gallery_wallpaper.jpg" style="width: 407px; height: 400px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic" start="9">
+<li><p class="first">To add new images, videos and models, you should add them in the below directories respectively</p>
+<ul class="simple">
+<li>Images - /opt/edgeai-test-data/images/</li>
+<li>Videos - /opt/edgeai-test-data/videos/</li>
+<li>Models - /opt/model_zoo/</li>
+</ul>
+</li>
+<li><p class="first">To change the videos in the prebuilt pipelines used for <code class="docutils literal"><span class="pre">Image</span> <span class="pre">Classification</span></code>, <code class="docutils literal"><span class="pre">Object</span> <span class="pre">Detection</span></code> &amp; <code class="docutils literal"><span class="pre">Semantic</span> <span class="pre">Segmentation</span></code>, you can replace the video files <code class="docutils literal"><span class="pre">oob-gui-video*.h264</span></code> under <code class="docutils literal"><span class="pre">/opt/oob-demo-assets/</span></code>.</p>
+</li>
+<li><p class="first">To add new models to the <code class="docutils literal"><span class="pre">Model</span></code> dropdown list in Custom popup menu, Add the names of the models in <code class="docutils literal"><span class="pre">/opt/oob-demo-assets/allowedModels.txt</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For the above changes to take effect, close and relaunch the application.</p>
+</div>
+</li>
+<li><p class="first">To relaunch the application, you should run</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/etc/init.d/edgeai-launcher.sh start
+</pre></div>
+</div>
+</li>
+<li><p class="first">And to stop the application again, you should run</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/etc/init.d/edgeai-launcher.sh start
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="building-the-edge-ai-gallery">
+<h2>1.6.1.4. Building the edge AI gallery<a class="headerlink" href="#building-the-edge-ai-gallery" title="Permalink to this headline">¶</a></h2>
+<p>The edge AI gallery application is enabled by default for the <code class="docutils literal"><span class="pre">tisdk-edgeai-image</span></code> for J721E.</p>
+<p>The source code is available at <a class="reference external" href="https://git.ti.com/cgit/apps/edgeai-gui-app">edgeai-gui-app</a> and can be recompiled with the following steps</p>
+<ol class="arabic">
+<li><p class="first">To setup the environment, from the root of the SDK installation directory, source <cite>environment-setup</cite> script.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ source linux-devkit/environment-setup
+</pre></div>
+</div>
+</li>
+<li><p class="first">Go to the root of edgeai-gui-app repository and run the following command to build the application.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ qmake; make
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the compiled binary to /usr/bin directory of the device</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ scp edgeai-gui-app root@&lt;ip-addr-of-device&gt;:/usr/bin/
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../linux/Overview_Technical_Support.html" class="btn btn-neutral float-right" title="1.7. Processor SDK Technical Support" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../linux/Overview_EdgeAI_Stack.html" class="btn btn-neutral" title="1.6. Edge AI Stack and OOB Demos" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

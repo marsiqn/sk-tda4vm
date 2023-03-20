@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1.4. GCC ToolChain &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../../index.html"/>
+        <link rel="up" title="1.1. Getting Started Guide" href="../Overview_Getting_Started_Guide.html"/>
+        <link rel="next" title="1.2. Building the SDK with Yocto" href="../Overview_Building_the_SDK.html"/>
+        <link rel="prev" title="1.1.3. Formatting SD card on Linux" href="Processor_SDK_Linux_Formatting_SD_Card.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../Overview.html">1. Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../Overview_Getting_Started_Guide.html">1.1. Getting Started Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Download_and_Install_the_SDK.html">1.1.1. Download and Install the SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Run_Setup_Scripts.html">1.1.2. Run Setup Scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Processor_SDK_Linux_Formatting_SD_Card.html">1.1.3. Formatting SD card on Linux</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1.1.4. GCC ToolChain</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Overview_Building_the_SDK.html">1.2. Building the SDK with Yocto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Overview_Top_Level_Makefile.html">1.3. Simplified SDK Build using Top-Level Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Overview_Directory_Structure_Overview.html">1.4. Directory Structure Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Overview_PSDKLA_PSDKRA_Summary.html">1.5. Processor SDK RTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Overview_EdgeAI_Stack.html">1.6. Edge AI Stack and OOB Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Overview_Technical_Support.html">1.7. Processor SDK Technical Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Overview_GPLv3_Disclaimer.html">1.8. GPLv3 Disclaimer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Foundational_Components.html">3. Foundational Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../Overview.html">1. Overview</a> &raquo;</li>
+      
+          <li><a href="../Overview_Getting_Started_Guide.html">1.1. Getting Started Guide</a> &raquo;</li>
+      
+    <li>1.1.4. GCC ToolChain</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gcc-toolchain">
+<h1>1.1.4. GCC ToolChain<a class="headerlink" href="#gcc-toolchain" title="Permalink to this headline">¶</a></h1>
+<p class="rubric" id="gcc-overview">Overview</p>
+<p>The Processor SDK Linux J721e package contains an ARM-based toolchain for Cortex
+A devices. The ARM toolchain also enables hardware floating point
+(hardfp) support. Older toolchains including arm-arago-linux-gnueabi-
+uses software floating point (softfp). This results in software built
+using a hardfp toolchain being incompatible with software built with a
+softfp toolchain.</p>
+<p class="rubric" id="arm-toolchain">ARM Toolchain</p>
+<p>The Processor SDK Linux J721e package uses an ARM-based tool chain. Other than
+using a newer version of GCC, the ARM tool chain also supports hard
+floating point, also known as Hard-FP. Hard-FP uses the FPU on the ARM
+instead of simulating it. Older tool chains including the Arago tool
+chain uses soft floating point (Soft-FP). Binaries built using a soft-fp
+tool chain are not compatible with binaries built using a hard-fp.
+Therefore, you must rebuild all binaries to use either hard-fp and
+soft-fp since you can’t mix and match. By default, all binaries included
+in the Processor SDK Linux J721e package will be built for hard-fp.</p>
+<p>The name of the toolchain binaries have also been updated from older
+versions of the SDK. Current SDK ARMv8 toolchains use a prefix of
+“<strong>aarch64-linux-gnu-</strong>” For example, the new toolchain’s gcc compiler
+is named <strong>aarch64-linux-gnu-gcc</strong>.</p>
+<p>GCC tools are used to compile and link code on ARM A72/A53.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">CGT</th>
+<th class="head">Download link</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ARM64 CGT for A72/A53 Linux</td>
+<td><a class="reference external" href="https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu.tar.xz">https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu.tar.xz</a></td>
+</tr>
+<tr class="row-odd"><td>ARM32 CGT for R5F U Boot</td>
+<td><a class="reference external" href="https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz">https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric" id="linux-devkit-structure">Linux-Devkit Structure</p>
+<p>Here is the structure of the Linux-devkit directory within the SDK.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Element</td>
+<td>Location</td>
+</tr>
+<tr class="row-even"><td>Toolchain Location</td>
+<td>linux-devkit/sysroots/x86_64-arago-linux/usr/bin</td>
+</tr>
+<tr class="row-odd"><td>Cross Compile Libraries Location</td>
+<td>linux-devkit/sysroots/&lt;device specific string&gt;-vfp-neon-linux-gnueabi/usr/lib</td>
+</tr>
+<tr class="row-even"><td>Headers for Cross Compiled Libraries Location</td>
+<td>linux-devkit/sysroots/&lt;device specific string&gt;-vfp-neon-linux-gnueabi/usr/include</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric" id="location-in-sdk">Location in SDK</p>
+<p>The toolchain is located in the Linux SDK in the <strong>&lt;SDK INSTALL
+DIR&gt;/linux-devkit</strong> directory. The following sections will cover the key
+components of the toolchain.</p>
+<p class="rubric" id="cross-compilerstools">Cross-Compilers/Tools</p>
+<p>The cross-compilers and tools such as qmake2 can be found the the
+<strong>&lt;SDK INSTALL DIR&gt;/linux-devkit/sysroots/x86_64-arago-linux/usr/bin</strong> directory. Adding this
+directory to your PATH will allow using these tools. For example:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# export PATH=&quot;&lt;SDK INSTALL DIR&gt;/linux-devkit/sysroots/x86\_64-arago-linux/usr/bin:$PATH&quot;
+</pre></div>
+</div>
+<p>Additional tools are also located here such as the <strong>qmake2, rcc, uic</strong> tools
+used by Qt. In addition there is a qt.conf file that can be used by tools such
+as Qt creator to use the pre-built libraries found in the Linux SDK.</p>
+<p class="rubric" id="toolchain-prefix">Toolchain Prefix</p>
+<p>Reference the table below for all toolchain prefixes and their corresponding
+architectures found in Processor SDK.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="13%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Toolchain Prefix</td>
+<td>Architecture</td>
+<td>Processor SDK Device</td>
+</tr>
+<tr class="row-even"><td>aarch64-linux-gnu-</td>
+<td>ARMv8</td>
+<td>j7-evm j7200-evm am65xx-evm</td>
+</tr>
+</tbody>
+</table>
+<p>In an effort to be succient, the specific toolchain prefix will be replaced with
+${TOOLCHAIN_PREFIX} in the examples below. In fact, the
+<a class="reference external" href="#environment-setup-script">environment-setup script</a>, described below, will
+set this variable in your environment.</p>
+<p class="rubric" id="cross-compiled-libraries">Cross-Compiled Libraries</p>
+<p>The toolchain within the Linux SDK contains more than just the
+cross-compiler, it also contains pre-built libraries that can be used
+in your applications without requiring you to cross-compile them
+yourself. These libraries include packages from alsa to zlib. The
+libraries are located in the <strong>&lt;SDK INSTALL
+DIR&gt;/linux-devkit/sysroots/&lt;device specific
+string&gt;-vfp-neon-linux-gnueabi/</strong> directory. For a list of the
+libraries you can refer to the software manifest found in the <strong>&lt;SDK
+INSTALL DIR&gt;/docs</strong> directory or look at the list of libraries
+available in the <strong>&lt;SDK INSTALL DIR&gt;/linux-devkit/sysroots/&lt;device
+specific string&gt;-vfp-neon-linux-gnueabi/usr/lib</strong> directory. You will
+also find the header files corresponding to these libraries in the
+<strong>&lt;SDK INSTALL DIR&gt;/linux-devkit/sysroots/&lt;device specific
+string&gt;-vfp-neon-linux-gnueabi/usr/include</strong> directory. Usage of these
+libraries will be covered in more detail in the next sections, but as
+an example if your application wants access to the alsa asound library
+then you can now do the following command (assuming you have added the
+cross compiler to your PATH):</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# ${TOOLCHAIN_PREFIX}gcc -lasound app.c -o app.out
+</pre></div>
+</div>
+<p class="rubric" id="environment-setup-script">environment-setup script</p>
+<p>When cross-compiling packages that use configuration tools and autotools
+there are many settings that are required to make sure that the proper
+cross-compile libraries are used. The <strong>environment-setup</strong> script
+located in the <strong>&lt;SDK INSTALL DIR&gt;/linux-devkit</strong> directory handles this
+for you. This script exports variables to perform actions such as:</p>
+<ul class="simple">
+<li>Adding the toolchain to the PATH</li>
+<li>Setting up CPATH</li>
+<li>Setting up PKG_CONFIG_* paths</li>
+<li>Setting standard variable such as CC, CPP, AR to the cross-compile
+values</li>
+</ul>
+<p>To <strong>use</strong> the environment-setup script you only need to source it. This
+is as simple as:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# source linux-devkit/environment-setup
+</pre></div>
+</div>
+<p>To know if the environment setup script has been sourced in your current
+shell the shell prompt will be changed to contain the
+<strong>[linux-devkit]:</strong> prefix in the command prompt.</p>
+<p>The <a class="reference external" href="#usage">Usage</a> section below will cover some cases where
+using the environment-setup script is useful.</p>
+<p class="rubric" id="when-compiling-the-linux-kernel">When Compiling the Linux Kernel</p>
+<p>Because environment-setup changes standard variables such as CC you
+should not use this script when compiler projects that build host-side
+as well as target-side tools. A prime example of this is the Linux
+kernel, which builds some host side tools to help during the kernel
+build. If the environment-setup script has been sourced then the CC
+value will specify the cross-compiler for the host-side tool build. This
+means that the tools compiled and used during the kernel build will be
+compiled for the ARM platform while the kernel build tries to run these
+tools on an Intel platform. This will cause the tools to fail to run and
+the kernel to fail to compile.</p>
+<p class="rubric">Usage</p>
+<p>The following sections give some examples of how to use the included
+toolchain to compile a simple <em>HelloWorld</em> application.</p>
+<p class="rubric" id="simple-cross-compile">Simple Cross-Compile</p>
+<p>In the simplest case the cross-compiler can be used to compile simple
+applications that just need access to standard libraries. The two
+examples below cover an application that uses only the standard libgcc
+libraries and another example that uses the pthreads threading library.</p>
+<p class="rubric" id="helloworld">HelloWorld</p>
+<p>Simple applications like <strong>HelloWorld</strong> can be compiled using just a
+call to the cross-compiler since the cross-compiler can find the
+libraries it was built with without any issues. The following steps will
+show how to make a simple helloworld application and cross-compile that
+application.</p>
+<p>Create a <strong>helloworld.c</strong> file</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+ <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+     <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;Hello World from TI!!!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+<p>Cross-compile the <strong>helloworld.c</strong> file using the cross-compile
+toolchain. In this example we will invoke the toolchain without it
+having been added to our PATH.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# &lt;SDK INSTALL DIR&gt;/linux-devkit/sysroots/x86_64-arago-linux/usr/bin/${TOOLCHAIN_PREFIX}gcc helloworld.c -o helloworld
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>After the above steps are run you should now have a <strong>helloworld</strong>
+executable in your directory that has been compiled for the ARM. A
+simple way to check this is to run the following command:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span>host# file helloworld
+</pre></div>
+</div>
+<p>This should yield output like:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>helloworld: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 3.2.0, with debug_info, not stripped
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Overview_Building_the_SDK.html" class="btn btn-neutral float-right" title="1.2. Building the SDK with Yocto" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Processor_SDK_Linux_Formatting_SD_Card.html" class="btn btn-neutral" title="1.1.3. Formatting SD card on Linux" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>

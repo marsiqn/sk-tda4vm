@@ -1,0 +1,1153 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.7. Multimedia Video Codec &mdash; Processor SDK Linux for J721e Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Processor SDK Linux for J721e Documentation" href="../index.html"/>
+        <link rel="up" title="3. Foundational Components" href="Foundational_Components.html"/>
+        <link rel="next" title="3.8. Virtualization" href="Foundational_Components_Virtualization.html"/>
+        <link rel="prev" title="3.6.1. Introduction" href="Foundational_Components/Graphics/Graphics_and_Display.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <header id="tiHeader">
+    <div class="top">
+      <ul>
+        <li id="top_logo">
+          <a href="http://www.ti.com">
+            <img src="../_static/img/ti_logo.png"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav"></div>
+  </header>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../devices/J7/linux/index.html" class="icon icon-home"> Processor SDK Linux for J721e
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                08_06_00
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devices/J7/linux/Release_Specific.html">2. Release Specific</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Foundational_Components.html">3. Foundational Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Foundational_Components_U-Boot.html">3.1. U-Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Foundational_Components_Kernel.html">3.2. Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Foundational_Components_Filesystem.html">3.3. Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Foundational_Components_Tools.html">3.4. Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Foundational_Components_IPCLLD.html">3.5. IPC Low Level Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Foundational_Components_Graphics.html">3.6. Graphics and Display</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.7. Multimedia Video Codec</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">3.7.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demos">3.7.2. Demos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-architecture">3.7.3. Software Architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#software-stack-of-accelerated-codec-encoding-decoding">3.7.3.1. Software Stack of Accelerated Codec Encoding/Decoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux-kernel-drivers">3.7.3.2. Linux Kernel Drivers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gstreamer-plugins-for-multimedia">3.7.3.3. GStreamer Plugins for Multimedia</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gstreamer-pipelines">3.7.4. GStreamer Pipelines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#running-a-gstreamer-pipeline">3.7.4.1. Running a GStreamer pipeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations-of-gstreamer-plugins">3.7.4.2. Limitations of GStreamer Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gstreamer-plugin-internals">3.7.4.3. GStreamer Plugin Internals</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-optimisation">3.7.5. Memory Optimisation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#decoder-driver-memory-optimisation">3.7.5.1. Decoder Driver Memory Optimisation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rebuilding-and-debugging">3.7.6. Rebuilding and Debugging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rebuilding-v4l2-drivers">3.7.6.1. Rebuilding V4L2 Drivers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debug-logs">3.7.6.2. Debug Logs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#latency-profiling">3.7.6.3. Latency Profiling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Foundational_Components_Virtualization.html">3.8. Virtualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Foundational_Components_ATF.html">3.9. ARM Trusted Firmware-A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Foundational_Components_OPTEE.html">3.10. OP-TEE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="How_to_Guides.html">4. How to Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Documentation_Tarball.html">5. Documentation Tarball</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../devices/J7/linux/index.html">Processor SDK Linux for J721e</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../devices/J7/linux/index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="Foundational_Components.html">3. Foundational Components</a> &raquo;</li>
+      
+    <li>3.7. Multimedia Video Codec</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multimedia-video-codec">
+<span id="foundational-components-multimedia"></span><h1>3.7. Multimedia Video Codec<a class="headerlink" href="#multimedia-video-codec" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>3.7.1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>TI’s embedded processors such as J721E have the
+following hardware accelerators:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Multi-Standard HD Video Decoder (DECODER) based on D5520MP2 from
+Imagination Technologies for accelerating multimedia decode</li>
+<li>Multi-Standard HD Video Encoder (ENCODER) based on VXE384MP2 from
+Imagination Technologies for accelerating multimedia encode</li>
+</ol>
+</div></blockquote>
+<p>In order to make it easy for customers to write applications, and to
+leverage open source elements that provide functionality such as AVI
+stream demuxing, audio encode/decode, etc, TI’s Processor SDK Linux J721e
+supplies ARM-based GStreamer plugins that abstract the hardware
+acceleration.</p>
+<p>This multimedia training page will cover the following topics:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Capabilities of DECODER and ENCODER</li>
+<li>Out-of-box Multimedia Demos in Processor SDK Linux J721e</li>
+<li>Software Stack of Accelerated Codec Encoding/Decoding</li>
+<li>V4L2 Driver-level Test Application</li>
+<li>GStreamer Pipelines for Multimedia Applications</li>
+<li>Limitations of GStreamer Plugins</li>
+<li>Memory Optimisation</li>
+<li>Rebuilding the V4L2 encode/decode driver modules</li>
+<li>Enabling Debug Features</li>
+</ol>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p class="rubric" id="capabilities-of-decoder-encoder-and-arm">Capabilities of DECODER, ENCODER, and ARM</p>
+<p>In Processor SDK Linux J721e, DECODER hardware supports the following codecs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Video Decode: H.264, HEVC/H.265, MPEG4/H.263, WMV9, VC-1, MPEG2,
+DivX, AVS, RealVideo, VP8, VP6, Sorenson</li>
+<li>Image Decode: MJPEG</li>
+</ul>
+</div></blockquote>
+<p>The multimedia decoding applications, however, support a subset of the
+codecs supported by the DECODER hardware. The decoding applications
+support these codecs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Video Decode: H.264 and HEVC/H.265</li>
+<li>Image Decode: MJPEG</li>
+</ul>
+</div></blockquote>
+<p>The ENCODER hardware supports the following codecs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Video Encode: H.264, MPEG4, H.263, MPEG2</li>
+<li>Image Encode: JPEG</li>
+</ul>
+</div></blockquote>
+<p>The multimedia encoding applications, however, support a subset of the
+codecs supported by the ENCODER hardware. The encoding applications
+support these codecs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Video Encode: H.264</li>
+</ul>
+</div></blockquote>
+<p>Demo applications also demonstrate the following ARM-based coding
+capabilities:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Audio encoding and decoding on ARM: AAC, MPEG2 (leveraging open
+source codecs)</li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="demos">
+<h2>3.7.2. Demos<a class="headerlink" href="#demos" title="Permalink to this headline">¶</a></h2>
+<p>The multimedia video decode capabilities can be demonstrated by using
+the GStreamer pipeline to decode to the display. Please refer to the section
+<a class="reference internal" href="#gstreamer-pipelines">GStreamer Pipelines</a>  for further details. The decoder can also be
+tested at the V4L2 driver level using the standalone test application
+detailed in the section <a class="reference internal" href="#v4l2-video-decoder-test-app"><span class="std std-ref">V4L2 Video Decoder Test Application</span></a>.</p>
+<p>At this time, GStreamer for encode using the ENCODER hardware is not supported.
+The encoder can be tested at the V4L2 driver level using the standalone
+test app detailed in the section <a class="reference internal" href="#v4l2-video-encoder-test-app"><span class="std std-ref">V4L2 Video Encoder Test Application</span></a>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="software-architecture">
+<h2>3.7.3. Software Architecture<a class="headerlink" href="#software-architecture" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="software-stack-of-accelerated-codec-encoding-decoding">
+<h3>3.7.3.1. Software Stack of Accelerated Codec Encoding/Decoding<a class="headerlink" href="#software-stack-of-accelerated-codec-encoding-decoding" title="Permalink to this headline">¶</a></h3>
+<p>As shown in the figures below, the software stack of the accelerated
+encoding and decoding has two parts:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A V4L2 (Video4Linux version 2) software driver running on Linux on the A72 MPU subsystem</li>
+<li>The firmware running on the DECODER and ENCODER</li>
+</ul>
+</div></blockquote>
+<p>The driver communicates with the firmware running on the ENCODER/DECODER
+through its own IPC (inter-processor communication).
+For the DECODER, at the highest level in the MPU subsystem on the A72,
+there is a Linux user space application which is based on GStreamer. GStreamer
+is an open source framework that simplifies the development of multimedia
+applications. The GStreamer library loads and interfaces with the GStreamer
+plugin (V4L2 plugin), which handles all the details specific to the use of
+the hardware accelerator. Specifically, the GStreamer plugin interfaces
+with the V4L2 decoder and encoder kernel driver interface. The V4L2 decoder driver
+controls the DECODER to enable the accelerated decoding and the V4L2 encoder
+driver controls the Encoder to enable the accelerated encoding.</p>
+<div class="center"><div class="floatnone"><div class="figure" id="id1">
+<img alt="codec software stack" src="../_images/MM_D5520MP2_VXE384MP2_SW_overview.png" />
+<p class="caption"><span class="caption-number">Fig. 3.5 </span><span class="caption-text">CODEC Software Stack</span></p>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="linux-kernel-drivers">
+<h3>3.7.3.2. Linux Kernel Drivers<a class="headerlink" href="#linux-kernel-drivers" title="Permalink to this headline">¶</a></h3>
+<p class="rubric" id="ti-provided-v4l2-drivers-for-multimedia">TI-Provided V4L2 Drivers for Multimedia</p>
+<p>Video4Linux version 2 (V4L2) is an open source framework that
+provides a media interface to all Linux-based applications. V4L2 is
+a collection of device drivers and an API for supporting realtime
+video capture and video memory-to-memory operations on Linux systems.</p>
+<p>Video encode and decode using the ENCODER and DECODER hardware, respectively,
+are enabled as V4L2 drivers. The V4L2 is integrated with the ENCODER and
+DECODER drivers by a thin layer that implements the V4L2 node ioctls
+and translates the V4L2 data structures to those understood by the
+ENCODER/DECODER.</p>
+<div class="section" id="v4l2-video-decoder">
+<h4>3.7.3.2.1. V4L2 Video Decoder<a class="headerlink" href="#v4l2-video-decoder" title="Permalink to this headline">¶</a></h4>
+<p>The V4L2 video decoder driver is a memory-to-memory device that receives
+the encoded data on its “output” stream and generates the decoded data to
+its “capture” stream. The module name is “vxd-dec.ko”.</p>
+<p class="rubric" id="v4l2-dec-codec-support">Codec Support</p>
+<p>The V4L2 decoder driver supports receiving the following encoded bitstream
+formats on its “output” stream:</p>
+<blockquote>
+<div><ul class="simple">
+<li>V4L2_PIX_FMT_H264</li>
+<li>V4L2_PIX_FMT_HEVC</li>
+<li>V4L2_PIX_FMT_MJPEG</li>
+</ul>
+</div></blockquote>
+<p class="rubric" id="v4l2-dec-color-format-support">Color Format Support</p>
+<p>The DECODER supports outputting several color formats. There is no color
+conversion performed. The selected color format should be the same as the
+native color format of the encoded stream. The V4L2 decoder driver supports
+several standard V4L2 color formats, plus two custom color formats. The
+formats supported are:</p>
+<p>Standard Formats:</p>
+<blockquote>
+<div><ul class="simple">
+<li>V4L2_PIX_FMT_NV12</li>
+<li>V4L2_PIX_FMT_NV16</li>
+<li>V4L2_PIX_FMT_YUV420M</li>
+<li>V4L2_PIX_FMT_YUV422M</li>
+</ul>
+</div></blockquote>
+<p>Custom Formats:</p>
+<blockquote>
+<div><ul class="simple">
+<li>V4L2_PIX_FMT_TI1210 (NV12 10-bit)</li>
+<li>V4L2_PIX_FMT_TI1610 (NV16 10-bit)</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Formats with an “M” at the end of their name are multi-planar formats,
+meaning that the planes are non-contiguous in memory.</p>
+</div>
+<p>The following table shows the native color format support for each of the supported codecs:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Codec</strong></td>
+<td><strong>Supported Color Format</strong></td>
+</tr>
+<tr class="row-even"><td>H.264</td>
+<td><p class="first">V4L2_PIX_FMT_NV12</p>
+<p>V4L2_PIX_FMT_NV16</p>
+<p>V4L2_PIX_FMT_TI1210</p>
+<p class="last">V4L2_PIX_FMT_TI1610</p>
+</td>
+</tr>
+<tr class="row-odd"><td>HEVC/H.265</td>
+<td><p class="first">V4L2_PIX_FMT_NV12</p>
+<p>V4L2_PIX_FMT_NV16</p>
+<p>V4L2_PIX_FMT_TI1210</p>
+<p class="last">V4L2_PIX_FMT_TI1610</p>
+</td>
+</tr>
+<tr class="row-even"><td>MJPEG</td>
+<td><p class="first">V4L2_PIX_FMT_YUV420M</p>
+<p class="last">V4L2_PIX_FMT_YUV422M</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="v4l2-video-decoder-test-application">
+<span id="v4l2-video-decoder-test-app"></span><h4>3.7.3.2.2. V4L2 Video Decoder Test Application<a class="headerlink" href="#v4l2-video-decoder-test-application" title="Permalink to this headline">¶</a></h4>
+<p>A test application that interfaces directly through the V4L2 API is provided
+along with the release. The test application used for verifying the DECODER
+functionality through the V4L2 API is “tidec_decode”.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">tidec_decode is only able to handle raw streams, not container formats.</p>
+</div>
+<p>Usage:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>tidec_decode -i &lt;input_file&gt; [OPTIONS]
+The final output file/s will be &#39;&lt;output_file_base&gt;_xx.out&#39;
+where xx ranges from 00, 01, 02, ...
+depending on how many fds are specified to -n
+
+OPTIONS:
+        -h                              help
+        -b                              DO NOT use drm dss device capture buffer (instead, use v4l2)
+        -n &lt;number&gt;                     number of fds to open
+        -o &lt;output_file_base&gt;           Dump output stream to file
+                                        The final output file/s will be &#39;&lt;output_file_base&gt;_xx.out&#39;
+                                        where xx ranges from 00, 01, 02, ...
+                                        depending on how many fds are specified to -n
+        -f &lt;number of frames to decode&gt; Maximum number of frames to decode
+        -d &lt;path&gt;                       Path to which drm device to use for buffer allocation
+        -t                              for enable time profiling
+        -e &lt;number of ms&gt;               Number of milliseconds to sleep between
+                                        queueing the last bitstream buffer and sending CMD_STOP
+                                        Used to test various timing scenarios for EOS
+        -v &lt;dev_name&gt;                   Used to specify which device node is the decoder
+</pre></div>
+</div>
+<p>Verification:</p>
+<p>In order to verify basic functionality, runs can be done with no output file specified.
+In this case, the command line would be simply:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>tidec_decode -i &lt;input_file&gt;
+</pre></div>
+</div>
+<p>At the end of a successful run, the test application prints:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>test app completed successfully
+</pre></div>
+</div>
+<p>which can be used to verify a run to completion.</p>
+<p>In order to verify the decoded output, a YUV player or mplayer can be used
+on the host PC. In this case, an output file needs to be specified. The total
+command line would be:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>tidec_decode -i &lt;input_file&gt; -o &lt;output_file&gt;
+</pre></div>
+</div>
+<p>The output could then be played back on the host PC. For example, to play back
+raw QCIF NV12 output:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>mplayer output.yuv -demuxer rawvideo -rawvideo w=176:h=144:format=NV12
+</pre></div>
+</div>
+</div>
+<div class="section" id="v4l2-video-encoder">
+<h4>3.7.3.2.3. V4L2 Video Encoder<a class="headerlink" href="#v4l2-video-encoder" title="Permalink to this headline">¶</a></h4>
+<p>The V4L2 video encoder driver is a memory-to-memory device that receives
+the raw frame data on its “output” stream and generates the encoded data to
+its “capture” stream. The module name is “vxe-enc.ko”.</p>
+<p class="rubric" id="v4l2-enc-codec-support">Codec Support</p>
+<p>The V4L2 encoder driver supports encoding to the following encoded bitstream
+formats on its “capture” stream:</p>
+<blockquote>
+<div><ul class="simple">
+<li>V4L2_PIX_FMT_H264</li>
+</ul>
+</div></blockquote>
+<p class="rubric" id="v4l2-enc-color-format-support">Color Format Support</p>
+<p>The V4L2 encoder driver supports encoding of the following color formats for
+the raw data “output” stream:</p>
+<blockquote>
+<div><ul class="simple">
+<li>V4L2_PIX_FMT_NV12</li>
+</ul>
+</div></blockquote>
+<p class="rubric" id="v4l2-enc-config-controls">Configurable Controls</p>
+<p>The V4L2 encoder driver has the following configurable controls:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="11%" />
+<col width="16%" />
+<col width="12%" />
+<col width="17%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Ctrl</strong></td>
+<td><strong>Min</strong></td>
+<td><strong>Max</strong></td>
+<td><strong>Step</strong></td>
+<td><strong>Default</strong></td>
+</tr>
+<tr class="row-even"><td>V4L2_CID_MPEG_VIDEO_GOP_SIZE</td>
+<td>1</td>
+<td>7200</td>
+<td>1</td>
+<td>1800</td>
+</tr>
+<tr class="row-odd"><td>V4L2_CID_MPEG_VIDEO_BITRATE</td>
+<td>50000</td>
+<td>100000000</td>
+<td>1</td>
+<td>500000</td>
+</tr>
+<tr class="row-even"><td>V4L2_CID_MPEG_VIDEO_H264_I_PERIOD</td>
+<td>1</td>
+<td>600</td>
+<td>1</td>
+<td>3600</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The controls should be set before calling VIDIOC_S_FMT.</p>
+</div>
+<p>The following table gives recommended values for bitrate based on resolution and frame type:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="43%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Resolution</strong></td>
+<td><strong>Bitrate for I-frame Only sequence</strong></td>
+<td><strong>Bitrate for IPP sequence</strong></td>
+</tr>
+<tr class="row-even"><td>QCIF (176x144)</td>
+<td>1000000</td>
+<td>500000</td>
+</tr>
+<tr class="row-odd"><td>CIF (352x288)</td>
+<td>2000000</td>
+<td>1000000</td>
+</tr>
+<tr class="row-even"><td>VGA (640x480)</td>
+<td>6000000</td>
+<td>4000000</td>
+</tr>
+<tr class="row-odd"><td>HD (1280x720)</td>
+<td>12000000</td>
+<td>7000000</td>
+</tr>
+<tr class="row-even"><td>Full HD (1920x1080)</td>
+<td>15000000</td>
+<td>10000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="v4l2-video-encoder-test-application">
+<span id="v4l2-video-encoder-test-app"></span><h4>3.7.3.2.4. V4L2 Video Encoder Test Application<a class="headerlink" href="#v4l2-video-encoder-test-application" title="Permalink to this headline">¶</a></h4>
+<p>A test application that interfaces directly through the V4L2 API is provided
+along with the release. The test application used for verifying the ENCODER
+functionality through the V4L2 API is “tienc_encode”.</p>
+<p>Usage:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>tienc_encode -i &lt;input_file&gt; -w &lt;width&gt; -h &lt;height&gt; [OPTIONS]
+OPTIONS:
+        -o &lt;output_file_name&gt;
+                Dump output stream to file
+        -d &lt;device&gt;
+                Location of device node (ex. /dev/video0)
+        -e &lt;device_path&gt;
+                Directory of device node (ex. /dev/)
+                Not needed if -d argument is provided
+        -f &lt;format&gt;
+                Input image format. Available formats:
+                        NV12
+        -c &lt;codec&gt;
+                Output stream codec. Available codecs
+                        H264
+        -n &lt;n_frames&gt;
+                Number of frames to encode
+        -b &lt;bitrate&gt;
+                Bitrate in bits per second
+        -g &lt;gop_size&gt;
+                IDR frame interval
+        -p &lt;i_period&gt;
+                I frame period in H264
+        -r &lt;framerate&gt;
+                Framerate in frames per second
+        -j
+                Use DMA buffers for output stream
+        -k
+                Use DMA buffers for capture stream
+        -l &lt;drm_device_name&gt;
+                Location of drm device (ex. /dev/dri/card0)
+        -m &lt;drm_device-path&gt;
+                Directory of drm device node (ex. /dev/dri/)
+                Not needed if -l argument is provided
+</pre></div>
+</div>
+<p>Verification:</p>
+<p>In order to verify basic functionality, defaults can be used for most
+configurable options except for input file, width, height, and output file.
+In this case, the command line would be simply:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>tienc_encode -i &lt;input_file&gt; -w &lt;width&gt; -h &lt;height&gt; -o &lt;output_file&gt;
+</pre></div>
+</div>
+<p>At the end of a successful run, the test application prints:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Got EPIPE, exiting
+</pre></div>
+</div>
+<p>which can be used to verify a run to completion.</p>
+<p>In order to verify the encoded bitstream, mplayer can be used on the host
+PC. The total command line would be:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>tienc_encode -i &lt;input_file&gt; -w &lt;width&gt; -h &lt;height&gt; -o &lt;output_file&gt;
+</pre></div>
+</div>
+<p>The encoded bitstream could then be played back on the host PC. For example,
+to play back a raw H.264 bitstream:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>mplayer -fps 30 output.h264
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="gstreamer-plugins-for-multimedia">
+<h3>3.7.3.3. GStreamer Plugins for Multimedia<a class="headerlink" href="#gstreamer-plugins-for-multimedia" title="Permalink to this headline">¶</a></h3>
+<p class="rubric" id="open-source-gstreamer-overview">Open Source GStreamer Overview</p>
+<p>GStreamer is an open source framework that simplifies the development of
+multimedia applications, such as media players and capture encoders. It
+encapsulates existing multimedia software components, such as codecs,
+filters, and platform-specific I/O operations, by using a standard
+interface and providing a uniform framework across applications.</p>
+<p>The modular nature of GStreamer facilitates the addition of new
+functionality, transparent inclusion of component advancements and
+allows for flexibility in application development and testing.
+Processing nodes are implemented via GStreamer plugins with several sink
+and/or source pads. Many plugins are running as ARM software
+implementations, but for more complex SoCs, certain functions are better
+executed on hardware-accelerated IPs like D5520MP2 (DECODER) and
+VXE384MP2 (ENCODER).</p>
+<p>GStreamer is a multimedia framework based on data flow paradigm. It allows
+easy plugin registration just by deploying new shared objects to the
+/usr/lib/gstreamer-1.0 folder. The shared libraries in this folder are
+scanned for reserved data structures identifying capabilities of
+individual plugins. Individual processing nodes can be interconnected as
+a pipeline at run-time, creating complex topologies. Node interfacing
+compatibility is verified at that time - before the pipeline is started.</p>
+<p>GStreamer brings a lot of value-added features to Processor SDK Linux J721e,
+including audio encoding/decoding, audio/video synchronization, and
+interaction with a wide variety of open source plugins (muxers,
+demuxers, codecs, and filters). New GStreamer features are continuously
+being added, and the core libraries are actively supported by
+participants in the GStreamer community. Additional information about
+the GStreamer framework is available on the GStreamer project site:
+<a class="reference external" href="http://gstreamer.freedesktop.org/">http://gstreamer.freedesktop.org/</a>.</p>
+<p class="rubric" id="video-decode-gstreamer-plugins">Hardware-Accelerated GStreamer Plugins</p>
+<p>One benefit of using GStreamer as a multimedia framework is that the
+core libraries already build and run on ARM Linux. Only a GStreamer
+plugin is required to enable additional hardware features on TI’s
+embedded processors with both ARM and hardware accelerators for
+multimedia. The open source GStreamer plugins provide elements for
+GStreamer pipelines that enable the use of hardware-accelerated video
+decoding through the V4L2 GStreamer plugin.</p>
+<p>Below is a list of GStreamer plugins that utilize the hardware-accelerated
+video decoding in the J721E.</p>
+<ul>
+<li><p class="first">DECODER</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>v4l2h264dec</li>
+<li>v4l2h265dec</li>
+<li>v4l2jpegdec</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">ENCODER</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>v4l2h264enc</li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="gstreamer-pipelines">
+<h2>3.7.4. GStreamer Pipelines<a class="headerlink" href="#gstreamer-pipelines" title="Permalink to this headline">¶</a></h2>
+<p class="rubric" id="visual-representation-of-typical-gstreamer-pipelines">Visual Representation of Typical GStreamer Pipelines</p>
+<p>A typical GStreamer pipeline starts with one or more source elements,
+uses zero or more filter elements, and ends in a sink or multiple sinks.</p>
+<p>This section provides visual representation of one typical GStreamer
+pipeline: multimedia decoding and playout.</p>
+<p class="rubric" id="decode-pipeline">Decode Pipeline</p>
+<p>The example pipeline shown in the figure <a class="reference internal" href="#gst-dec-playout-fig"><span class="std std-ref">GStreamer Decode Playout</span></a>
+demonstrates the demuxing and playback of a transport stream. The input
+is first read using the source element, and then processed by
+GStreamer playbin2 (Player Bin 2). To use playbin2 in the pipeline,
+we use the playbin element (as shown in the figure below). Inside playbin2,
+demuxer first demuxes the stream into its audio and video stream components.</p>
+<p>The video stream is then queued and sent to V4L2
+GStreamer plugin for decoding. Finally, it is sent to a video sink to
+display the decoded video on the screen. The audio stream is queued and
+then decoded by the ARM audio GStreamer plugin, and then reaches its
+destination at the alsasink element to play the decoded audio.</p>
+<div class="center"><div class="floatnone"><div class="figure" id="id2">
+<span id="gst-dec-playout-fig"></span><img alt="gstreamer decode playout" src="../_images/Gst_decode_playout_v2.png" />
+<p class="caption"><span class="caption-number">Fig. 3.6 </span><span class="caption-text">GStreamer Decode Playout</span></p>
+</div>
+</div></div><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="running-a-gstreamer-pipeline">
+<h3>3.7.4.1. Running a GStreamer pipeline<a class="headerlink" href="#running-a-gstreamer-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>GStreamer pipelines can also run from the command line. In order to do so,
+exit Weston by pressing Ctrl-Alt-Backspace from the keyboard which
+connects to the EVM. Then, if the LCD screen stays in “Please wait…”,
+press Ctrl-Alt-F1 to go to the command line on the LCD console. After that,
+the command line can be used from serial console, SSH console, or LCD
+console.</p>
+<p>One can run an audio video file using the GStreamer playbin from the
+console. Currently, the supported Audio/video sink is kmssink,
+waylandsink and alsassink.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">playbin is currently supported only with kmssink and only for NV12 output.</p>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span>kmssink:
+  target #  gst-launch-1.0 playbin uri=file:///&lt;path_to_file&gt; video-sink=kmssink audio-sink=alsasink
+</pre></div>
+</div>
+<p>One can also run an audio video file without playbin. This is required
+for decode to any sink except kmssink due to the need to use the video
+format filter, which can not be used with playbin. The following pipelines
+show how to playback to kmssink and waylandsink without playbin.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>kmssink (video only playback):
+  target #  gst-launch-1.0 filesrc location=/&lt;path_to_file&gt; ! qtdemux ! h264parse ! v4l2h264dec ! video/x-raw,format=NV12 ! kmssink
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span>kmssink (audio + video playback):
+  target #  gst-launch-1.0 filesrc location=/&lt;path_to_file&gt; ! qtdemux name=demux \
+            demux.video_0 ! queue ! h264parse ! v4l2h264dec ! video/x-raw,format=NV12 ! kmssink \
+            demux.audio_0 ! queue ! decodebin ! alsasink
+</pre></div>
+</div>
+<p>The following pipelines show playback to waylandsink. Please refer
+<a class="reference external" href="Foundational_Components_Graphics.html#wayland-weston">Wayland/Weston</a>
+to start Weston before running the pipelines.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>waylandsink (video only playback):
+  target #  gst-launch-1.0 filesrc location=/&lt;path_to_file&gt; ! qtdemux ! h264parse ! v4l2h264dec ! video/x-raw,format=NV12 ! waylandsink
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span>waylandsink (audio + video playback):
+  target #  gst-launch-1.0 filesrc location=/&lt;path_to_file&gt; ! qtdemux name=demux \
+            demux.video_0 ! queue ! h264parse ! v4l2h264dec ! video/x-raw,format=NV12 ! waylandsink \
+            demux.audio_0 ! queue ! decodebin ! alsasink
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="arabic">
+<li><p class="first">The V4L2 Plugin (and TI V4L2 Video Decode driver) will not select the
+native color format on its own. The video format filter MUST be used to
+ensure proper decoding. The required filter is highlighted in the below
+example pipeline. The format can be changed according to the input stream:</p>
+<blockquote>
+<div><p>gst-launch-1.0 ! filesrc location=/&lt;path_to_file&gt; ! qtdemux ! h264parse ! v4l2h264dec ! <strong>video/x-raw,format=NV12</strong> ! waylandsink</p>
+</div></blockquote>
+</li>
+<li><p class="first">If the native format is not supported by the sink, then a color converter
+plugin will need to be used in the pipeline.</p>
+</li>
+<li><p class="first">playbin is currently supported ONLY with kmssink and ONLY for NV12 format.</p>
+</li>
+</ol>
+<p class="last">For full list of limitations, see <a class="reference internal" href="#limitations-of-gstreamer-plugins">Limitations of GStreamer Plugins</a>.</p>
+</div>
+<p>The following pipelines show examples of using the v4l2h265dec and v4l2jpegdec elements.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>HEVC/H.265 video playback to waylandsink
+  target #  gst-launch-1.0 filesrc location=/&lt;path_to_file&gt; ! qtdemux ! h265parse ! v4l2h265dec ! video/x-raw,format=NV12 ! waylandsink
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span>MJPEG video playback to waylandsink
+  target #  gst-launch-1.0 filesrc location=/&lt;path_to_file&gt; ! qtdemux ! jpegparse ! v4l2jpegdec ! video/x-raw,format=I420 ! videoconvert ! video/x-raw,format=NV12 ! waylandsink
+</pre></div>
+</div>
+<p>Scaling of the decoded video to fit the display with kmssink can be achieved by
+selecting a kms plane with scaling support.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>To enumerate all the connector IDs and plane IDs, modetest can be used:
+  target #  modetest -M tidss -p
+
+kmssink playback using VID plane that supports display scaling:
+  target #  gst-launch-1.0 playbin uri=file:///&lt;path_to_file&gt; video-sink=&quot;kmssink plane-id=41&quot; audio-sink=alsasink
+
+Or
+  target #  gst-launch-1.0 filesrc location=/&lt;path_to_file&gt; ! qtdemux ! h264parse ! v4l2h264dec ! video/x-raw,format=NV12 ! kmssink plane-id=41
+</pre></div>
+</div>
+<p>The following pipeline shows example of using the v4l2h264enc element.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>H.264 video encoding to filesink
+   target #  gst-launch-1.0 filesrc location=/&lt;path_to_file&gt; rawvideoparse width=1280 height=720 framerate=30/1 format=23 ! v4l2h264enc ! filesink location=/&lt;path_to_file&gt;
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="limitations-of-gstreamer-plugins">
+<h3>3.7.4.2. Limitations of GStreamer Plugins<a class="headerlink" href="#limitations-of-gstreamer-plugins" title="Permalink to this headline">¶</a></h3>
+<p class="rubric" id="gstreamer-plugins-limitations">Limitations of GStreamer Plugins</p>
+<ul class="simple">
+<li>GStreamer V4L2 plugin decoder elements need video filter
+(video/x-raw,format=&lt;format&gt;) to select the native color format for decoding.</li>
+<li>playbin is supported ONLY with kmssink and ONLY with NV12 format due to need
+for video filter with other sinks.</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="gstreamer-plugin-internals">
+<h3>3.7.4.3. GStreamer Plugin Internals<a class="headerlink" href="#gstreamer-plugin-internals" title="Permalink to this headline">¶</a></h3>
+<p class="rubric" id="v4l2-gstreamer-plugin-support">V4L2 GStreamer Plugin Support</p>
+<p>Each V4L2 decode element has one sink pad and one src pad. The sink pad
+is for receiving the encoded bitstream, and the src pad is for outputting the
+raw video data.</p>
+<p class="rubric" id="element-src-and-sink-pads">Element Src and Sink Pads</p>
+<p>The following table gives the format support for the sink and src pads for each
+supported element.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Element</strong></td>
+<td><strong>Sink Pad Format</strong></td>
+<td><strong>Src Pad Format</strong></td>
+</tr>
+<tr class="row-even"><td>v4l2h264dec</td>
+<td>H.264</td>
+<td><p class="first">NV12</p>
+<p class="last">NV16</p>
+</td>
+</tr>
+<tr class="row-odd"><td>v4l2h265dec</td>
+<td>HEVC/H.265</td>
+<td><p class="first">NV12</p>
+<p class="last">NV16</p>
+</td>
+</tr>
+<tr class="row-even"><td>v4l2jpegdec</td>
+<td>MJPEG</td>
+<td><p class="first">I420</p>
+<p class="last">Y42B</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="arabic">
+<li><p class="first">No color conversion is performed in the plugin or v4l2 decode driver. The
+color format selected should be that of the native color format of the encoded bitstream.</p>
+</li>
+<li><p class="first">To select the appropriate color format, it is important to provide the color
+format filter to the GStreamer pipeline. See <a class="reference internal" href="#running-a-gstreamer-pipeline">Running a GStreamer pipeline</a> for more
+information on how to provide this filter. Example:</p>
+<blockquote>
+<div><p>gst-launch-1.0 filesrc location=&lt;file_location&gt; ! h264parse ! v4l2h264dec ! <strong>video/x-raw,format=NV12</strong> ! kmssink</p>
+</div></blockquote>
+</li>
+<li><p class="first">The v4l2 decode driver supports some
+<a class="reference external" href="Foundational_Components_Multimedia_D5520_VXE384.html#v4l2-dec-color-format-support">custom 10-bit color formats</a>,
+but that support is not available at GStreamer plugin side.</p>
+</li>
+</ol>
+<p class="last">For full list of limitations, see <a class="reference internal" href="#limitations-of-gstreamer-plugins">Limitations of GStreamer Plugins</a>.</p>
+</div>
+<p class="rubric" id="inspecting-an-element">Inspecting an Element</p>
+<p>To get the full information about an element, the gst-inspect-1.0 utility can be used on
+the target. For example:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>target #  gst-inspect-1.0 v4l2h264dec
+target #  gst-inspect-1.0 v4l2h264enc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">gst-inspect-1.0 will show that all color formats are available for every element.
+However, not all color formats are supported by every element. The table
+<a class="reference external" href="Foundational_Components_Multimedia_D5520_VXE384.html#element-src-and-sink-pads">here</a>
+summarizes the actual support per element.</p>
+</div>
+<p class="rubric" id="buffer-flow-considerations">Buffer Flow Considerations</p>
+<p>The V4L2 GStreamer Plugin provides the ability to either allocate its own buffers,
+or import buffers from a downstream plugin such as kmssink or waylandsink. This
+buffer io-mode can be selected using the property “capture-io-mode”. To request
+the decoder element (and in turn the TI V4L2 decoder driver) to do the allocation,
+“dmabuf” (GST_V4L2_IO_DMABUF) is used. To request the element to import buffers
+allocated downstream, “dmabuf-import” (GST_V4L2_IO_DMABUF_IMPORT) is used. By
+default for the decode elements, GST_V4L2_IO_DMABUF will be selected due to V4L2
+decoder driver support for it.</p>
+<p>With the TI V4L2 Video Decoder Driver, the best latency performance to display is achieved
+with the default of “dmabuf” (GST_V4L2_IO_DMABUF). This default provides
+the best performance because internally the V4L2 decoder allocates contiguous
+buffers that can be sent to display without any buffer copies.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="memory-optimisation">
+<h2>3.7.5. Memory Optimisation<a class="headerlink" href="#memory-optimisation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="decoder-driver-memory-optimisation">
+<h3>3.7.5.1. Decoder Driver Memory Optimisation<a class="headerlink" href="#decoder-driver-memory-optimisation" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>To optimise the Decoder driver memory allocation with performance degradation less than 10%.
+Change the Macro in Makefile as CAPTURE_CONTIG_ALLOC ?=n, and follow the driver rebuild instructions.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>drivers/media/platform/vxe-vxd/makefile
+</pre></div>
+</div>
+<p>Make the following change:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>-                 CAPTURE_CONTIG_ALLOC ?=y
++                 CAPTURE_CONTIG_ALLOC ?=n
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="rebuilding-and-debugging">
+<h2>3.7.6. Rebuilding and Debugging<a class="headerlink" href="#rebuilding-and-debugging" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rebuilding-v4l2-drivers">
+<h3>3.7.6.1. Rebuilding V4L2 Drivers<a class="headerlink" href="#rebuilding-v4l2-drivers" title="Permalink to this headline">¶</a></h3>
+<p>The V4L2 Encode and Decode drivers can be rebuilt using the
+“linux-ti-staging” Yocto recipe available with the release.
+If the recipe needs to be modified (for example, to enable/disable
+config options), the recipe can be found in the meta-ti
+sources, in the path “recipes-kernel/linux/linux-ti-staging-&lt;version&gt;/”.</p>
+<p>After modifications/additions are made to the recipe or source code,
+the module needs to be rebuilt, and this can be done from the Yocto
+build.</p>
+<p>First, please refer to <a class="reference external" href="Overview_Building_the_SDK.html">Building The SDK</a>
+to set up the build environment and bitbake the original recipe for
+ti-img-encode-decode, i.e.,</p>
+<p><code class="docutils literal"><span class="pre">MACHINE=j7-evm</span> <span class="pre">bitbake</span> <span class="pre">linux-ti-staging</span></code></p>
+<p>After the bitbake command above is successfully done,
+./build/arago-tmp-external-arm-toolchain/work/j7_evm-linux/ti-img-encode-decode/&lt;*&gt;
+will be created with the original source code under the git sub-folder.
+Copy the modified and/or the newly added files to the git sub-folder,
+and rebuild the module referring to <a class="reference external" href="Overview_Building_the_SDK.html#recipes">Rebuild
+Recipe</a>.</p>
+<p>Last, install the rebuilt module(s) on target filesystem referring to
+<a class="reference external" href="Overview_Building_the_SDK.html#installing-package">Installing Package</a>.
+After the installation, the following files will be updated and/or
+added.</p>
+<blockquote>
+<div><ul class="simple">
+<li>/lib/modules/&lt;version&gt;/kernel/drivers/media/platform/vxe-vxd/vxd-dec.ko</li>
+<li>/lib/modules/&lt;version&gt;/kernel/drivers/media/platform/vxe-vxd/vxe-enc.ko</li>
+</ul>
+</div></blockquote>
+<p>For rebuilding individual recipes in Processor SDK Linux J721e, please refer to
+<a class="reference external" href="Overview_Building_the_SDK.html#recipes">Recipes</a>.</p>
+</div>
+<div class="section" id="debug-logs">
+<h3>3.7.6.2. Debug Logs<a class="headerlink" href="#debug-logs" title="Permalink to this headline">¶</a></h3>
+<p>In case additional logs are needed from the V4L2 Encode or Decode
+drivers, debug tracing can be enabled by rebuilding the module
+with the appropriate options selected.</p>
+<p class="rubric" id="v4l2-dec-debug-options">V4L2 Decoder Debug Options</p>
+<p>DEBUG_DECODER_DRIVER can be set to ‘y’ to enable all the debug tracing
+in the decoder driver. This should only be used for debugging
+purposes. To enable it, set DEBUG_DECODER_DRIVER to ‘y’ and rebuild
+the decoder module following the instructions in <a class="reference internal" href="#rebuilding-v4l2-drivers">Rebuilding V4L2 Drivers</a>.</p>
+<p class="rubric" id="v4l2-enc-debug-options">V4L2 Encoder Debug Options</p>
+<p>DEBUG_ENCODER_DRIVER can be set to ‘y’ to enable all the debug tracing
+in the encoder driver. This should only be used for debugging
+purposes. To enable it, set DEBUG_ENCODER_DRIVER to ‘y’ and rebuild
+the encoder module following the instructions in <a class="reference internal" href="#rebuilding-v4l2-drivers">Rebuilding V4L2 Drivers</a>.</p>
+</div>
+<div class="section" id="latency-profiling">
+<h3>3.7.6.3. Latency Profiling<a class="headerlink" href="#latency-profiling" title="Permalink to this headline">¶</a></h3>
+<p>The decode latency of the V4L2 Decoder can be measured at the picture or
+firmware level. Only one can be enabled at a time.</p>
+<p class="rubric" id="decoder-firmware-latency-profiling">Decoder Firmware Latency Profiling</p>
+<p>To enable firmware latency profiling, follow these steps:</p>
+<ol class="arabic">
+<li><p class="first">Enable the print in the driver code by modifying the following file:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>drivers/media/platform/vxe-vxd/decoder/vxd_pvdec.c
+</pre></div>
+</div>
+<p>Make the following change:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>-                 dev_info(dev,
++                 dev_err(dev,
+                           &quot;fw decode time is %llu us for msg_id x%0x\n&quot;,
+</pre></div>
+</div>
+</li>
+<li><p class="first">Follow the instructions in the section <a class="reference internal" href="#rebuilding-v4l2-drivers">Rebuilding V4L2 Drivers</a> in
+order to rebuild the module and copy the updated module to the target.
+The module to copy is vxd-dec.ko.</p>
+</li>
+<li><p class="first">Collect the logs and look for the traces that look like:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[  802.626314] img_dec 4300000.video-decoder: fw decode time is 5314 us for msg_id xc60f
+</pre></div>
+</div>
+</li>
+<li><p class="first">Each trace gives the firmware decode time per frame. All numbers are in
+micro seconds.</p>
+</li>
+</ol>
+<p class="rubric" id="decoder-v4l2-picture-dec-latency-profiling">Decoder V4L2-level Picture Decode Latency Profiling</p>
+<p>To enable V4L2-level picture decode latency profiling, follow these steps:</p>
+<ol class="arabic">
+<li><p class="first">Enable the print in the driver code by modifying the following file:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>ti-img-encode-decode/linux/decoder/vxd_v4l2.c
+</pre></div>
+</div>
+<p>Make the following change:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>-                 dev_info(dev,
++                 dev_err(dev,
+                          &quot;picture buf decode time is %llu us for buf_map_id 0x%x\n&quot;,
+</pre></div>
+</div>
+</li>
+<li><p class="first">Follow the instructions in the section <a class="reference internal" href="#rebuilding-v4l2-drivers">Rebuilding V4L2 Drivers</a> in
+order to rebuild the module and copy the updated module to the target.
+The module to copy is vxd-dec.ko.</p>
+</li>
+<li><p class="first">Collect the logs and look for the traces that look like:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[  511.316237] img_dec 4300000.video-decoder: picture buf decode time is 9901 us for buf_map_id 0x4000025
+</pre></div>
+</div>
+</li>
+<li><p class="first">Each trace gives the v4l2-level picture decode time per frame. All numbers are in
+micro seconds.</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<dl class="last docutils">
+<dt>Known limitations:</dt>
+<dd><ol class="first last arabic simple">
+<li>DMA Buf import on encoder works only for 16 byte width and height aligned buffers from the upstream element.
+For Non 16 byte aligned resolution, the pipeline exits safely with buffer size negotiation error.</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Foundational_Components_Virtualization.html" class="btn btn-neutral float-right" title="3.8. Virtualization" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Foundational_Components/Graphics/Graphics_and_Display.html" class="btn btn-neutral" title="3.6.1. Introduction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <a href="http://www.ti.com/corp/docs/legal/copyright.shtml">&copy; Copyright 1995-2021</a>, Texas Instruments Incorporated. All rights reserved. <br>
+      <a href="http://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="http://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="http://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="http://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'08_06_00',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+        });
+
+      var menuHeight = window.innerHeight;
+
+      var contentOffset = $(".wy-nav-content-wrap").offset();
+      var contentHeight = $(".wy-nav-content-wrap").height();
+      var contentBottom = contentOffset.top + contentHeight;
+
+      function setNavbarTop() {
+          var scrollTop = $(window).scrollTop();
+          var maxTop = scrollTop + menuHeight;
+
+          // If past the header
+          if (scrollTop > contentOffset.top && maxTop < contentBottom) {
+            stickyTop = scrollTop - contentOffset.top;
+          } else if (maxTop > contentBottom) {
+            stickyTop = scrollTop - contentOffset.top - (maxTop - contentBottom);
+          } else {
+            stickyTop = 0;
+          }
+
+          $(".wy-nav-side").css("top", stickyTop);
+      }
+
+      $(document).ready(function() {
+        setNavbarTop();
+        $(window).scroll(function () {
+          setNavbarTop();
+        });
+      });
+  </script>
+   
+
+</body>
+</html>
